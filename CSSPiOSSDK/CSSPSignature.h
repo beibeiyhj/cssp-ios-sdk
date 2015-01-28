@@ -28,6 +28,9 @@
              withSecret:(NSString *)secretKey;
 - (NSURLRequest *) requestBySettingAuthorizationHeadersForRequest:(NSURLRequest *) request
                                                             error:(NSError * __autoreleasing *)error;
+- (NSString *) signatureForReques:(NSURLRequest *) request
+                    withtimestamp:(NSString *) timestamp;
+
 @end
 
 
