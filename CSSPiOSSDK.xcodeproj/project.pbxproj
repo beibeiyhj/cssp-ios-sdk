@@ -10,6 +10,7 @@
 		15501C091A768BB40040E0FE /* CSSPiOSSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSPiOSSDK.h */; };
 		15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
+		15DADEC51A7771BD00DA7385 /* CSSPSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DADEC41A7771BD00DA7385 /* CSSPSignature.m */; };
 		7832B8946256270695B14FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 831C2BCEF358DB7E7B12C810 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,8 @@
 		15501C101A768BB40040E0FE /* CSSPiOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSSPiOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C161A768BB40040E0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15501C1F1A768BE90040E0FE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		15DADEC31A7771BD00DA7385 /* CSSPSignature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSignature.h; sourceTree = "<group>"; };
+		15DADEC41A7771BD00DA7385 /* CSSPSignature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSignature.m; sourceTree = "<group>"; };
 		831C2BCEF358DB7E7B12C810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0942B16486258057AC02A7C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +106,8 @@
 			children = (
 				15501C081A768BB40040E0FE /* CSSPiOSSDK.h */,
 				15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */,
+				15DADEC31A7771BD00DA7385 /* CSSPSignature.h */,
+				15DADEC41A7771BD00DA7385 /* CSSPSignature.m */,
 			);
 			path = CSSPiOSSDK;
 			sourceTree = "<group>";
@@ -255,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */,
+				15DADEC51A7771BD00DA7385 /* CSSPSignature.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
