@@ -95,7 +95,7 @@
     [mutableString appendFormat:@"%@", mutableCanonicalizedHeaderString];
     [mutableString appendFormat:@"%@", canonicalizedResource];
 
-    
+    return nil;
 }
 
 - (NSURLRequest *) requestBySettingAuthorizationHeadersForRequest:(NSURLRequest *)request error:(NSError *__autoreleasing *)error{
