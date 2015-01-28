@@ -95,7 +95,7 @@
     [mutableString appendFormat:@"%@", mutableCanonicalizedHeaderString];
     [mutableString appendFormat:@"%@", canonicalizedResource];
 
-    return nil;
+    return [CSSPSignature HMACSign:[mutableCanonicalizedHeaderString dataUsingEncoding:NSUTF8StringEncoding] withKey:self.secretKey usingAlgorithm:kCCHmacAlgSHA1];
 }
 
 - (NSURLRequest *) requestBySettingAuthorizationHeadersForRequest:(NSURLRequest *)request error:(NSError *__autoreleasing *)error{
