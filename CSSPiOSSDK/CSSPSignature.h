@@ -30,7 +30,7 @@
                                                             error:(NSError * __autoreleasing *)error;
 - (NSString *) signatureForReques:(NSURLRequest *) request
                     withtimestamp:(NSString *) timestamp;
-
++ (NSString *) base64EncodeString:(NSData *) data;
 @end
 
 
