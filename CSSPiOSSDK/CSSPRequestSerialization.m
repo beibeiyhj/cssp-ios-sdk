@@ -6,58 +6,12 @@
 //  Copyright (c) 2015年 cssp. All rights reserved.
 //
 
-#import "CSSPSignature.h"
+#import "CSSPRequestSerialization.h"
 
 
 static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-@interface CSSPNSDate:NSObject
-+ (NSDateFormatter *) DateFormatter;
-@end
 
-@implementation CSSPNSDate
-
-+ (NSDateFormatter *) DateFormatter{
-    NSMutableDictionary * threadDictionary = [[NSThread currentThread] threadDictionary];
-    NSDateFormatter * dataFormatter = [threadDictionary objectForKey:@"cachedDateFormatter"];
-    if (dataFormatter == nil) {
-        dataFormatter = [[NSDateFormatter alloc] init];
-        [dataFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-        [dataFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss GMT"];
-        [threadDictionary setObject:dataFormatter forKey:@"cachedDateFormatter"];
-    }
-    return dataFormatter;
-}
-
-@end
-
-
-@interface CSSPSignature ()
-@property (readwrite, nonatomic, copy) NSString *accessKey;
-@property (readwrite, nonatomic, copy) NSString *secretKey;
-@end
-
-
-@implementation CSSPSignature
-
-+ (NSString *) HMACSign:(NSData *)data withKey:(NSString *)key usingAlgorithm:(CCHmacAlgorithm)algorithm{
-    CCHmacContext context;
-    const char    *keyCString = [key cStringUsingEncoding:NSASCIIStringEncoding];
-    
-    CCHmacInit(&context, kCCHmacAlgSHA1, keyCString, strlen(keyCString));
-    CCHmacUpdate(&context, [data bytes], [data length]);
-    
-    unsigned char digestRaw[CC_SHA1_DIGEST_LENGTH];
-    NSUInteger digestLength = CC_SHA1_DIGEST_LENGTH;
-    
-    CCHmacFinal(&context, digestRaw);
-    
-    NSData *digestData = [NSData dataWithBytes:digestRaw length:digestLength];
-    
-    return [CSSPSignature base64EncodeString:digestData];
-    
-}
-
-+ (NSString *) base64EncodeString:(NSData*) data{
+static NSString * base64EncodeString(NSData* data) {
     NSUInteger length = [data length];
     NSMutableData *mutableData = [NSMutableData dataWithLength:((length +2)/3) * 4];
     uint8_t *input = (uint8_t *)[data bytes];
@@ -83,6 +37,44 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     return [[NSString alloc] initWithData:mutableData encoding:NSASCIIStringEncoding];
 }
 
+
+static NSDateFormatter * DateFormatter (){
+    NSMutableDictionary * threadDictionary = [[NSThread currentThread] threadDictionary];
+    NSDateFormatter * dataFormatter = [threadDictionary objectForKey:@"cachedDateFormatter"];
+    if (dataFormatter == nil) {
+        dataFormatter = [[NSDateFormatter alloc] init];
+        [dataFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+        [dataFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss GMT"];
+        [threadDictionary setObject:dataFormatter forKey:@"cachedDateFormatter"];
+    }
+    return dataFormatter;
+}
+
+
+static NSString * HMACSign(NSData *data, NSString *key, CCHmacAlgorithm algorithm){
+    CCHmacContext context;
+    const char    *keyCString = [key cStringUsingEncoding:NSASCIIStringEncoding];
+    
+    CCHmacInit(&context, kCCHmacAlgSHA1, keyCString, strlen(keyCString));
+    CCHmacUpdate(&context, [data bytes], [data length]);
+    
+    unsigned char digestRaw[CC_SHA1_DIGEST_LENGTH];
+    NSUInteger digestLength = CC_SHA1_DIGEST_LENGTH;
+    
+    CCHmacFinal(&context, digestRaw);
+    
+    NSData *digestData = [NSData dataWithBytes:digestRaw length:digestLength];
+    
+    return base64EncodeString(digestData);
+}
+
+@interface CSSPRequestSerialization ()
+@property (readwrite, nonatomic, copy) NSString *accessKey;
+@property (readwrite, nonatomic, copy) NSString *secretKey;
+@end
+
+
+@implementation CSSPRequestSerialization
 - (void) setAccessKeyID:(NSString *)accessKey withSecret:(NSString *)secretKey{
     NSParameterAssert(accessKey);
     NSParameterAssert(secretKey);
@@ -122,14 +114,14 @@ static uint8_t const kBase64EncodingTable[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefg
     [mutableString appendFormat:@"%@", mutableCanonicalizedHeaderString];
     [mutableString appendFormat:@"%@", canonicalizedResource];
 
-    return [CSSPSignature HMACSign:[mutableCanonicalizedHeaderString dataUsingEncoding:NSUTF8StringEncoding] withKey:self.secretKey usingAlgorithm:kCCHmacAlgSHA1];
+    return HMACSign([mutableCanonicalizedHeaderString dataUsingEncoding:NSUTF8StringEncoding], self.secretKey, kCCHmacAlgSHA1);
 }
 
 - (NSURLRequest *) requestBySettingAuthorizationHeadersForRequest:(NSURLRequest *)request error:(NSError *__autoreleasing *)error{
     NSMutableURLRequest *mutableRequest = [request mutableCopy];
     if (self.accessKey && self.secretKey){
         NSDate *date = [NSDate date];
-        NSString *gmtDate = [[CSSPNSDate DateFormatter] stringFromDate:date];
+        NSString *gmtDate = [DateFormatter() stringFromDate:date];
         NSString *signature = [self signatureForReques:request withtimestamp:gmtDate];
         
         [mutableRequest setValue:[NSString stringWithFormat:@"CSSP %@:%@", self.accessKey, signature] forHTTPHeaderField:@"Authorization"];
