@@ -10,6 +10,10 @@
 		15501C091A768BB40040E0FE /* CSSPiOSSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSPiOSSDK.h */; };
 		15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
+		156FC85F1A7F2423001C4F5D /* CSSPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 156FC85E1A7F2423001C4F5D /* CSSPModel.m */; };
+		156FC8631A7F6553001C4F5D /* CSSPNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 156FC8621A7F6553001C4F5D /* CSSPNetworking.m */; };
+		156FC8661A7F725B001C4F5D /* CSSPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 156FC8651A7F725B001C4F5D /* CSSPURLSessionManager.m */; };
+		1595E1DE1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 1595E1DD1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.m */; };
 		15DADEC51A7771BD00DA7385 /* CSSPRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DADEC41A7771BD00DA7385 /* CSSPRequestSerialization.m */; };
 		7832B8946256270695B14FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 831C2BCEF358DB7E7B12C810 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -44,6 +48,14 @@
 		15501C101A768BB40040E0FE /* CSSPiOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSSPiOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C161A768BB40040E0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15501C1F1A768BE90040E0FE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		156FC85D1A7F2423001C4F5D /* CSSPModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPModel.h; sourceTree = "<group>"; };
+		156FC85E1A7F2423001C4F5D /* CSSPModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPModel.m; sourceTree = "<group>"; };
+		156FC8611A7F6553001C4F5D /* CSSPNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPNetworking.h; sourceTree = "<group>"; };
+		156FC8621A7F6553001C4F5D /* CSSPNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPNetworking.m; sourceTree = "<group>"; };
+		156FC8641A7F725B001C4F5D /* CSSPURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPURLSessionManager.h; sourceTree = "<group>"; };
+		156FC8651A7F725B001C4F5D /* CSSPURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPURLSessionManager.m; sourceTree = "<group>"; };
+		1595E1DC1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSynchronizedMutableDictionary.h; sourceTree = "<group>"; };
+		1595E1DD1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSynchronizedMutableDictionary.m; sourceTree = "<group>"; };
 		15DADEC31A7771BD00DA7385 /* CSSPRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPRequestSerialization.h; sourceTree = "<group>"; };
 		15DADEC41A7771BD00DA7385 /* CSSPRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPRequestSerialization.m; sourceTree = "<group>"; };
 		831C2BCEF358DB7E7B12C810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -104,6 +116,8 @@
 		15501C071A768BB40040E0FE /* CSSPiOSSDK */ = {
 			isa = PBXGroup;
 			children = (
+				1595E1DB1A80B0580071258D /* Utility */,
+				156FC8601A7F6539001C4F5D /* Networking */,
 				15501C081A768BB40040E0FE /* CSSPiOSSDK.h */,
 				15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */,
 				15DADEC31A7771BD00DA7385 /* CSSPRequestSerialization.h */,
@@ -126,6 +140,28 @@
 				15501C161A768BB40040E0FE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		156FC8601A7F6539001C4F5D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				156FC8611A7F6553001C4F5D /* CSSPNetworking.h */,
+				156FC8621A7F6553001C4F5D /* CSSPNetworking.m */,
+				156FC8641A7F725B001C4F5D /* CSSPURLSessionManager.h */,
+				156FC8651A7F725B001C4F5D /* CSSPURLSessionManager.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
+		1595E1DB1A80B0580071258D /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				156FC85D1A7F2423001C4F5D /* CSSPModel.h */,
+				156FC85E1A7F2423001C4F5D /* CSSPModel.m */,
+				1595E1DC1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.h */,
+				1595E1DD1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.m */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		903D659F178841379487EFA0 /* Frameworks */ = {
@@ -259,8 +295,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				156FC8631A7F6553001C4F5D /* CSSPNetworking.m in Sources */,
+				156FC85F1A7F2423001C4F5D /* CSSPModel.m in Sources */,
 				15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */,
+				1595E1DE1A80B09B0071258D /* CSSPSynchronizedMutableDictionary.m in Sources */,
 				15DADEC51A7771BD00DA7385 /* CSSPRequestSerialization.m in Sources */,
+				156FC8661A7F725B001C4F5D /* CSSPURLSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

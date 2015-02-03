@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CommonCrypto/CommonHMAC.h>
-#include "AFURLRequestSerialization.h"
 
 
-@interface CSSPRequestSerialization: AFHTTPRequestSerializer
+@interface CSSPRequestSerialization: NSObject
+
 
 @property (nonatomic, copy) NSString *bucket;
 @property (nonatomic, copy) NSString *region;
