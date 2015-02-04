@@ -2,30 +2,25 @@
 //  CSSPModel.h
 //  CSSPiOSSDK
 //
-//  Created by dannis on 15/2/2.
+//  Created by dannis on 15/2/4.
 //  Copyright (c) 2015年 cssp. All rights reserved.
 //
 
-#import "Mantle.h"
+#import <Foundation/Foundation.h>
 
-@interface CSSPModel : MTLModel <MTLJSONSerializing>
+@interface CSSPRequest : NSObject
 
 @end
 
-@interface CSSPModelUtility : NSObject
 
-+ (NSDictionary *)mapMTLDictionaryFromJSONArrayDictionary:(NSDictionary *)JSONArrayDictionary
-                                         arrayElementType:(NSString *)arrayElementType
-                                           withModelClass:(Class)modelClass;
-+ (NSDictionary *)JSONArrayDictionaryFromMapMTLDictionary:(NSDictionary *)mapMTLDictionary
-                                         arrayElementType:(NSString *)arrayElementType;
+@interface CSSPDeleteObjectRequest : CSSPRequest
 
-+ (NSArray *)mapMTLArrayFromJSONArray:(NSArray *)JSONArray
-                       withModelClass:(Class)modelClass;
-+ (NSArray *)JSONArrayFromMapMTLArray:(NSArray *)mapMTLArray;
+@property (nonatomic, strong) NSString *object;
 
-+ (NSDictionary *)mapMTLDictionaryFromJSONDictionary:(NSDictionary *)JSONDictionary
-                                      withModelClass:(Class)modelClass;
-+ (NSDictionary *)JSONDictionaryFromMapMTLDictionary:(NSDictionary *)mapMTLDictionary;
+@end
+
+@interface CSSPGetContainerAclRequest : CSSPRequest
+
+@property (nonatomic, strong) NSString *container;
 
 @end

@@ -11,6 +11,7 @@
 #import "AFHTTPSessionManager.h"
 #import "CSSPRequestSerialization.h"
 
+
 @interface CSSPHTTPRequestManager : AFHTTPRequestOperationManager<NSSecureCoding, NSCopying>
 
 @property (readonly, nonatomic, strong) NSURL *baseURL;
@@ -53,6 +54,9 @@
                                success:(void (^)(id responseObject)) success
                                failure:(void (^) (NSError *error)) failure;
 
+-(AFHTTPRequestOperation *) listObjects:(NSString *) containerName
+                                success:(void (^)(id responseObject)) success
+                                failure:(void (^) (NSError *error)) failure;
 
 
 @end
