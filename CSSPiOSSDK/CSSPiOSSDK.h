@@ -7,60 +7,38 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFHTTPRequestOperationManager.h"
-#import "AFHTTPSessionManager.h"
 #import "CSSPRequestSerialization.h"
+#import "CSSPModel.h"
+
+@class BFTask;
 
 
-@interface CSSPHTTPRequestManager : AFHTTPRequestOperationManager<NSSecureCoding, NSCopying>
+@interface CSSPiOSSDK : NSObject
 
-@property (readonly, nonatomic, strong) NSURL *baseURL;
-@property (nonatomic, strong) CSSPRequestSerialization<AFURLRequestSerialization> *requestSerializer;
+- (BFTask *)abortMultipartUpload:(CSSPAbortMultipartUploadRequest *)request;
 
--(id) initWithAccessKeyID:(NSString *) accessKey
-            withSecretKey:(NSString *) secretKey;
+- (BFTask *)completeMultipartUpload:(CSSPCompleteMultipartUploadRequest *)request;
 
--(AFHTTPRequestOperation *) enqueueRequestOpetation:(NSString *) method
-                                           withPath:(NSString *) path
-                                     withParameters:(NSDictionary *) parameters
-                                            success:(void (^)(id responseObject)) success
-                                            failure:(void (^) (NSError *error)) failure;
+-(BFTask *) deleteObject:(CSSPDeleteObjectRequest *)request;
 
+-(BFTask *) getContainerAcl:(CSSPGetContainerAclRequest*)request;
 
--(AFHTTPRequestOperation *) deleteObject:(NSString *) object
-                                 success:(void (^)(id responseObject)) success
-                                 failure:(void (^) (NSError *error)) failure;
+-(BFTask *) getObject:(CSSPGetObjectRequest *)request;
 
--(AFHTTPRequestOperation *) getContainerAcl:(NSString *) containerName
-                                    success:(void (^)(id responseObject)) success
-                                    failure:(void (^) (NSError *error)) failure;
+-(BFTask *) headContainer:(CSSPHeadContainerRequest *)request;
 
--(AFHTTPRequestOperation *) getObject:(NSString *) object
-                             progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
-                              success:(void (^)(id responseObject, NSData *responseData))success
-                              failure:(void (^)(NSError *error))failure;
+-(BFTask *) headObject:(CSSPHeaderObjectRequest *)request;
 
--(AFHTTPRequestOperation *) getObject:(NSString *) object
-                         outputStream:(NSOutputStream *)outputStream
-                             progress:(void (^)(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead))progress
-                              success:(void (^)(id responseObject, NSData *responseData))success
-                              failure:(void (^)(NSError *error))failure;
+-(BFTask *) listObjects:(CSSPListObjectsRequest *)request;
 
--(AFHTTPRequestOperation *) headContainer:(NSString *) containerName
-                                  success:(void (^)(id responseObject)) success
-                                  failure:(void (^) (NSError *error)) failure;
+-(BFTask *) listParts:(CSSPListPartsRequest *) request;
 
--(AFHTTPRequestOperation *) headObject:(NSString *) object
-                               success:(void (^)(id responseObject)) success
-                               failure:(void (^) (NSError *error)) failure;
+-(BFTask *) putContainerAcl:(CSSPPutContainerAclRequest *)request;
 
--(AFHTTPRequestOperation *) listObjects:(NSString *) containerName
-                                success:(void (^)(id responseObject)) success
-                                failure:(void (^) (NSError *error)) failure;
+-(BFTask *) putObject:(CSSPPutObjectRequest *)request;
 
+-(BFTask *) replicateObject:(CSSPReplicateObjectRequest *) request;
 
-@end
-
-@interface CSSPHTTPSessionManager : AFHTTPSessionManager<NSSecureCoding, NSCopying>
+-(BFTask *) uploadPart:(CSSPUploadPartRequest *) request;
 
 @end

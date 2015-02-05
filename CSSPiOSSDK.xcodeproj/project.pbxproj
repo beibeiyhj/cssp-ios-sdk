@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1536203B1A835A4300C23D7E /* CSSPNetworking.m */; };
 		15501C091A768BB40040E0FE /* CSSPiOSSDK.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSPiOSSDK.h */; };
 		15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
@@ -39,6 +40,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1536203A1A835A4300C23D7E /* CSSPNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPNetworking.h; sourceTree = "<group>"; };
+		1536203B1A835A4300C23D7E /* CSSPNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPNetworking.m; sourceTree = "<group>"; };
 		15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libCSSPiOSSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C081A768BB40040E0FE /* CSSPiOSSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CSSPiOSSDK.h; sourceTree = "<group>"; };
 		15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSSPiOSSDK.m; sourceTree = "<group>"; };
@@ -83,6 +86,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		153620391A835A1200C23D7E /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				1536203A1A835A4300C23D7E /* CSSPNetworking.h */,
+				1536203B1A835A4300C23D7E /* CSSPNetworking.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		15501BFC1A768BB40040E0FE = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +119,7 @@
 		15501C071A768BB40040E0FE /* CSSPiOSSDK */ = {
 			isa = PBXGroup;
 			children = (
+				153620391A835A1200C23D7E /* Networking */,
 				15E4348A1A82165800218C8A /* CSSPModel.h */,
 				15E4348B1A82165800218C8A /* CSSPModel.m */,
 				15501C081A768BB40040E0FE /* CSSPiOSSDK.h */,
@@ -264,6 +277,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */,
 				15E4348C1A82165800218C8A /* CSSPModel.m in Sources */,
 				15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */,
 				15DADEC51A7771BD00DA7385 /* CSSPRequestSerialization.m in Sources */,
