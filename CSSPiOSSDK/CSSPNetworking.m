@@ -9,6 +9,8 @@
 #import "CSSPNetworking.h"
 #import "Bolts.h"
 
+NSString *const CSSPNetworkingErrorDomain = @"com.cssp.csspNetworkingErrorDomain";
+
 @implementation CSSPNetworkingConfiguration
 
 +(instancetype)defaultConfiguration{
@@ -161,6 +163,44 @@
 
 @end
 
+
+#pragma mark - CSSPHTTPMethod
+
+@implementation NSString (CSSPHTTPMethod)
+
++ (instancetype)cssp_stringWithHTTPMethod:(CSSPHTTPMethod)HTTPMethod {
+    NSString *string = nil;
+    switch (HTTPMethod) {
+        case CSSPHTTPMethodGET:
+            string = @"GET";
+            break;
+        case CSSPHTTPMethodHEAD:
+            string = @"HEAD";
+            break;
+        case CSSPHTTPMethodPOST:
+            string = @"POST";
+            break;
+        case CSSPHTTPMethodPUT:
+            string = @"PUT";
+            break;
+        case CSSPHTTPMethodPATCH:
+            string = @"PATCH";
+            break;
+        case CSSPHTTPMethodDELETE:
+            string = @"DELETE";
+            break;
+            
+        default:
+            break;
+    }
+    
+    return string;
+}
+
+@end
+
+#pragma mark - AWSNetworking
+
 @interface CSSPNetworking()
 
 @property (nonatomic, strong) CSSPURLSessionManager *networkManager;
@@ -171,15 +211,15 @@
 
 - (instancetype)init {
     if (self = [super init]) {
-        CSSPURLSessionManager *sessionManager = [[CSSPURLSessionManager alloc]init];
+        CSSPURLSessionManager *sessionManager = [CSSPURLSessionManager new];
         self.networkManager = sessionManager;
     }
     
     return self;
 }
 
-+(instancetype)initWithConfiguration:(CSSPNetworkingConfiguration *)configuration{
-    CSSPNetworking *networking = [[CSSPNetworking alloc]init];
++ (instancetype)networking:(CSSPNetworkingConfiguration *)configuration {
+    CSSPNetworking *networking = [CSSPNetworking new];
     networking.networkManager.configuration = configuration;
     
     return networking;

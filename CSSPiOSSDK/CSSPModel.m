@@ -7,7 +7,3 @@
 //
 
 #import "CSSPModel.h"
-
-@implementation CSSPModel
-
-@end

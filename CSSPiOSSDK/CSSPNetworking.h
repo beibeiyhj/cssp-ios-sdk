@@ -11,6 +11,12 @@
 #import "AFURLResponseSerialization.h"
 #import "CSSPURLSessionManager.h"
 
+FOUNDATION_EXPORT NSString *const CSSPNetworkingErrorDomain;
+
+typedef NS_ENUM(NSInteger, CSSPNetworkingErrorType) {
+    CSSPNetworkingErrorUnknown,
+    CSSPNetworkingErrorCancelled
+};
 
 @class CSSPNetworkingConfiguration;
 @class CSSPNetworkingRequest;
@@ -30,6 +36,12 @@ typedef NS_ENUM(NSInteger, CSSPHTTPMethod) {
     CSSPHTTPMethodPATCH,
     CSSPHTTPMethodDELETE
 };
+
+@interface NSString (CSSPHTTPMethod)
+
++ (instancetype)cssp_stringWithHTTPMethod:(CSSPHTTPMethod)HTTPMethod;
+
+@end
 
 #pragma mark - CSSPURLRequestSerializer
 
@@ -90,7 +102,7 @@ typedef NS_ENUM(NSInteger, CSSPHTTPMethod) {
 
 @interface CSSPNetworking : NSObject
 
-+(instancetype) initWithConfiguration:(CSSPNetworkingConfiguration *)configuration;
++(instancetype) networking:(CSSPNetworkingConfiguration *)configuration;
 
 - (BFTask *)sendRequest:(CSSPNetworkingRequest *)request;
 
