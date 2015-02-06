@@ -181,34 +181,33 @@ typedef NS_ENUM(NSInteger, CSSPURLSessionTaskType) {
             
             mutableURLRequest.HTTPMethod = [NSString cssp_stringWithHTTPMethod:delegate.request.HTTPMethod];
             
-//            if ([request.requestSerializer respondsToSelector:@selector(serializeRequest:headers:parameters:)]) {
-//                BFTask *resultTask = [request.requestSerializer serializeRequest:mutableURLRequest
-//                                                                         headers:request.headers
-//                                                                      parameters:request.parameters];
-//                //if serialization has error, abort task.
-//                if (resultTask.error) {
-//                    return resultTask;
-//                }
-//            }
-//            
-//            BFTask *sequencialTask = [BFTask taskWithResult:nil];
-//            for(id<CSSPNetworkingRequestInterceptor>interceptor in request.requestInterceptors) {
-//                if ([interceptor respondsToSelector:@selector(interceptRequest:)]) {
-//                    sequencialTask = [sequencialTask continueWithSuccessBlock:^id(BFTask *task) {
-//                        return [interceptor interceptRequest:mutableURLRequest];
-//                    }];
-//                }
-//            }
+            if ([request.requestSerializer respondsToSelector:@selector(serializeRequest:headers:parameters:)]) {
+                BFTask *resultTask = [request.requestSerializer serializeRequest:mutableURLRequest
+                                                                         headers:request.headers
+                                                                      parameters:request.parameters];
+                //if serialization has error, abort task.
+                if (resultTask.error) {
+                    return resultTask;
+                }
+            }
+            
+            BFTask *sequencialTask = [BFTask taskWithResult:nil];
+            for(id<CSSPNetworkingRequestInterceptor>interceptor in request.requestInterceptors) {
+                if ([interceptor respondsToSelector:@selector(interceptRequest:)]) {
+                    sequencialTask = [sequencialTask continueWithSuccessBlock:^id(BFTask *task) {
+                        return [interceptor interceptRequest:mutableURLRequest];
+                    }];
+                }
+            }
         
             return task;
     }]continueWithSuccessBlock:^id(BFTask *task) {
-//        CSSPNetworkingRequest *request = delegate.request;
-//        if ([request.requestSerializer respondsToSelector:@selector(validateRequest:)]) {
-//            return [request.requestSerializer validateRequest:mutableURLRequest];
-//        } else {
-//            return [BFTask taskWithResult:nil];
-//        }
-        return nil;
+        CSSPNetworkingRequest *request = delegate.request;
+        if ([request.requestSerializer respondsToSelector:@selector(validateRequest:)]) {
+            return [request.requestSerializer validateRequest:mutableURLRequest];
+        } else {
+            return [BFTask taskWithResult:nil];
+        }
     }] continueWithSuccessBlock:^id(BFTask *task) {
         switch (delegate.taskType) {
             case CSSPURLSessionTaskTypeData:

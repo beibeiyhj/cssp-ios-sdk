@@ -18,7 +18,6 @@
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
 		159B4B6A1A83BC410064DCB0 /* CSSPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */; };
 		159B4B6E1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */; };
-		15DADEC51A7771BD00DA7385 /* CSSPRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 15DADEC41A7771BD00DA7385 /* CSSPRequestSerialization.m */; };
 		15E4348C1A82165800218C8A /* CSSPS3Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E4348B1A82165800218C8A /* CSSPS3Model.m */; };
 		7832B8946256270695B14FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 831C2BCEF358DB7E7B12C810 /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -69,8 +68,6 @@
 		159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPURLSessionManager.m; sourceTree = "<group>"; };
 		159B4B6C1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSynchronizedMutableDictionary.h; sourceTree = "<group>"; };
 		159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSynchronizedMutableDictionary.m; sourceTree = "<group>"; };
-		15DADEC31A7771BD00DA7385 /* CSSPRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPRequestSerialization.h; sourceTree = "<group>"; };
-		15DADEC41A7771BD00DA7385 /* CSSPRequestSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPRequestSerialization.m; sourceTree = "<group>"; };
 		15E4348A1A82165800218C8A /* CSSPS3Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPS3Model.h; sourceTree = "<group>"; };
 		15E4348B1A82165800218C8A /* CSSPS3Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPS3Model.m; sourceTree = "<group>"; };
 		831C2BCEF358DB7E7B12C810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,8 +163,6 @@
 				154D04FA1A84AD5000DE3513 /* CSSPCore */,
 				15501C081A768BB40040E0FE /* CSSPiOSSDK.h */,
 				15501C0A1A768BB40040E0FE /* CSSPiOSSDK.m */,
-				15DADEC31A7771BD00DA7385 /* CSSPRequestSerialization.h */,
-				15DADEC41A7771BD00DA7385 /* CSSPRequestSerialization.m */,
 				15E4348A1A82165800218C8A /* CSSPS3Model.h */,
 				15E4348B1A82165800218C8A /* CSSPS3Model.m */,
 			);
@@ -345,7 +340,6 @@
 				15501C0B1A768BB40040E0FE /* CSSPiOSSDK.m in Sources */,
 				154D04FD1A84AECF00DE3513 /* CSSPCategory.m in Sources */,
 				159B4B6E1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m in Sources */,
-				15DADEC51A7771BD00DA7385 /* CSSPRequestSerialization.m in Sources */,
 				159B4B6A1A83BC410064DCB0 /* CSSPURLSessionManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

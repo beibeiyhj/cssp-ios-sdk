@@ -12,7 +12,7 @@
 
 @protocol CSSPCredentialsProvider;
 
-@interface AWSSignatureSignerUtility : NSObject
+@interface CSSPSignatureSignerUtility : NSObject
 
 + (NSData *)sha256HMacWithData:(NSData *)data withKey:(NSData *)key;
 + (NSString *)hashString:(NSString *)stringToHash;
