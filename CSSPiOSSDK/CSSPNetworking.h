@@ -7,8 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AFURLRequestSerialization.h"
-#import "AFURLResponseSerialization.h"
 #import "CSSPURLSessionManager.h"
 
 FOUNDATION_EXPORT NSString *const CSSPNetworkingErrorDomain;

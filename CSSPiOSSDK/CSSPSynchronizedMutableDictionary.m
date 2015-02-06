@@ -20,7 +20,7 @@
 - (instancetype)init {
     if (self = [super init]) {
         _dictionary = [NSMutableDictionary new];
-        _dispatchQueue = dispatch_queue_create("com.CSSP.CSSPSynchronizedMutableDictionary", DISPATCH_QUEUE_SERIAL);
+        _dispatchQueue = dispatch_queue_create("com.iflycssp.CSSPSynchronizedMutableDictionary", DISPATCH_QUEUE_SERIAL);
     }
     
     return self;
