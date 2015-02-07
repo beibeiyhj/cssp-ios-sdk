@@ -7,13 +7,31 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CSSPRequestSerialization.h"
-#import "CSSPModel.h"
+#import "Bolts.h"
+#import "CSSPNetworking.h"
+#import "CSSPCategory.h"
+#import "CSSPCredentialsProvider.h"
+#import "CSSPLogging.h"
+#import "CSSPModule.h"
+
+@interface CSSPServiceConfiguration : CSSPNetworkingConfiguration
+
+@property (nonatomic, strong, readonly) id<CSSPCredentialsProvider> credentialsProvider;
+@property (nonatomic, assign) int32_t maxRetryCount;
+
++ (instancetype)configurationWithCredentialsProvider:(id<CSSPCredentialsProvider>)credentialsProvider;
+
+@end
 
 @class BFTask;
 
+@interface CSSP: NSObject
 
-@interface CSSPiOSSDK : NSObject
+@property (nonatomic, strong, readonly) CSSPServiceConfiguration *configuration;
+
++ (instancetype)defaultCSSP;
+
+- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
 
 - (BFTask *)abortMultipartUpload:(CSSPAbortMultipartUploadRequest *)request;
 

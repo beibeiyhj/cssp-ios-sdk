@@ -302,21 +302,7 @@ typedef NS_ENUM(NSInteger, CSSPURLSessionTaskType) {
     CSSPURLSessionManagerDelegate *delegate = [self.sessionManagerDelegates objectForKey:@(task.taskIdentifier)];
     CSSPNetworkingUploadProgressBlock uploadProgress = delegate.request.uploadProgress;
     if (uploadProgress) {
-        NSURLSessionTask *sessionTask = delegate.request.task;
-//        int64_t originalDataLength = [[[sessionTask.originalRequest allHTTPHeaderFields] objectForKey:@"x-amz-decoded-content-length"] longLongValue];
-//        NSInputStream *inputStream = (CSSPChunkedEncodingInputStream *)sessionTask.originalRequest.HTTPBodyStream;
-//        if ([inputStream isKindOfClass:[CSSPChunkedEncodingInputStream class]]) {
-//            CSSPChunkedEncodingInputStream *chunkedInputStream = (AWSS3ChunkedEncodingInputStream *)inputStream;
-//            int64_t payloadBytesSent = bytesSent;
-//            if (chunkedInputStream.totalLengthOfChunkSignatureSent > delegate.lastTotalLengthOfChunkSignatureSent) {
-//                payloadBytesSent = bytesSent - (chunkedInputStream.totalLengthOfChunkSignatureSent - delegate.lastTotalLengthOfChunkSignatureSent);
-//            }
-//            delegate.lastTotalLengthOfChunkSignatureSent = chunkedInputStream.totalLengthOfChunkSignatureSent;
-//            
-//            uploadProgress(payloadBytesSent, totalBytesSent - chunkedInputStream.totalLengthOfChunkSignatureSent, originalDataLength);
-//        }else {
-//            uploadProgress(bytesSent, totalBytesSent, totalBytesExpectedToSend);
-//        }
+        uploadProgress(bytesSent, totalBytesSent, totalBytesExpectedToSend);
     }
 }
 
@@ -407,47 +393,10 @@ typedef NS_ENUM(NSInteger, CSSPURLSessionTaskType) {
                 }
             }
             
-        } else {
-//            NSError *error = nil;
-//            //This is the normal case. downloaded data will be saved in a temporay folder and then moved to downloadingFileURL after downloading complete.
-//            NSString *tempFileName = [NSString stringWithFormat:@"%@.%@",AWSMobileURLSessionManagerCacheDomain,[[NSProcessInfo processInfo] globallyUniqueString]];
-//            NSString *tempDirPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.fileCache",AWSMobileURLSessionManagerCacheDomain]];
-//            
-//            //Create temp folder if not exist
-//            [[NSFileManager defaultManager] createDirectoryAtPath:tempDirPath withIntermediateDirectories:NO attributes:nil error:nil];
-//            
-//            delegate.tempDownloadedFileURL  = [NSURL fileURLWithPath:[tempDirPath stringByAppendingPathComponent:tempFileName]];
-//            
-//            //Remove temp file if it has already exists
-//            if ([[NSFileManager defaultManager] fileExistsAtPath:delegate.tempDownloadedFileURL.path]) {
-//                NSLog(@"Warning: target file already exists, will be overwritten at the file path: %@",delegate.tempDownloadedFileURL);
-//                [[NSFileManager defaultManager] removeItemAtPath:delegate.tempDownloadedFileURL.path error:&error];
-//            }
-//            if (error) {
-//                NSLog(@"Error: [%@]", error);
-//            }
-//            
-//            //Create new temp file
-//            if (![[NSFileManager defaultManager] createFileAtPath:delegate.tempDownloadedFileURL.path contents:nil attributes:nil]) {
-//                NSLog(@"Error: Can not create file with file path:%@",delegate.tempDownloadedFileURL.path);
-//            }
-//            error = nil;
-//            delegate.responseFilehandle = [NSFileHandle fileHandleForWritingToURL:delegate.tempDownloadedFileURL error:&error];
-//            if (error) {
-//                NSLog(@"Error: [%@]", error);
-//            }
         }
         
     }
-    
-    //    if([response isKindOfClass:[NSHTTPURLResponse class]]) {
-    //        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
-    //        if ([[[httpResponse allHeaderFields] objectForKey:@"Content-Length"] longLongValue] >= AWSMinimumDownloadTaskSize) {
-    //            completionHandler(NSURLSessionResponseBecomeDownload);
-    //            return;
-    //        }
-    //    }
-    
+
     completionHandler(NSURLSessionResponseAllow);
 }
 

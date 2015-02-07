@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "CSSPURLSessionManager.h"
+#import "CSSPModel.h"
 
 FOUNDATION_EXPORT NSString *const CSSPNetworkingErrorDomain;
 
@@ -26,7 +26,6 @@ typedef NS_ENUM(NSInteger, CSSPNetworkingRetryType) {
 
 @class CSSPNetworkingConfiguration;
 @class CSSPNetworkingRequest;
-@class CSSPURLSessionManager;
 @class BFTask;
 
 typedef void (^CSSPNetworkingUploadProgressBlock) (int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend);
@@ -168,6 +167,22 @@ typedef NS_ENUM(NSInteger, CSSPHTTPMethod) {
 
 @end
 
+@interface CSSPRequest : CSSPModel
+
+@property (nonatomic, copy) CSSPNetworkingUploadProgressBlock uploadProgress;
+@property (nonatomic, copy) CSSPNetworkingDownloadProgressBlock downloadProgress;
+@property (nonatomic, assign, readonly, getter = isCancelled) BOOL cancelled;
+@property (nonatomic, strong) NSURL *downloadingFileURL;
+
+- (BFTask *)cancel;
+- (BFTask *)pause;
+
+@end
+
+@interface CSSPNetworkingRequestInterceptor : NSObject <CSSPNetworkingRequestInterceptor>
+
+@end
+
 
 @interface CSSPNetworking : NSObject
 
@@ -176,3 +191,5 @@ typedef NS_ENUM(NSInteger, CSSPHTTPMethod) {
 - (BFTask *)sendRequest:(CSSPNetworkingRequest *)request;
 
 @end
+
+

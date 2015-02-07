@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+FOUNDATION_EXPORT NSString *const CSSPDateRFC822DateFormat1;
+FOUNDATION_EXPORT NSString *const CSSPDateISO8601DateFormat1;
+FOUNDATION_EXPORT NSString *const CSSPDateISO8601DateFormat2;
+FOUNDATION_EXPORT NSString *const CSSPDateISO8601DateFormat3;
+FOUNDATION_EXPORT NSString *const CSSPDateShortDateFormat1;
+
 @interface NSDate (CSSP)
 
 + (NSDate *)cssp_dateFromString:(NSString *)string;

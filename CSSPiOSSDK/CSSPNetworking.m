@@ -8,6 +8,7 @@
 
 #import "CSSPNetworking.h"
 #import "Bolts.h"
+#import "CSSPURLSessionManager.h"
 
 NSString *const CSSPNetworkingErrorDomain = @"com.cssp.csspNetworkingErrorDomain";
 
