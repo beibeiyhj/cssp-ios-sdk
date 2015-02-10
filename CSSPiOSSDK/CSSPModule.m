@@ -7,3 +7,19 @@
 //
 
 #import "CSSPModule.h"
+#import "CSSPCategory.h"
+
+NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
+
+@implementation CSSPAbortMultipartUploadRequest
+
++(NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"container" : @"Container",
+             @"object" : @"Object",
+             @"uploadId" : @"UploadId",
+             };
+
+}
+
+@end

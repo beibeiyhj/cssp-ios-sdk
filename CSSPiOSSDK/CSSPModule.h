@@ -17,48 +17,48 @@ typedef NS_ENUM(NSInteger, CSSPErrorType) {
     CSSPErrorInvalidToken,
     CSSPErrorSignatureDoesNotMatch,
     CSSPErrorTokenRefreshRequired,
-    CSSPErrorBucketAlreadyExists,
-    CSSPErrorNoSuchBucket,
+    CSSPErrorContainerAlreadyExists,
+    CSSPErrorNoSuchContainer,
     CSSPErrorNoSuchKey,
     CSSPErrorNoSuchUpload,
     CSSPErrorObjectAlreadyInActiveTier,
     CSSPErrorObjectNotInActiveTier,
 };
 
-typedef NS_ENUM(NSInteger, CSSPBucketCannedACL) {
-    CSSPBucketCannedACLUnknown,
-    CSSPBucketCannedACLPrivate,
-    CSSPBucketCannedACLPublicRead,
-    CSSPBucketCannedACLPublicReadWrite,
-    CSSPBucketCannedACLAuthenticatedRead,
+typedef NS_ENUM(NSInteger, CSSPContainerCannedACL) {
+    CSSPContainerCannedACLUnknown,
+    CSSPContainerCannedACLPrivate,
+    CSSPContainerCannedACLPublicRead,
+    CSSPContainerCannedACLPublicReadWrite,
+    CSSPContainerCannedACLAuthenticatedRead,
 };
 
-typedef NS_ENUM(NSInteger, CSSPBucketLocationConstraint) {
-    CSSPBucketLocationConstraintUnknown,
-    CSSPBucketLocationConstraintEU,
-    CSSPBucketLocationConstraintEUWest1,
-    CSSPBucketLocationConstraintUSWest1,
-    CSSPBucketLocationConstraintUSWest2,
-    CSSPBucketLocationConstraintAPSoutheast1,
-    CSSPBucketLocationConstraintAPSoutheast2,
-    CSSPBucketLocationConstraintAPNortheast1,
-    CSSPBucketLocationConstraintSAEast1,
-    CSSPBucketLocationConstraintBlank,
-    CSSPBucketLocationConstraintCNNorth1,
-    CSSPBucketLocationConstraintEUCentral1,
+typedef NS_ENUM(NSInteger, CSSPContainerLocationConstraint) {
+    CSSPContainerLocationConstraintUnknown,
+    CSSPContainerLocationConstraintEU,
+    CSSPContainerLocationConstraintEUWest1,
+    CSSPContainerLocationConstraintUSWest1,
+    CSSPContainerLocationConstraintUSWest2,
+    CSSPContainerLocationConstraintAPSoutheast1,
+    CSSPContainerLocationConstraintAPSoutheast2,
+    CSSPContainerLocationConstraintAPNortheast1,
+    CSSPContainerLocationConstraintSAEast1,
+    CSSPContainerLocationConstraintBlank,
+    CSSPContainerLocationConstraintCNNorth1,
+    CSSPContainerLocationConstraintEUCentral1,
 };
 
-typedef NS_ENUM(NSInteger, CSSPBucketLogsPermission) {
-    CSSPBucketLogsPermissionUnknown,
-    CSSPBucketLogsPermissionFullControl,
-    CSSPBucketLogsPermissionRead,
-    CSSPBucketLogsPermissionWrite,
+typedef NS_ENUM(NSInteger, CSSPContainerLogsPermission) {
+    CSSPContainerLogsPermissionUnknown,
+    CSSPContainerLogsPermissionFullControl,
+    CSSPContainerLogsPermissionRead,
+    CSSPContainerLogsPermissionWrite,
 };
 
-typedef NS_ENUM(NSInteger, CSSPBucketVersioningStatus) {
-    CSSPBucketVersioningStatusUnknown,
-    CSSPBucketVersioningStatusEnabled,
-    CSSPBucketVersioningStatusSuspended,
+typedef NS_ENUM(NSInteger, CSSPContainerVersioningStatus) {
+    CSSPContainerVersioningStatusUnknown,
+    CSSPContainerVersioningStatusEnabled,
+    CSSPContainerVersioningStatusSuspended,
 };
 
 typedef NS_ENUM(NSInteger, CSSPEncodingType) {
@@ -105,8 +105,8 @@ typedef NS_ENUM(NSInteger, CSSPObjectCannedACL) {
     CSSPObjectCannedACLPublicRead,
     CSSPObjectCannedACLPublicReadWrite,
     CSSPObjectCannedACLAuthenticatedRead,
-    CSSPObjectCannedACLBucketOwnerRead,
-    CSSPObjectCannedACLBucketOwnerFullControl,
+    CSSPObjectCannedACLContainerOwnerRead,
+    CSSPObjectCannedACLContainerOwnerFullControl,
 };
 
 typedef NS_ENUM(NSInteger, CSSPObjectStorageClass) {
@@ -124,7 +124,7 @@ typedef NS_ENUM(NSInteger, CSSPObjectVersionStorageClass) {
 typedef NS_ENUM(NSInteger, CSSPPayer) {
     CSSPPayerUnknown,
     CSSPPayerRequester,
-    CSSPPayerBucketOwner,
+    CSSPPayerContainerOwner,
 };
 
 typedef NS_ENUM(NSInteger, CSSPPermission) {
@@ -173,6 +173,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @end
 
+
 @interface CSSPAccessControlPolicy
 
 
@@ -188,7 +189,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @interface CSSPAbortMultipartUploadRequest : CSSPRequest
 
 @property (nonatomic, strong) NSString *container;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *object;
 @property (nonatomic, strong) NSString *uploadId;
 
 @end
@@ -214,7 +215,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  * If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
  */
 @property (nonatomic, strong) NSDate *expiration;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *object;
 @property (nonatomic, strong) NSString *location;
 
 /**
@@ -228,11 +229,107 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @interface CSSPCompleteMultipartUploadRequest : CSSPRequest
 
 @property (nonatomic, strong) NSString *container;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *object;
 @property (nonatomic, strong) CSSPCompletedMultipartUpload *multipartUpload;
 @property (nonatomic, strong) NSString *uploadId;
 
 @end
+
+
+@interface CSSPCreateMultipartUploadOutput : CSSPModel
+
+
+/**
+ * Name of the container to which the multipart upload was initiated.
+ */
+@property (nonatomic, strong) NSString *container;
+
+/**
+ * Object key for which the multipart upload was initiated.
+ */
+@property (nonatomic, strong) NSString *object;
+
+
+/**
+ * ID for the initiated multipart upload.
+ */
+@property (nonatomic, strong) NSString *uploadId;
+
+@end
+
+@interface CSSPCreateMultipartUploadRequest : CSSPRequest
+
+
+/**
+ * The canned ACL to apply to the object.
+ */
+@property (nonatomic, assign) CSSPObjectCannedACL ACL;
+@property (nonatomic, strong) NSString *container;
+
+/**
+ * Specifies caching behavior along the request/reply chain.
+ */
+@property (nonatomic, strong) NSString *cacheControl;
+
+/**
+ * Specifies presentational information for the object.
+ */
+@property (nonatomic, strong) NSString *contentDisposition;
+
+/**
+ * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
+ */
+@property (nonatomic, strong) NSString *contentEncoding;
+
+/**
+ * The language the content is in.
+ */
+@property (nonatomic, strong) NSString *contentLanguage;
+
+/**
+ * A standard MIME type describing the format of the object data.
+ */
+@property (nonatomic, strong) NSString *contentType;
+
+/**
+ * The date and time at which the object is no longer cacheable.
+ */
+@property (nonatomic, strong) NSDate *expires;
+
+/**
+ * Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
+ */
+@property (nonatomic, strong) NSString *grantFullControl;
+
+/**
+ * Allows grantee to read the object data and its metadata.
+ */
+@property (nonatomic, strong) NSString *grantRead;
+
+/**
+ * Allows grantee to read the object ACL.
+ */
+@property (nonatomic, strong) NSString *grantReadACP;
+
+/**
+ * Allows grantee to write the ACL for the applicable object.
+ */
+@property (nonatomic, strong) NSString *grantWriteACP;
+@property (nonatomic, strong) NSString *object;
+
+/**
+ * A map of metadata to store with the object in S3.
+ */
+@property (nonatomic, strong) NSDictionary *metadata;
+
+
+/**
+ * The type of storage to use for the object. Defaults to 'STANDARD'.
+ */
+@property (nonatomic, assign) CSSPStorageClass storageClass;
+
+@end
+
 
 @interface CSSPDeleteObjectOutput : CSSPModel
 
@@ -316,7 +413,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, strong) NSString *ETag;
 
 /**
- * If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
+ * If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
  */
 @property (nonatomic, strong) NSDate *expiration;
 
@@ -412,7 +509,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, strong) NSString *ETag;
 
 /**
- * If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
+ * If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
  */
 @property (nonatomic, strong) NSDate *expiration;
 
@@ -443,9 +540,99 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @end
 
-@interface CSSPHeaderObjectRequest : CSSPRequest
+@interface CSSPHeadObjectRequest : CSSPRequest
 
 @property (nonatomic, strong) NSString *object;
+
+@end
+
+
+@interface CSSPListMultipartUploadsOutput : CSSPModel
+
+
+/**
+ * Name of the container to which the multipart upload was initiated.
+ */
+@property (nonatomic, strong) NSString *container;
+@property (nonatomic, strong) NSArray *commonPrefixes;
+@property (nonatomic, strong) NSString *delimiter;
+
+/**
+ * Encoding type used by Amazon S3 to encode object keys in the response.
+ */
+@property (nonatomic, assign) CSSPEncodingType encodingType;
+
+/**
+ * Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads.
+ */
+@property (nonatomic, strong) NSNumber *isTruncated;
+
+/**
+ * The key at or after which the listing began.
+ */
+@property (nonatomic, strong) NSString *keyMarker;
+
+/**
+ * Maximum number of multipart uploads that could have been included in the response.
+ */
+@property (nonatomic, strong) NSNumber *maxUploads;
+
+/**
+ * When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request.
+ */
+@property (nonatomic, strong) NSString *nextKeyMarker;
+
+/**
+ * When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request.
+ */
+@property (nonatomic, strong) NSString *nextUploadIdMarker;
+
+/**
+ * When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix.
+ */
+@property (nonatomic, strong) NSString *prefix;
+
+/**
+ * Upload ID after which listing began.
+ */
+@property (nonatomic, strong) NSString *uploadIdMarker;
+@property (nonatomic, strong) NSArray *uploads;
+
+@end
+
+@interface CSSPListMultipartUploadsRequest : CSSPRequest
+
+@property (nonatomic, strong) NSString *container;
+
+/**
+ * Character you use to group keys.
+ */
+@property (nonatomic, strong) NSString *delimiter;
+
+/**
+ * Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.
+ */
+@property (nonatomic, assign) CSSPEncodingType encodingType;
+
+/**
+ * Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin.
+ */
+@property (nonatomic, strong) NSString *keyMarker;
+
+/**
+ * Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response.
+ */
+@property (nonatomic, strong) NSNumber *maxUploads;
+
+/**
+ * Lists in-progress uploads only for those keys that begin with the specified prefix.
+ */
+@property (nonatomic, strong) NSString *prefix;
+
+/**
+ * Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored.
+ */
+@property (nonatomic, strong) NSString *uploadIdMarker;
 
 @end
 
@@ -508,7 +695,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, strong) NSString *displayName;
 
 /**
- * If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.
+ * If the principal is an CSSP account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.
  */
 @property (nonatomic, strong) NSString *ID;
 
@@ -536,7 +723,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 /**
  * Object key for which the multipart upload was initiated.
  */
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *object;
 
 /**
  * Maximum number of parts that were allowed in the response.

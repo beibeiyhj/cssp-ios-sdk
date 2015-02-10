@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, CSSPGeneralErrorType) {
     CSSPGeneralErrorAuthFailure
 };
 
-@interface CSSPJSONResponseSerializer : NSObject <CSSPHTTPURLResponseSerializer>
+@interface CSSPXMLResponseSerializer : NSObject <CSSPHTTPURLResponseSerializer>
 
 @property (nonatomic, assign) Class outputClass;
 

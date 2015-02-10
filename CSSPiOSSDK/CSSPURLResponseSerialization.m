@@ -17,14 +17,14 @@ NSString *const CSSPGeneralErrorDomain = @"com.amazonaws.CSSPGeneralErrorDomain"
 
 static NSDictionary *errorCodeDictionary = nil;
 
-@interface CSSPJSONResponseSerializer()
+@interface CSSPXMLResponseSerializer()
 
 @property (nonatomic, strong) NSDictionary *serviceDefinitionJSON;
 @property (nonatomic, strong) NSString *actionName;
 
 @end
 
-@implementation CSSPJSONResponseSerializer
+@implementation CSSPXMLResponseSerializer
 
 + (void)initialize {
     errorCodeDictionary = @{
@@ -39,7 +39,7 @@ static NSDictionary *errorCodeDictionary = nil;
 + (instancetype)serializerWithResource:(NSString *)resource
                             actionName:(NSString *)actionName
                            outputClass:(Class)outputClass {
-    CSSPJSONResponseSerializer *serializer = [self new];
+    CSSPXMLResponseSerializer *serializer = [self new];
     
     NSError *error = nil;
     NSString *filePath = [[NSBundle bundleForClass:[self class]] pathForResource:resource ofType:@"json"];
@@ -61,6 +61,69 @@ static NSDictionary *errorCodeDictionary = nil;
 }
 
 
+- (BOOL)validateResponse:(NSHTTPURLResponse *)response
+             fromRequest:(NSURLRequest *)request
+                    data:(id)data
+                   error:(NSError *__autoreleasing *)error {
+    //Validation already performed during XML Parsing in CSSPXMLParser Class.
+    return YES;
+}
+
+- (NSMutableDictionary *)parseResponseHeader:(NSDictionary *)responseHeaders
+                                       rules:(CSSPJSONDictionary *)rules
+                              bodyDictionary:(NSMutableDictionary *)bodyDictionary
+                                       error:(NSError *__autoreleasing *)error {
+    //If no rule just return
+    if (rules == (id)[NSNull null] ||  [rules count] == 0) {
+        return bodyDictionary;
+    }
+    
+    rules = rules[@"members"] ? rules[@"members"] : @{};
+    
+    [rules enumerateKeysAndObjectsUsingBlock:^(NSString *memberName, id memberRules, BOOL *stop) {
+        if ([memberRules isKindOfClass:[NSDictionary class]] && [memberRules[@"location"] isEqualToString:@"header"]) {
+            NSString *locationName = memberRules[@"locationName"]?memberRules[@"locationName"]:memberName;
+            if (locationName && responseHeaders[locationName]) {
+                NSString *rulesType = memberRules[@"type"];
+                if ([rulesType isEqualToString:@"integer"]) {
+                    bodyDictionary[memberName] = @([responseHeaders[locationName] integerValue]);
+                } else if ([rulesType isEqualToString:@"long"]) {
+                    bodyDictionary[memberName] = @([responseHeaders[locationName] longValue]);
+                } else if ([rulesType isEqualToString:@"float"]) {
+                    bodyDictionary[memberName] = @([responseHeaders[locationName] floatValue]);
+                } else if ([rulesType isEqualToString:@"double"]) {
+                    bodyDictionary[memberName] = @([responseHeaders[locationName] doubleValue]);
+                }else if ([rulesType isEqualToString:@"string"]) {
+                    bodyDictionary[memberName] = responseHeaders[locationName];
+                } else if ([rulesType isEqualToString:@"timestamp"]) {
+                    bodyDictionary[memberName] = responseHeaders[locationName];
+                }
+            }
+        }
+        
+        //if the location may contain multiple headers if it is a map type
+        if ([memberRules isKindOfClass:[NSDictionary class]] && [memberRules[@"location"] isEqualToString:@"headers"] && [memberRules[@"type"] isEqualToString:@"map"] ) {
+            NSString *locationName = memberRules[@"locationName"]?memberRules[@"locationName"]:memberName;
+            if (locationName) {
+                NSPredicate *metaDatapredicate = [NSPredicate predicateWithFormat:@"SELF like %@",[locationName stringByAppendingString:@"*"]];
+                NSArray *matchedArray = [[responseHeaders allKeys] filteredArrayUsingPredicate:metaDatapredicate];
+                NSMutableDictionary *mapDic = [NSMutableDictionary new];
+                for (NSString *fullHeaderName in matchedArray) {
+                    NSString *extractedHeaderName = [fullHeaderName stringByReplacingOccurrencesOfString:locationName withString:@""];
+                    if (extractedHeaderName) {
+                        mapDic[extractedHeaderName] = responseHeaders[fullHeaderName];
+                    }
+                }
+                if ([mapDic count] > 0 && memberName) {
+                    bodyDictionary[memberName] = mapDic;
+                }
+            }
+        }
+    }];
+    
+    return bodyDictionary;
+}
+
 - (id)responseObjectForResponse:(NSHTTPURLResponse *)response
                 originalRequest:(NSURLRequest *)originalRequest
                  currentRequest:(NSURLRequest *)currentRequest
@@ -78,7 +141,7 @@ static NSDictionary *errorCodeDictionary = nil;
     NSString *responseContentTypeStr = [[response allHeaderFields] objectForKey:@"Content-Type"];
     if (responseContentTypeStr) {
         if ([responseContentTypeStr rangeOfString:@"text/html"].location != NSNotFound) {
-            //found html response rather than json format. should be an error.
+            //found html response rather than xml format. should be an error.
             if (error) {
                 NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                 
@@ -91,47 +154,49 @@ static NSDictionary *errorCodeDictionary = nil;
         }
     }
     
-    if (!data) {
+    if (![self validateResponse:response fromRequest:currentRequest data:data error:error]) {
         return nil;
     }
-    if (![self validateResponse:response
-                    fromRequest:currentRequest
-                           data:data
-                          error:error]) {
-        return nil;
-    }
+    NSDictionary *anActionRules = [[self.serviceDefinitionJSON objectForKey:@"operations"] objectForKey:self.actionName];
+    NSDictionary *shapeRules = [self.serviceDefinitionJSON objectForKey:@"shapes"];
+    CSSPJSONDictionary *outputRules = [[CSSPJSONDictionary alloc] initWithDictionary:[anActionRules objectForKey:@"output"] JSONDefinitionRule:shapeRules];
     
-    id result = nil;
     
-    if (data) {
-        //parse JSON data
-        result = [CSSPJSONParser dictionaryForJsonData:data actionName:self.actionName serviceDefinitionRule:self.serviceDefinitionJSON error:error];
-        
-        //Parse CSSPGeneralError
-        if ([result isKindOfClass:[NSDictionary class]]) {
-            if ([errorCodeDictionary objectForKey:[[[result objectForKey:@"__type"] componentsSeparatedByString:@"#"] lastObject]]) {
-                if (error) {
-                    *error = [NSError errorWithDomain:CSSPGeneralErrorDomain
-                                                 code:[[errorCodeDictionary objectForKey:[[[result objectForKey:@"__type"] componentsSeparatedByString:@"#"] lastObject]] integerValue]
-                                             userInfo:result];
-                }
-            }
+    NSMutableDictionary *resultDic = [NSMutableDictionary new];
+    
+    if (response.statusCode >= 200 && response.statusCode < 300 ) {
+        // status is good, we can keep NSURL as data
+    } else {
+        //if status error indicates error, need to convert NSURL to NSData for error processing
+        if ([data isKindOfClass:[NSURL class]]) {
+            data = [NSData dataWithContentsOfFile:[(NSURL *)data path]];
         }
     }
     
-    if (self.outputClass)
-        result = [MTLJSONAdapter modelOfClass:self.outputClass
-                           fromJSONDictionary:result
-                                        error:error];
+    if ([resultDic count] == 0) {
+        //if not blob type, try to parse as XML string
+        resultDic = [[CSSPXMLParser sharedInstance] dictionaryForXMLData:data
+                                                             actionName:self.actionName
+                                                  serviceDefinitionRule:self.serviceDefinitionJSON
+                                                                  error:error];
+    }
     
-    return result;
-}
-
-- (BOOL)validateResponse:(NSHTTPURLResponse *)response
-             fromRequest:(NSURLRequest *)request
-                    data:(id)data
-                   error:(NSError *__autoreleasing *)error {
-    return YES;
+    //parse response header
+    resultDic = [self parseResponseHeader:[response allHeaderFields] rules:outputRules bodyDictionary:resultDic error:error];
+    
+    //Parse CSSPGeneralError
+    NSDictionary *errorInfo = resultDic[@"Error"];
+    if (errorInfo) {
+        if (errorInfo[@"Code"] && errorCodeDictionary[errorInfo[@"Code"]]) {
+            if (error && (*error == nil)) {
+                *error = [NSError errorWithDomain:CSSPGeneralErrorDomain
+                                             code:[errorCodeDictionary[errorInfo[@"Code"]] integerValue]
+                                         userInfo:errorInfo
+                          ];
+            }
+        }
+    }
+    return resultDic;
 }
 
 @end

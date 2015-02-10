@@ -108,3 +108,14 @@ typedef NS_ENUM(NSInteger, CSSPXMLParserErrorType) {
 
 @end
 
+@interface CSSPXMLParser : NSObject
+
++ (CSSPXMLParser *)sharedInstance;
+
+- (NSMutableDictionary *)dictionaryForXMLData:(NSData *)data
+                                   actionName:(NSString *)actionName
+                        serviceDefinitionRule:(NSDictionary *)serviceDefinitionRule
+                                        error:(NSError *__autoreleasing *)error;
+
+@end
+

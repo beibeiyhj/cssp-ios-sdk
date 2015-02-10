@@ -14,12 +14,26 @@
 #import "CSSPLogging.h"
 #import "CSSPModule.h"
 
+#pragma mark - CSSPEndpoint
+
+@interface CSSPEndpoint : NSObject
+
+@property (nonatomic, readonly) NSString *containerName;
+@property (nonatomic, readonly) NSURL *URL;
+@property (nonatomic, readonly) NSString *hostName;
+
++ (instancetype)endpointWithURL:(NSString *)urlString;
+
+@end
+
+
 @interface CSSPServiceConfiguration : CSSPNetworkingConfiguration
 
 @property (nonatomic, strong, readonly) id<CSSPCredentialsProvider> credentialsProvider;
-@property (nonatomic, assign) int32_t maxRetryCount;
+@property (nonatomic, strong, readonly) CSSPEndpoint *endpoint;
 
-+ (instancetype)configurationWithCredentialsProvider:(id<CSSPCredentialsProvider>)credentialsProvider;
++ (instancetype)configurationWithCredentialsProvider:(id<CSSPCredentialsProvider>)credentialsProvider
+                                        withEndpoint:(CSSPEndpoint *)endpoint;
 
 @end
 
@@ -29,9 +43,8 @@
 
 @property (nonatomic, strong, readonly) CSSPServiceConfiguration *configuration;
 
-+ (instancetype)defaultCSSP;
-
-- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
+- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration
+                         withEndpoint:(CSSPEndpoint *)endpoint;
 
 - (BFTask *)abortMultipartUpload:(CSSPAbortMultipartUploadRequest *)request;
 
@@ -45,7 +58,7 @@
 
 -(BFTask *) headContainer:(CSSPHeadContainerRequest *)request;
 
--(BFTask *) headObject:(CSSPHeaderObjectRequest *)request;
+-(BFTask *) headObject:(CSSPHeadObjectRequest *)request;
 
 -(BFTask *) listObjects:(CSSPListObjectsRequest *)request;
 
