@@ -166,15 +166,59 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 };
 
 
-@interface CSSPOwner
+@class CSSPInitiator;
+
+
+@interface CSSPOwner :CSSPModel
 
 @property (nonatomic, strong) NSString *displayName;
 @property (nonatomic, strong) NSString *ID;
 
 @end
 
+@interface CSSPGrantee : CSSPModel
 
-@interface CSSPAccessControlPolicy
+
+/**
+ * Screen name of the grantee.
+ */
+@property (nonatomic, strong) NSString *displayName;
+
+/**
+ * Email address of the grantee.
+ */
+@property (nonatomic, strong) NSString *emailAddress;
+
+/**
+ * The canonical user ID of the grantee.
+ */
+@property (nonatomic, strong) NSString *ID;
+
+/**
+ * Type of grantee
+ */
+@property (nonatomic, assign) CSSPType type;
+
+/**
+ * URI of the grantee group.
+ */
+@property (nonatomic, strong) NSString *URI;
+
+@end
+
+@interface CSSPGrant : CSSPModel
+
+@property (nonatomic, strong) CSSPGrantee *grantee;
+
+/**
+ * Specifies the permission given to the grantee.
+ */
+@property (nonatomic, assign) CSSPPermission permission;
+
+@end
+
+
+@interface CSSPAccessControlPolicy : CSSPModel
 
 
 /**
@@ -225,6 +269,21 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @end
 
+
+@interface CSSPCompletedPart : CSSPModel
+
+
+/**
+ * Entity tag returned when the part was uploaded.
+ */
+@property (nonatomic, strong) NSString *ETag;
+
+/**
+ * Part number that identifies the part.
+ */
+@property (nonatomic, strong) NSNumber *partNumber;
+
+@end
 
 @interface CSSPCompleteMultipartUploadRequest : CSSPRequest
 
@@ -547,6 +606,43 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 
+@interface CSSPCommonPrefix : CSSPModel
+
+@property (nonatomic, strong) NSString *prefix;
+
+@end
+
+@interface CSSPMultipartUpload : CSSPModel
+
+
+/**
+ * Date and time at which the multipart upload was initiated.
+ */
+@property (nonatomic, strong) NSDate *initiated;
+
+/**
+ * Identifies who initiated the multipart upload.
+ */
+@property (nonatomic, strong) CSSPInitiator *initiator;
+
+/**
+ * Key of the object for which the multipart upload was initiated.
+ */
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) CSSPOwner *owner;
+
+/**
+ * The class of storage used to store the object.
+ */
+@property (nonatomic, assign) CSSPStorageClass storageClass;
+
+/**
+ * Upload ID that identifies the multipart upload.
+ */
+@property (nonatomic, strong) NSString *uploadId;
+
+@end
+
 @interface CSSPListMultipartUploadsOutput : CSSPModel
 
 
@@ -636,6 +732,21 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @end
 
+
+@interface CSSPObject : CSSPModel
+
+@property (nonatomic, strong) NSString *ETag;
+@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSDate *lastModified;
+@property (nonatomic, strong) CSSPOwner *owner;
+@property (nonatomic, strong) NSNumber *size;
+
+/**
+ * The class of storage used to store the object.
+ */
+@property (nonatomic, assign) CSSPObjectStorageClass storageClass;
+
+@end
 
 @interface CSSPListObjectsOutput : CSSPModel
 
@@ -776,6 +887,32 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, strong) NSString *uploadId;
 
 @end
+
+@interface CSSPPart : CSSPModel
+
+
+/**
+ * Entity tag returned when the part was uploaded.
+ */
+@property (nonatomic, strong) NSString *ETag;
+
+/**
+ * Date and time at which the part was uploaded.
+ */
+@property (nonatomic, strong) NSDate *lastModified;
+
+/**
+ * Part number identifying the part.
+ */
+@property (nonatomic, strong) NSNumber *partNumber;
+
+/**
+ * Size of the uploaded part data.
+ */
+@property (nonatomic, strong) NSNumber *size;
+
+@end
+
 
 @interface CSSPPutContainerAclRequest : CSSPRequest
 
