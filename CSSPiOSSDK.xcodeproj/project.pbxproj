@@ -20,6 +20,7 @@
 		15501C091A768BB40040E0FE /* CSSP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSP.h */; };
 		15501C0B1A768BB40040E0FE /* CSSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSP.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
+		157C30DE1A8AFF1C006E75E5 /* CSSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */; };
 		159B4B6A1A83BC410064DCB0 /* CSSPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */; };
 		159B4B6E1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */; };
 		15E4348C1A82165800218C8A /* CSSPModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E4348B1A82165800218C8A /* CSSPModule.m */; };
@@ -76,6 +77,8 @@
 		15501C101A768BB40040E0FE /* CSSPiOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSSPiOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C161A768BB40040E0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		15501C1F1A768BE90040E0FE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cssp-2015-02-09.json"; sourceTree = "<group>"; };
+		157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPTest.m; sourceTree = "<group>"; };
 		159B4B681A83BC410064DCB0 /* CSSPURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPURLSessionManager.h; sourceTree = "<group>"; };
 		159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPURLSessionManager.m; sourceTree = "<group>"; };
 		159B4B6C1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSynchronizedMutableDictionary.h; sourceTree = "<group>"; };
@@ -184,6 +187,7 @@
 		15501C071A768BB40040E0FE /* CSSPiOSSDK */ = {
 			isa = PBXGroup;
 			children = (
+				157C30DB1A8AFD96006E75E5 /* Resources */,
 				15501C081A768BB40040E0FE /* CSSP.h */,
 				15501C0A1A768BB40040E0FE /* CSSP.m */,
 				15E4348A1A82165800218C8A /* CSSPModule.h */,
@@ -201,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				15501C151A768BB40040E0FE /* Supporting Files */,
+				157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */,
 			);
 			path = CSSPiOSSDKTests;
 			sourceTree = "<group>";
@@ -211,6 +216,14 @@
 				15501C161A768BB40040E0FE /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		157C30DB1A8AFD96006E75E5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		159B4B6B1A83BD5E0064DCB0 /* Utility */ = {
@@ -380,6 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				157C30DE1A8AFF1C006E75E5 /* CSSPTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

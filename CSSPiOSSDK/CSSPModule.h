@@ -166,7 +166,47 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 };
 
 
+@class CSSPAbortMultipartUploadRequest;
+@class CSSPAccessControlPolicy;
+@class CSSPCommonPrefix;
+@class CSSPCompleteMultipartUploadOutput;
+@class CSSPCompleteMultipartUploadRequest;
+@class CSSPCompletedMultipartUpload;
+@class CSSPCompletedPart;
+@class CSSPCreateMultipartUploadOutput;
+@class CSSPCreateMultipartUploadRequest;
+@class CSSPDeleteObjectOutput;
+@class CSSPDeleteObjectRequest;
+@class CSSPGetContainerAclOutput;
+@class CSSPGetContainerAclRequest;
+@class CSSPGetObjectAclOutput;
+@class CSSPGetObjectAclRequest;
+@class CSSPGetObjectOutput;
+@class CSSPGetObjectRequest;
+@class CSSPGrant;
+@class CSSPGrantee;
+@class CSSPHeadContainerRequest;
+@class CSSPHeadObjectOutput;
+@class CSSPHeadObjectRequest;
 @class CSSPInitiator;
+@class CSSPListMultipartUploadsOutput;
+@class CSSPListMultipartUploadsRequest;
+@class CSSPListObjectsOutput;
+@class CSSPListObjectsRequest;
+@class CSSPListPartsOutput;
+@class CSSPListPartsRequest;
+@class CSSPMultipartUpload;
+@class CSSPObject;
+@class CSSPOwner;
+@class CSSPPart;
+@class CSSPPutContainerAclRequest;
+@class CSSPPutObjectOutput;
+@class CSSPPutObjectRequest;
+@class CSSPReplicateObjectOutput;
+@class CSSPReplicateObjectRequest;
+@class CSSPReplicateObjectResult;
+@class CSSPUploadPartOutput;
+@class CSSPUploadPartRequest;
 
 
 @interface CSSPOwner :CSSPModel
@@ -399,6 +439,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPDeleteObjectRequest : CSSPRequest
 
+@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 @end
@@ -491,29 +532,21 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSDictionary *metadata;
 
-/**
- * This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers.
- */
-@property (nonatomic, strong) NSNumber *missingMeta;
-
-/**
- * Provides information about object restoration operation and expiration time of the restored object copy.
- */
-@property (nonatomic, strong) NSString *restore;
-
-/**
- * If the container is configured as a website, redirects requests for this object to another object in the same container or to an external URL. Amazon S3 stores the value of this header in the object metadata.
- */
-@property (nonatomic, strong) NSString *websiteRedirectLocation;
 
 @end
 
 
 @interface CSSPGetObjectRequest : CSSPRequest
 
+@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 @property (nonatomic, strong) NSOutputStream * outputStream;
+
+/**
+ * Sets the Expires header of the response.
+ */
+@property (nonatomic, strong) NSDate *responseExpires;
 
 @end
 
@@ -1084,10 +1117,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, assign) CSSPMetadataDirective metadataDirective;
 @property (nonatomic, strong) NSString *replicateSource;
-@property (nonatomic, strong) NSString *replicateSourceIfMatch;
-@property (nonatomic, strong) NSDate *replicateSourceIfModifiedSince;
-@property (nonatomic, strong) NSString *replicateSourceIfNoneMatch;
-@property (nonatomic, strong) NSDate *replicateSourceIfUnmodifiedSince;
 
 @end
 

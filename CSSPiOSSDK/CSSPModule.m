@@ -135,31 +135,9 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     return @{
              @"container" : @"Container",
              @"object" : @"Object",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
              @"uploadId" : @"UploadId",
              };
 }
-
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 @end
 
 @implementation CSSPCreateMultipartUploadRequest
@@ -180,13 +158,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"grantWriteACP" : @"GrantWriteACP",
              @"object" : @"Object",
              @"metadata" : @"Metadata",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKey" : @"SSECustomerKey",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
              @"storageClass" : @"StorageClass",
-             @"websiteRedirectLocation" : @"WebsiteRedirectLocation",
              };
 }
 
@@ -240,22 +212,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     }];
 }
 
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
 
 + (NSValueTransformer *)storageClassJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
@@ -286,7 +242,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"deleteMarker" : @"DeleteMarker",
-             @"versionId" : @"VersionId",
              };
 }
 
@@ -298,8 +253,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     return @{
              @"container" : @"Container",
              @"object" : @"Object",
-             @"MFA" : @"MFA",
-             @"versionId" : @"VersionId",
              };
 }
 
@@ -352,14 +305,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"expires" : @"Expires",
              @"lastModified" : @"LastModified",
              @"metadata" : @"Metadata",
-             @"missingMeta" : @"MissingMeta",
-             @"restore" : @"Restore",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
-             @"versionId" : @"VersionId",
-             @"websiteRedirectLocation" : @"WebsiteRedirectLocation",
              };
 }
 
@@ -387,23 +332,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     }];
 }
 
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 @end
 
 @implementation CSSPGetObjectRequest
@@ -411,40 +339,10 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"container" : @"Container",
-             @"ifMatch" : @"IfMatch",
-             @"ifModifiedSince" : @"IfModifiedSince",
-             @"ifNoneMatch" : @"IfNoneMatch",
-             @"ifUnmodifiedSince" : @"IfUnmodifiedSince",
              @"object" : @"Object",
              @"range" : @"Range",
-             @"responseCacheControl" : @"ResponseCacheControl",
-             @"responseContentDisposition" : @"ResponseContentDisposition",
-             @"responseContentEncoding" : @"ResponseContentEncoding",
-             @"responseContentLanguage" : @"ResponseContentLanguage",
-             @"responseContentType" : @"ResponseContentType",
              @"responseExpires" : @"ResponseExpires",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKey" : @"SSECustomerKey",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"versionId" : @"VersionId",
              };
-}
-
-+ (NSValueTransformer *)ifModifiedSinceJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-+ (NSValueTransformer *)ifUnmodifiedSinceJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
 }
 
 + (NSValueTransformer *)responseExpiresJSONTransformer {
@@ -578,14 +476,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"expires" : @"Expires",
              @"lastModified" : @"LastModified",
              @"metadata" : @"Metadata",
-             @"missingMeta" : @"MissingMeta",
-             @"restore" : @"Restore",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
-             @"versionId" : @"VersionId",
-             @"websiteRedirectLocation" : @"WebsiteRedirectLocation",
              };
 }
 
@@ -613,23 +503,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     }];
 }
 
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 @end
 
 @implementation CSSPHeadObjectRequest
@@ -643,28 +516,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"ifUnmodifiedSince" : @"IfUnmodifiedSince",
              @"object" : @"Object",
              @"range" : @"Range",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKey" : @"SSECustomerKey",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"versionId" : @"VersionId",
              };
-}
-
-+ (NSValueTransformer *)ifModifiedSinceJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-+ (NSValueTransformer *)ifUnmodifiedSinceJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
 }
 
 @end
@@ -1121,13 +973,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"grantWriteACP" : @"GrantWriteACP",
              @"object" : @"Object",
              @"metadata" : @"Metadata",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKey" : @"SSECustomerKey",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
-             @"storageClass" : @"StorageClass",
-             @"websiteRedirectLocation" : @"WebsiteRedirectLocation",
              };
 }
 
@@ -1181,23 +1026,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     }];
 }
 
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 + (NSValueTransformer *)storageClassJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
         if ([value isEqualToString:@"STANDARD"]) {
@@ -1242,20 +1070,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"metadata" : @"Metadata",
              @"metadataDirective" : @"MetadataDirective",
              @"replicateSource" : @"CopySource",
-             @"replicateSourceIfMatch" : @"CopySourceIfMatch",
-             @"replicateSourceIfModifiedSince" : @"CopySourceIfModifiedSince",
-             @"replicateSourceIfNoneMatch" : @"CopySourceIfNoneMatch",
-             @"replicateSourceIfUnmodifiedSince" : @"CopySourceIfUnmodifiedSince",
-             @"replicateSourceSSECustomerAlgorithm" : @"CopySourceSSECustomerAlgorithm",
-             @"replicateSourceSSECustomerKey" : @"CopySourceSSECustomerKey",
-             @"replicateSourceSSECustomerKeyMD5" : @"CopySourceSSECustomerKeyMD5",
-             @"replicateSourceSSEKMSKeyId" : @"CopySourceSSEKMSKeyId",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKey" : @"SSECustomerKey",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"serverSideEncryption" : @"ServerSideEncryption",
-             @"storageClass" : @"StorageClass",
-             @"websiteRedirectLocation" : @"WebsiteRedirectLocation",
              };
 }
 
@@ -1331,39 +1145,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     }];
 }
 
-+ (NSValueTransformer *)replicateSourceIfModifiedSinceJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-+ (NSValueTransformer *)replicateSourceIfUnmodifiedSinceJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 + (NSValueTransformer *)storageClassJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
         if ([value isEqualToString:@"STANDARD"]) {
@@ -1412,28 +1193,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"ETag" : @"ETag",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
              };
-}
-
-+ (NSValueTransformer *)serverSideEncryptionJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"AES256"]) {
-            return @(CSSPServerSideEncryptionAES256);
-        }
-        return @(CSSPServerSideEncryptionUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPServerSideEncryptionAES256:
-                return @"AES256";
-            case CSSPServerSideEncryptionUnknown:
-            default:
-                return nil;
-        }
-    }];
 }
 
 @end
@@ -1448,10 +1208,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"contentMD5" : @"ContentMD5",
              @"object" : @"Object",
              @"partNumber" : @"PartNumber",
-             @"SSECustomerAlgorithm" : @"SSECustomerAlgorithm",
-             @"SSECustomerKey" : @"SSECustomerKey",
-             @"SSECustomerKeyMD5" : @"SSECustomerKeyMD5",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
              @"uploadId" : @"UploadId",
              };
 }
