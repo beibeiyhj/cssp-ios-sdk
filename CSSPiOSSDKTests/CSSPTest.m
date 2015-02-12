@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+#import "CSSP.h"
 
-@interface CSSPTest :XCTest
+@interface CSSPTest :XCTestCase
 @end
 
 

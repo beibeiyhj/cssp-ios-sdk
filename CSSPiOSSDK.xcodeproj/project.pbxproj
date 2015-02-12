@@ -17,13 +17,13 @@
 		154D05031A84B66400DE3513 /* CSSPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D05021A84B66400DE3513 /* CSSPModel.m */; };
 		154D05071A84B8AA00DE3513 /* CSSPCredentialsProvider.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D05061A84B8AA00DE3513 /* CSSPCredentialsProvider.m */; };
 		154D050A1A84BA4C00DE3513 /* CSSPSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D05091A84BA4C00DE3513 /* CSSPSignature.m */; };
-		15501C091A768BB40040E0FE /* CSSP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSP.h */; };
 		15501C0B1A768BB40040E0FE /* CSSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSP.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
-		157C30DE1A8AFF1C006E75E5 /* CSSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */; };
 		159B4B6A1A83BC410064DCB0 /* CSSPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */; };
 		159B4B6E1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */; };
+		15DE7E661A8C8A8400947888 /* CSSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */; };
 		15E4348C1A82165800218C8A /* CSSPModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E4348B1A82165800218C8A /* CSSPModule.m */; };
+		15EAD0881A8C51C300D2152B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EAD0871A8C51C300D2152B /* Foundation.framework */; };
 		7832B8946256270695B14FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 831C2BCEF358DB7E7B12C810 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -44,7 +44,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				15501C091A768BB40040E0FE /* CSSP.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +75,6 @@
 		15501C0A1A768BB40040E0FE /* CSSP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSSP.m; sourceTree = "<group>"; };
 		15501C101A768BB40040E0FE /* CSSPiOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSSPiOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C161A768BB40040E0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		15501C1F1A768BE90040E0FE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cssp-2015-02-09.json"; sourceTree = "<group>"; };
 		157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPTest.m; sourceTree = "<group>"; };
 		159B4B681A83BC410064DCB0 /* CSSPURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPURLSessionManager.h; sourceTree = "<group>"; };
@@ -85,6 +83,7 @@
 		159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSynchronizedMutableDictionary.m; sourceTree = "<group>"; };
 		15E4348A1A82165800218C8A /* CSSPModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPModule.h; sourceTree = "<group>"; };
 		15E4348B1A82165800218C8A /* CSSPModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPModule.m; sourceTree = "<group>"; };
+		15EAD0871A8C51C300D2152B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		831C2BCEF358DB7E7B12C810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0942B16486258057AC02A7C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -95,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15EAD0881A8C51C300D2152B /* Foundation.framework in Frameworks */,
 				7832B8946256270695B14FF7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -166,7 +166,6 @@
 		15501BFC1A768BB40040E0FE = {
 			isa = PBXGroup;
 			children = (
-				15501C1F1A768BE90040E0FE /* Podfile */,
 				15501C071A768BB40040E0FE /* CSSPiOSSDK */,
 				15501C141A768BB40040E0FE /* CSSPiOSSDKTests */,
 				15501C061A768BB40040E0FE /* Products */,
@@ -244,6 +243,7 @@
 		903D659F178841379487EFA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15EAD0871A8C51C300D2152B /* Foundation.framework */,
 				831C2BCEF358DB7E7B12C810 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -393,7 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				157C30DE1A8AFF1C006E75E5 /* CSSPTest.m in Sources */,
+				15DE7E661A8C8A8400947888 /* CSSPTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +486,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F0942B16486258057AC02A7C /* Pods.debug.xcconfig */;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
+					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
+					"\"${PODS_ROOT}/Headers/Public/XMLDictionary\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-Bolts\"",
+					"-l\"Pods-Mantle\"",
+					"-l\"Pods-XMLDictionary\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-weak_framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -496,7 +516,27 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */;
 			buildSettings = {
-				OTHER_LDFLAGS = "-ObjC";
+				HEADER_SEARCH_PATHS = (
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
+					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
+					"\"${PODS_ROOT}/Headers/Public/XMLDictionary\"",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-l\"Pods-Bolts\"",
+					"-l\"Pods-Mantle\"",
+					"-l\"Pods-XMLDictionary\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-weak_framework",
+					"\"UIKit\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -508,13 +548,31 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CSSPiOSSDKTests/CSSPiOSSDKTests-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${SRCROOT}/Pods/Headers/**",
+				);
 				INFOPLIST_FILE = CSSPiOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -525,9 +583,27 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CSSPiOSSDKTests/CSSPiOSSDKTests-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"${SRCROOT}/Pods/Headers/**",
 				);
 				INFOPLIST_FILE = CSSPiOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					XCTest,
+					"-ObjC",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

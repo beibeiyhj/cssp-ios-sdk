@@ -9,8 +9,42 @@
 #import "CSSPNetworking.h"
 #import "Bolts.h"
 #import "CSSPURLSessionManager.h"
+#import "CSSPCategory.h"
 
 NSString *const CSSPNetworkingErrorDomain = @"com.cssp.csspNetworkingErrorDomain";
+
+
+#pragma mark - CSSPURLRequestSerializer
+
+@implementation CSSPURLRequestSerializer
+
+- (BFTask *)validateRequest:(NSURLRequest *)request {
+    return [BFTask taskWithResult:nil];
+}
+
+- (BFTask *)serializeRequest:(NSMutableURLRequest *)request
+                     headers:(NSDictionary *)header
+                  parameters:(NSDictionary *)parameters {
+    if ([request.HTTPMethod isEqualToString:@"GET"]) {
+        NSMutableString *URLparameters = [NSMutableString new];
+        for (id o in parameters) {
+            if ([URLparameters length] > 0) {
+                [URLparameters appendString:@"&"];
+            }
+            
+            [URLparameters appendFormat:@"%@=%@", o, [parameters objectForKey:o]];
+        }
+        
+        NSString *escapedURLParameters = [[URLparameters stringByRemovingPercentEncoding] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        request.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@%@",
+                                            [request.URL absoluteString],
+                                            request.URL.query ? @"&" : @"?",
+                                            escapedURLParameters]];
+    }
+    return [BFTask taskWithResult:nil];
+}
+
+@end
 
 @implementation CSSPNetworkingConfiguration
 
@@ -231,6 +265,90 @@ NSString *const CSSPNetworkingErrorDomain = @"com.cssp.csspNetworkingErrorDomain
     
     
     return taskCompletionSource.task;
+}
+
+@end
+
+@interface CSSPRequest()
+
+@property (nonatomic, strong) CSSPNetworkingRequest *internalRequest;
+@property (nonatomic, assign) NSNumber *shouldWriteDirectly;
+
+@end
+
+@implementation CSSPRequest
+
+- (instancetype)init {
+    if (self = [super init]) {
+        _internalRequest = [CSSPNetworkingRequest new];
+    }
+    
+    return self;
+}
+
+- (void)setUploadProgress:(CSSPNetworkingUploadProgressBlock)uploadProgress {
+    self.internalRequest.uploadProgress = uploadProgress;
+}
+
+- (void)setDownloadProgress:(CSSPNetworkingDownloadProgressBlock)downloadProgress {
+    self.internalRequest.downloadProgress = downloadProgress;
+}
+
+- (BOOL)isCancelled {
+    return [self.internalRequest isCancelled];
+}
+
+- (BFTask *)cancel {
+    [self.internalRequest cancel];
+    return [BFTask taskWithResult:nil];
+}
+
+- (BFTask *)pause {
+    [self.internalRequest pause];
+    return [BFTask taskWithResult:nil];
+}
+
+- (NSDictionary *)dictionaryValue {
+    NSDictionary *dictionaryValue = [super dictionaryValue];
+    NSMutableDictionary *mutableDictionaryValue = [dictionaryValue mutableCopy];
+    
+    [dictionaryValue enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        if ([key isEqualToString:@"internalRequest"]) {
+            [mutableDictionaryValue removeObjectForKey:key];
+        }
+    }];
+    
+    return mutableDictionaryValue;
+}
+
+@end
+
+
+@interface CSSPNetworkingRequestInterceptor()
+
+@end
+
+@implementation CSSPNetworkingRequestInterceptor
+
+- (NSString *)userAgent {
+    static NSString *_userAgent = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        NSString *systemName = [[[UIDevice currentDevice] systemName] stringByReplacingOccurrencesOfString:@" " withString:@"-"];
+        NSString *systemVersion = [[UIDevice currentDevice] systemVersion];
+        NSString *localeIdentifier = [[NSLocale currentLocale] localeIdentifier];
+        _userAgent = [NSString stringWithFormat:@"cssp-sdk-iOS/%@/%@ %@", systemName, systemVersion, localeIdentifier];
+    });
+    
+    return _userAgent;
+}
+
+- (BFTask *)interceptRequest:(NSMutableURLRequest *)request {
+    
+    NSString *userAgent = [self userAgent];
+    [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
+    
+    return [BFTask taskWithResult:nil];
 }
 
 @end

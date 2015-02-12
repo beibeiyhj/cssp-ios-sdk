@@ -622,6 +622,59 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 @end
 
+@implementation CSSPObject
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"ETag" : @"ETag",
+             @"key" : @"Key",
+             @"lastModified" : @"LastModified",
+             @"owner" : @"Owner",
+             @"size" : @"Size",
+             @"storageClass" : @"StorageClass",
+             };
+}
+
++ (NSValueTransformer *)lastModifiedJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate cssp_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)ownerJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPOwner class]];
+}
+
++ (NSValueTransformer *)storageClassJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
+        if ([value isEqualToString:@"STANDARD"]) {
+            return @(CSSPObjectStorageClassStandard);
+        }
+        if ([value isEqualToString:@"REDUCED_REDUNDANCY"]) {
+            return @(CSSPObjectStorageClassReducedRedundancy);
+        }
+        if ([value isEqualToString:@"GLACIER"]) {
+            return @(CSSPObjectStorageClassGlacier);
+        }
+        return @(CSSPObjectStorageClassUnknown);
+    } reverseBlock:^NSString *(NSNumber *value) {
+        switch ([value integerValue]) {
+            case CSSPObjectStorageClassStandard:
+                return @"STANDARD";
+            case CSSPObjectStorageClassReducedRedundancy:
+                return @"REDUCED_REDUNDANCY";
+            case CSSPObjectStorageClassGlacier:
+                return @"GLACIER";
+            case CSSPObjectStorageClassUnknown:
+            default:
+                return nil;
+        }
+    }];
+}
+
+@end
 
 @implementation CSSPListObjectsOutput
 
@@ -1184,6 +1237,29 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     } reverseBlock:^id(NSDate *date) {
         return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
     }];
+}
+
+@end
+
+@implementation CSSPReplicateObjectOutput
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"expiration" : @"Expiration",
+             @"replicateObjectResult" : @"CopyObjectResult",
+             };
+}
+
++ (NSValueTransformer *)expirationJSONTransformer {
+    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
+        return [NSDate cssp_dateFromString:str];
+    } reverseBlock:^id(NSDate *date) {
+        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
+    }];
+}
+
++ (NSValueTransformer *)replicateObjectResultJSONTransformer {
+    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPReplicateObjectResult class]];
 }
 
 @end

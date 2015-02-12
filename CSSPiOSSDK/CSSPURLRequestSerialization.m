@@ -11,8 +11,6 @@
 #import "CSSPCategory.h"
 #import "Bolts.h"
 
-
-NSString *const CSSPGeneralErrorDomain = @"com.iflycssp.CSSPGeneralErrorDomain";
 NSString *const CSSPValidationErrorDomain = @"com.iflycssp.CSSPValidationErrorDomain";
 
 typedef NS_ENUM(NSInteger, CSSPValidationErrorType) {
