@@ -22,9 +22,9 @@
 }
 
 
-+ (void)testCSSPHeadContainer {
+- (void)testHeadContainer {
     CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openspeech.cn"];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn"];
 
     CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration withEndpoint:endpoint];
 
@@ -37,6 +37,40 @@
 
     }]waitUntilFinished];
     
+}
+
+- (void)testListObjects {
+    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn"];
+    
+    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration withEndpoint:endpoint];
+    
+    
+    CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
+    listObjectReq.container = @"photos";
+    
+    [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+        XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
+        CSSPListObjectsOutput *listObjectsOutput = task.result;
+        //        XCTAssertEqualObjects(listObjectsOutput.name, @"ios-test-listobjects");
+        
+        for (CSSPObject *object in listObjectsOutput.contents) {
+            XCTAssertTrue([object.lastModified isKindOfClass:[NSDate class]], @"listObject doesn't contain LastModified(NSDate)");
+        }
+        
+        return nil;
+    }] waitUntilFinished];
+    
+//    CSSPListObjectsRequest *listObjectReq2 = [CSSPListObjectsRequest new];
+//    listObjectReq2.container = @"ios-test-listobjects-not-existed";
+//    
+//    
+//    [[[cssp listObjects:listObjectReq2] continueWithBlock:^id(BFTask *task) {
+//        XCTAssertTrue(task.error, @"Expected NoSuchBucket Error not thrown.");
+//        return nil;
+//    }] waitUntilFinished];
+
 }
 
 @end

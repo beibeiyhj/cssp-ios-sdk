@@ -12,7 +12,7 @@
             "name":"AbortMultipartUpload",
             "http":{
                 "method":"DELETE",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"AbortMultipartUploadRequest"},
             "errors":[
@@ -28,7 +28,7 @@
             "name":"CompleteMultipartUpload",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"CompleteMultipartUploadRequest"},
             "output":{"shape":"CompleteMultipartUploadOutput"},
@@ -38,7 +38,7 @@
             "name":"CreateMultipartUpload",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Bucket}/{Key+}?uploads"
+                "requestUri":"/{Container}/{Key+}?uploads"
             },
             "input":{"shape":"CreateMultipartUploadRequest"},
             "output":{"shape":"CreateMultipartUploadOutput"},
@@ -49,7 +49,7 @@
             "name":"DeleteObject",
             "http":{
                 "method":"DELETE",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"DeleteObjectRequest"},
             "output":{"shape":"DeleteObjectOutput"},
@@ -59,28 +59,28 @@
             "name":"DeleteObjects",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Bucket}?delete"
+                "requestUri":"/{Container}?delete"
             },
             "input":{"shape":"DeleteObjectsRequest"},
             "output":{"shape":"DeleteObjectsOutput"},
-            "documentation":"This operation enables you to delete multiple objects from a bucket using a single HTTP request. You may specify up to 1000 keys.",
+            "documentation":"This operation enables you to delete multiple objects from a Container using a single HTTP request. You may specify up to 1000 keys.",
             "alias":"DeleteMultipleObjects"
         },
-        "GetBucketAcl":{
-            "name":"GetBucketAcl",
+        "GetContainerAcl":{
+            "name":"GetContainerAcl",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Bucket}?acl"
+                "requestUri":"/{Container}?acl"
             },
-            "input":{"shape":"GetBucketAclRequest"},
-            "output":{"shape":"GetBucketAclOutput"},
-            "documentation":"Gets the access control policy for the bucket."
+            "input":{"shape":"GetContainerAclRequest"},
+            "output":{"shape":"GetContainerAclOutput"},
+            "documentation":"Gets the access control policy for the Container."
         },
         "GetObject":{
             "name":"GetObject",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"GetObjectRequest"},
             "output":{"shape":"GetObjectOutput"},
@@ -97,7 +97,7 @@
             "name":"GetObjectAcl",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Bucket}/{Key+}?acl"
+                "requestUri":"/{Container}/{Key+}?acl"
             },
             "input":{"shape":"GetObjectAclRequest"},
             "output":{"shape":"GetObjectAclOutput"},
@@ -111,27 +111,27 @@
             "documentation":"Returns the access control list (ACL) of an object.",
             "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html"
         },
-        "HeadBucket":{
-            "name":"HeadBucket",
+        "HeadContainer":{
+            "name":"HeadContainer",
             "http":{
                 "method":"HEAD",
-                "requestUri":"/{Bucket}"
+                "requestUri":"/{Container}"
             },
-            "input":{"shape":"HeadBucketRequest"},
+            "input":{"shape":"HeadContainerRequest"},
             "errors":[
                       {
-                      "shape":"NoSuchBucket",
+                      "shape":"NoSuchContainer",
                       "exception":true,
-                      "documentation":"The specified bucket does not exist."
+                      "documentation":"The specified Container does not exist."
                       }
                       ],
-            "documentation":"This operation is useful to determine if a bucket exists and you have permission to access it."
+            "documentation":"This operation is useful to determine if a Container exists and you have permission to access it."
         },
         "HeadObject":{
             "name":"HeadObject",
             "http":{
                 "method":"HEAD",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"HeadObjectRequest"},
             "output":{"shape":"HeadObjectOutput"},
@@ -148,7 +148,7 @@
             "name":"ListMultipartUploads",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Bucket}?uploads"
+                "requestUri":"/{Container}?uploads"
             },
             "input":{"shape":"ListMultipartUploadsRequest"},
             "output":{"shape":"ListMultipartUploadsOutput"},
@@ -158,54 +158,54 @@
             "name":"ListObjects",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Bucket}"
+                "requestUri":"/{Container}"
             },
             "input":{"shape":"ListObjectsRequest"},
             "output":{"shape":"ListObjectsOutput"},
             "errors":[
                       {
-                      "shape":"NoSuchBucket",
+                      "shape":"NoSuchContainer",
                       "exception":true,
-                      "documentation":"The specified bucket does not exist."
+                      "documentation":"The specified Container does not exist."
                       }
                       ],
-            "documentation":"Returns some or all (up to 1000) of the objects in a bucket. You can use the request parameters as selection criteria to return a subset of the objects in a bucket.",
-            "alias":"GetBucket"
+            "documentation":"Returns some or all (up to 1000) of the objects in a Container. You can use the request parameters as selection criteria to return a subset of the objects in a Container.",
+            "alias":"GetContainer"
         },
         "ListParts":{
             "name":"ListParts",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"ListPartsRequest"},
             "output":{"shape":"ListPartsOutput"},
             "documentation":"Lists the parts that have been uploaded for a specific multipart upload."
         },
-        "PutBucketAcl":{
-            "name":"PutBucketAcl",
+        "PutContainerAcl":{
+            "name":"PutContainerAcl",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Bucket}?acl"
+                "requestUri":"/{Container}?acl"
             },
-            "input":{"shape":"PutBucketAclRequest"},
-            "documentation":"Sets the permissions on a bucket using access control lists (ACL)."
+            "input":{"shape":"PutContainerAclRequest"},
+            "documentation":"Sets the permissions on a Container using access control lists (ACL)."
         },
         "PutObject":{
             "name":"PutObject",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"PutObjectRequest"},
             "output":{"shape":"PutObjectOutput"},
-            "documentation":"Adds an object to a bucket."
+            "documentation":"Adds an object to a Container."
         },
         "PutObjectAcl":{
             "name":"PutObjectAcl",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Bucket}/{Key+}?acl"
+                "requestUri":"/{Container}/{Key+}?acl"
             },
             "input":{"shape":"PutObjectAclRequest"},
             "errors":[
@@ -215,13 +215,13 @@
                       "documentation":"The specified key does not exist."
                       }
                       ],
-            "documentation":"uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a bucket"
+            "documentation":"uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a Container"
         },
         "UploadPart":{
             "name":"UploadPart",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Bucket}/{Key+}"
+                "requestUri":"/{Container}/{Key+}"
             },
             "input":{"shape":"UploadPartRequest"},
             "output":{"shape":"UploadPartOutput"},
@@ -232,15 +232,15 @@
         "AbortMultipartUploadRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key",
                         "UploadId"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -285,27 +285,27 @@
             "flattened":true
         },
         "Body":{"type":"blob"},
-        "Bucket":{
+        "Container":{
             "type":"structure",
             "members":{
                 "Name":{
-                    "shape":"BucketName",
-                    "documentation":"The name of the bucket."
+                    "shape":"ContainerName",
+                    "documentation":"The name of the Container."
                 },
                 "CreationDate":{
                     "shape":"CreationDate",
-                    "documentation":"Date the bucket was created."
+                    "documentation":"Date the Container was created."
                 }
             }
         },
-        "BucketAlreadyExists":{
+        "ContainerAlreadyExists":{
             "type":"structure",
             "members":{
             },
             "exception":true,
-            "documentation":"The requested bucket name is not available. The bucket namespace is shared by all users of the system. Please select a different name and try again."
+            "documentation":"The requested Container name is not available. The Container namespace is shared by all users of the system. Please select a different name and try again."
         },
-        "BucketCannedACL":{
+        "ContainerCannedACL":{
             "type":"string",
             "enum":[
                     "private",
@@ -314,7 +314,7 @@
                     "authenticated-read"
                     ]
         },
-        "BucketLocationConstraint":{
+        "ContainerLocationConstraint":{
             "type":"string",
             "enum":[
                     "EU",
@@ -330,13 +330,13 @@
                     "eu-central-1"
                     ]
         },
-        "BucketLoggingStatus":{
+        "ContainerLoggingStatus":{
             "type":"structure",
             "members":{
                 "LoggingEnabled":{"shape":"LoggingEnabled"}
             }
         },
-        "BucketLogsPermission":{
+        "ContainerLogsPermission":{
             "type":"string",
             "enum":[
                     "FULL_CONTROL",
@@ -344,19 +344,19 @@
                     "WRITE"
                     ]
         },
-        "BucketName":{"type":"string"},
-        "BucketVersioningStatus":{
+        "ContainerName":{"type":"string"},
+        "ContainerVersioningStatus":{
             "type":"string",
             "enum":[
                     "Enabled",
                     "Suspended"
                     ]
         },
-        "Buckets":{
+        "Containers":{
             "type":"list",
             "member":{
-                "shape":"Bucket",
-                "locationName":"Bucket"
+                "shape":"Container",
+                "locationName":"Container"
             }
         },
         "CommonPrefixList":{
@@ -368,7 +368,7 @@
             "type":"structure",
             "members":{
                 "Location":{"shape":"Location"},
-                "Bucket":{"shape":"BucketName"},
+                "Container":{"shape":"ContainerName"},
                 "Key":{"shape":"ObjectKey"},
                 "Expiration":{
                     "shape":"Expiration",
@@ -376,8 +376,8 @@
                     "locationName":"x-amz-expiration",
                     "documentation":"If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
                 },
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "documentation":"Entity tag of the object."
                 }
             }
@@ -385,15 +385,15 @@
         "CompleteMultipartUploadRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key",
                         "UploadId"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -425,8 +425,8 @@
         "CompletedPart":{
             "type":"structure",
             "members":{
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "documentation":"Entity tag returned when the part was uploaded."
                 },
                 "PartNumber":{
@@ -462,7 +462,7 @@
         "CopyObjectRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "CopySource",
                         "Key"
                         ],
@@ -473,10 +473,10 @@
                     "locationName":"x-amz-acl",
                     "documentation":"The canned ACL to apply to the object."
                 },
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "CacheControl":{
                     "shape":"CacheControl",
@@ -512,7 +512,7 @@
                     "shape":"CopySource",
                     "location":"header",
                     "locationName":"x-amz-copy-source",
-                    "documentation":"The name of the source bucket and key name of the source object, separated by a slash (/). Must be URL-encoded."
+                    "documentation":"The name of the source Container and key name of the source object, separated by a slash (/). Must be URL-encoded."
                 },
                 "Expires":{
                     "shape":"Expires",
@@ -577,22 +577,22 @@
                     "shape":"WebsiteRedirectLocation",
                     "location":"header",
                     "locationName":"x-amz-website-redirect-location",
-                    "documentation":"If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL. Amazon S3 stores the value of this header in the object metadata."
+                    "documentation":"If the Container is configured as a website, redirects requests for this object to another object in the same Container or to an external URL. Amazon S3 stores the value of this header in the object metadata."
                 }
             }
         },
         "CopyObjectResult":{
             "type":"structure",
             "members":{
-                "ETag":{"shape":"ETag"},
+                "Hash":{"shape":"Hash"},
                 "LastModified":{"shape":"LastModified"}
             }
         },
         "CopyPartResult":{
             "type":"structure",
             "members":{
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "documentation":"Entity tag of the object."
                 },
                 "LastModified":{
@@ -621,22 +621,22 @@
             "sensitive":true
         },
         "CopySourceVersionId":{"type":"string"},
-        "CreateBucketConfiguration":{
+        "CreateContainerConfiguration":{
             "type":"structure",
             "members":{
                 "LocationConstraint":{
-                    "shape":"BucketLocationConstraint",
-                    "documentation":"Specifies the region where the bucket will be created."
+                    "shape":"ContainerLocationConstraint",
+                    "documentation":"Specifies the region where the Container will be created."
                 }
             }
         },
         "CreateMultipartUploadOutput":{
             "type":"structure",
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
-                    "documentation":"Name of the bucket to which the multipart upload was initiated.",
-                    "locationName":"Bucket"
+                "Container":{
+                    "shape":"ContainerName",
+                    "documentation":"Name of the Container to which the multipart upload was initiated.",
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -651,7 +651,7 @@
         "CreateMultipartUploadRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
@@ -661,10 +661,10 @@
                     "locationName":"x-amz-acl",
                     "documentation":"The canned ACL to apply to the object."
                 },
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "CacheControl":{
                     "shape":"CacheControl",
@@ -779,14 +779,14 @@
         "DeleteObjectRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -808,14 +808,14 @@
         "DeleteObjectsRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Delete"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Delete":{
                     "shape":"Delete",
@@ -847,7 +847,7 @@
         },
         "Delimiter":{"type":"string"},
         "DisplayName":{"type":"string"},
-        "ETag":{"type":"string"},
+        "Hash":{"type":"string"},
         "EmailAddress":{"type":"string"},
         "EncodingType":{
             "type":"string",
@@ -893,7 +893,7 @@
             "member":{"shape":"ExposeHeader"},
             "flattened":true
         },
-        "GetBucketAclOutput":{
+        "GetContainerAclOutput":{
             "type":"structure",
             "members":{
                 "Owner":{"shape":"Owner"},
@@ -904,14 +904,14 @@
                 }
             }
         },
-        "GetBucketAclRequest":{
+        "GetContainerAclRequest":{
             "type":"structure",
-            "required":["Bucket"],
+            "required":["Container"],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 }
             }
         },
@@ -929,14 +929,14 @@
         "GetObjectAclRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -974,7 +974,7 @@
                     "shape":"Expiration",
                     "location":"header",
                     "locationName":"x-amz-expiration",
-                    "documentation":"If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
+                    "documentation":"If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
                 },
                 "Restore":{
                     "shape":"Restore",
@@ -994,11 +994,11 @@
                     "locationName":"Content-Length",
                     "documentation":"Size of the body in bytes."
                 },
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "location":"header",
-                    "locationName":"ETag",
-                    "documentation":"An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
+                    "locationName":"Hash",
+                    "documentation":"An Hash is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
                 },
                 "MissingMeta":{
                     "shape":"MissingMeta",
@@ -1054,14 +1054,14 @@
         "GetObjectRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -1164,14 +1164,14 @@
                 "locationName":"Grant"
             }
         },
-        "HeadBucketRequest":{
+        "HeadContainerRequest":{
             "type":"structure",
-            "required":["Bucket"],
+            "required":["Container"],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 }
             }
         },
@@ -1193,7 +1193,7 @@
                     "shape":"Expiration",
                     "location":"header",
                     "locationName":"x-amz-expiration",
-                    "documentation":"If the object expiration is configured (see PUT Bucket lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
+                    "documentation":"If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
                 },
                 "Restore":{
                     "shape":"Restore",
@@ -1213,11 +1213,11 @@
                     "locationName":"Content-Length",
                     "documentation":"Size of the body in bytes."
                 },
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "location":"header",
-                    "locationName":"ETag",
-                    "documentation":"An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
+                    "locationName":"Hash",
+                    "documentation":"An Hash is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
                 },
                 "MissingMeta":{
                     "shape":"MissingMeta",
@@ -1272,14 +1272,14 @@
         "HeadObjectRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -1314,7 +1314,7 @@
             "members":{
                 "Suffix":{
                     "shape":"Suffix",
-                    "documentation":"A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to samplebucket/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character."
+                    "documentation":"A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to sampleContainer/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character."
                 }
             }
         },
@@ -1340,9 +1340,9 @@
         "ListMultipartUploadsOutput":{
             "type":"structure",
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
-                    "documentation":"Name of the bucket to which the multipart upload was initiated."
+                "Container":{
+                    "shape":"ContainerName",
+                    "documentation":"Name of the Container to which the multipart upload was initiated."
                 },
                 "KeyMarker":{
                     "shape":"KeyMarker",
@@ -1386,12 +1386,12 @@
         },
         "ListMultipartUploadsRequest":{
             "type":"structure",
-            "required":["Bucket"],
+            "required":["Container"],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Delimiter":{
                     "shape":"Delimiter",
@@ -1458,7 +1458,7 @@
                     "shape":"DeleteMarkers",
                     "locationName":"DeleteMarker"
                 },
-                "Name":{"shape":"BucketName"},
+                "Name":{"shape":"ContainerName"},
                 "Prefix":{"shape":"Prefix"},
                 "Delimiter":{"shape":"Delimiter"},
                 "MaxKeys":{"shape":"MaxKeys"},
@@ -1471,12 +1471,12 @@
         },
         "ListObjectVersionsRequest":{
             "type":"structure",
-            "required":["Bucket"],
+            "required":["Container"],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Delimiter":{
                     "shape":"Delimiter",
@@ -1493,7 +1493,7 @@
                     "shape":"KeyMarker",
                     "location":"querystring",
                     "locationName":"key-marker",
-                    "documentation":"Specifies the key to start with when listing objects in a bucket."
+                    "documentation":"Specifies the key to start with when listing objects in a Container."
                 },
                 "MaxKeys":{
                     "shape":"MaxKeys",
@@ -1528,7 +1528,7 @@
                     "documentation":"When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys."
                 },
                 "Contents":{"shape":"ObjectList"},
-                "Name":{"shape":"BucketName"},
+                "Name":{"shape":"ContainerName"},
                 "Prefix":{"shape":"Prefix"},
                 "Delimiter":{"shape":"Delimiter"},
                 "MaxKeys":{"shape":"MaxKeys"},
@@ -1541,12 +1541,12 @@
         },
         "ListObjectsRequest":{
             "type":"structure",
-            "required":["Bucket"],
+            "required":["Container"],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Delimiter":{
                     "shape":"Delimiter",
@@ -1563,7 +1563,7 @@
                     "shape":"Marker",
                     "location":"querystring",
                     "locationName":"marker",
-                    "documentation":"Specifies the key to start with when listing objects in a bucket."
+                    "documentation":"Specifies the key to start with when listing objects in a Container."
                 },
                 "MaxKeys":{
                     "shape":"MaxKeys",
@@ -1582,9 +1582,9 @@
         "ListPartsOutput":{
             "type":"structure",
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
-                    "documentation":"Name of the bucket to which the multipart upload was initiated."
+                "Container":{
+                    "shape":"ContainerName",
+                    "documentation":"Name of the Container to which the multipart upload was initiated."
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -1628,15 +1628,15 @@
         "ListPartsRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key",
                         "UploadId"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -1667,9 +1667,9 @@
         "LoggingEnabled":{
             "type":"structure",
             "members":{
-                "TargetBucket":{
-                    "shape":"TargetBucket",
-                    "documentation":"Specifies the bucket where you want Amazon S3 to store server access logs. You can have your logs delivered to any bucket that you own, including the same bucket that is being logged. You can also configure multiple buckets to deliver their logs to the same target bucket. In this case you should choose a different TargetPrefix for each source bucket so that the delivered log files can be distinguished by key."
+                "TargetContainer":{
+                    "shape":"TargetContainer",
+                    "documentation":"Specifies the Container where you want Amazon S3 to store server access logs. You can have your logs delivered to any Container that you own, including the same Container that is being logged. You can also configure multiple Containers to deliver their logs to the same target Container. In this case you should choose a different TargetPrefix for each source Container so that the delivered log files can be distinguished by key."
                 },
                 "TargetGrants":{"shape":"TargetGrants"},
                 "TargetPrefix":{
@@ -1736,12 +1736,12 @@
         "NextPartNumberMarker":{"type":"integer"},
         "NextUploadIdMarker":{"type":"string"},
         "NextVersionIdMarker":{"type":"string"},
-        "NoSuchBucket":{
+        "NoSuchContainer":{
             "type":"structure",
             "members":{
             },
             "exception":true,
-            "documentation":"The specified bucket does not exist."
+            "documentation":"The specified Container does not exist."
         },
         "NoSuchKey":{
             "type":"structure",
@@ -1765,7 +1765,7 @@
                     "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
                 }
             },
-            "documentation":"Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a bucket that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
+            "documentation":"Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a Container that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
         },
         "NoncurrentVersionTransition":{
             "type":"structure",
@@ -1779,7 +1779,7 @@
                     "documentation":"The class of storage used to store the object."
                 }
             },
-            "documentation":"Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
+            "documentation":"Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class. If your Container is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
         },
         "NotificationConfiguration":{
             "type":"structure",
@@ -1795,7 +1795,7 @@
             "members":{
                 "Key":{"shape":"ObjectKey"},
                 "LastModified":{"shape":"LastModified"},
-                "ETag":{"shape":"ETag"},
+                "Hash":{"shape":"Hash"},
                 "Size":{"shape":"Size"},
                 "StorageClass":{
                     "shape":"ObjectStorageClass",
@@ -1818,8 +1818,8 @@
                     "public-read",
                     "public-read-write",
                     "authenticated-read",
-                    "bucket-owner-read",
-                    "bucket-owner-full-control"
+                    "Container-owner-read",
+                    "Container-owner-full-control"
                     ]
         },
         "ObjectIdentifier":{
@@ -1865,7 +1865,7 @@
         "ObjectVersion":{
             "type":"structure",
             "members":{
-                "ETag":{"shape":"ETag"},
+                "Hash":{"shape":"Hash"},
                 "Size":{
                     "shape":"Size",
                     "documentation":"Size in bytes of the object."
@@ -1921,8 +1921,8 @@
                     "shape":"LastModified",
                     "documentation":"Date and time at which the part was uploaded."
                 },
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "documentation":"Entity tag returned when the part was uploaded."
                 },
                 "Size":{
@@ -1942,7 +1942,7 @@
             "type":"string",
             "enum":[
                     "Requester",
-                    "BucketOwner"
+                    "ContainerOwner"
                     ]
         },
         "Permission":{
@@ -1964,25 +1964,25 @@
                     "https"
                     ]
         },
-        "PutBucketAclRequest":{
+        "PutContainerAclRequest":{
             "type":"structure",
-            "required":["Bucket"],
+            "required":["Container"],
             "members":{
                 "ACL":{
-                    "shape":"BucketCannedACL",
+                    "shape":"ContainerCannedACL",
                     "location":"header",
                     "locationName":"x-amz-acl",
-                    "documentation":"The canned ACL to apply to the bucket."
+                    "documentation":"The canned ACL to apply to the Container."
                 },
                 "AccessControlPolicy":{
                     "shape":"AccessControlPolicy",
                     "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
                     "locationName":"AccessControlPolicy"
                 },
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "ContentMD5":{
                     "shape":"ContentMD5",
@@ -1993,31 +1993,31 @@
                     "shape":"GrantFullControl",
                     "location":"header",
                     "locationName":"x-amz-grant-full-control",
-                    "documentation":"Allows grantee the read, write, read ACP, and write ACP permissions on the bucket."
+                    "documentation":"Allows grantee the read, write, read ACP, and write ACP permissions on the Container."
                 },
                 "GrantRead":{
                     "shape":"GrantRead",
                     "location":"header",
                     "locationName":"x-amz-grant-read",
-                    "documentation":"Allows grantee to list the objects in the bucket."
+                    "documentation":"Allows grantee to list the objects in the Container."
                 },
                 "GrantReadACP":{
                     "shape":"GrantReadACP",
                     "location":"header",
                     "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the bucket ACL."
+                    "documentation":"Allows grantee to read the Container ACL."
                 },
                 "GrantWrite":{
                     "shape":"GrantWrite",
                     "location":"header",
                     "locationName":"x-amz-grant-write",
-                    "documentation":"Allows grantee to create, overwrite, and delete any object in the bucket."
+                    "documentation":"Allows grantee to create, overwrite, and delete any object in the Container."
                 },
                 "GrantWriteACP":{
                     "shape":"GrantWriteACP",
                     "location":"header",
                     "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable bucket."
+                    "documentation":"Allows grantee to write the ACL for the applicable Container."
                 }
             },
             "payload":"AccessControlPolicy"
@@ -2025,7 +2025,7 @@
         "PutObjectAclRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
@@ -2040,10 +2040,10 @@
                     "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
                     "locationName":"AccessControlPolicy"
                 },
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "ContentMD5":{
                     "shape":"ContentMD5",
@@ -2054,31 +2054,31 @@
                     "shape":"GrantFullControl",
                     "location":"header",
                     "locationName":"x-amz-grant-full-control",
-                    "documentation":"Allows grantee the read, write, read ACP, and write ACP permissions on the bucket."
+                    "documentation":"Allows grantee the read, write, read ACP, and write ACP permissions on the Container."
                 },
                 "GrantRead":{
                     "shape":"GrantRead",
                     "location":"header",
                     "locationName":"x-amz-grant-read",
-                    "documentation":"Allows grantee to list the objects in the bucket."
+                    "documentation":"Allows grantee to list the objects in the Container."
                 },
                 "GrantReadACP":{
                     "shape":"GrantReadACP",
                     "location":"header",
                     "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the bucket ACL."
+                    "documentation":"Allows grantee to read the Container ACL."
                 },
                 "GrantWrite":{
                     "shape":"GrantWrite",
                     "location":"header",
                     "locationName":"x-amz-grant-write",
-                    "documentation":"Allows grantee to create, overwrite, and delete any object in the bucket."
+                    "documentation":"Allows grantee to create, overwrite, and delete any object in the Container."
                 },
                 "GrantWriteACP":{
                     "shape":"GrantWriteACP",
                     "location":"header",
                     "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable bucket."
+                    "documentation":"Allows grantee to write the ACL for the applicable Container."
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -2097,10 +2097,10 @@
                     "locationName":"x-amz-expiration",
                     "documentation":"If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
                 },
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "location":"header",
-                    "locationName":"ETag",
+                    "locationName":"Hash",
                     "documentation":"Entity tag for the uploaded object."
                 }
             }
@@ -2108,7 +2108,7 @@
         "PutObjectRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
@@ -2123,10 +2123,10 @@
                     "streaming":true,
                     "documentation":"Object data."
                 },
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "CacheControl":{
                     "shape":"CacheControl",
@@ -2288,14 +2288,14 @@
         "RestoreObjectRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key"
                         ],
             "members":{
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "Key":{
                     "shape":"ObjectKey",
@@ -2416,14 +2416,14 @@
                 "TagSet":{"shape":"TagSet"}
             }
         },
-        "TargetBucket":{"type":"string"},
+        "TargetContainer":{"type":"string"},
         "TargetGrant":{
             "type":"structure",
             "members":{
                 "Grantee":{"shape":"Grantee"},
                 "Permission":{
-                    "shape":"BucketLogsPermission",
-                    "documentation":"Logging permissions assigned to the Grantee for the bucket."
+                    "shape":"ContainerLogsPermission",
+                    "documentation":"Logging permissions assigned to the Grantee for the Container."
                 }
             }
         },
@@ -2447,11 +2447,11 @@
                 "Event":{
                     "shape":"Event",
                     "deprecated":true,
-                    "documentation":"Bucket event for which to send notifications."
+                    "documentation":"Container event for which to send notifications."
                 },
                 "Topic":{
                     "shape":"Topic",
-                    "documentation":"Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the bucket."
+                    "documentation":"Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the Container."
                 }
             }
         },
@@ -2497,10 +2497,10 @@
                     "locationName":"x-amz-server-side-encryption",
                     "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
                 },
-                "ETag":{
-                    "shape":"ETag",
+                "Hash":{
+                    "shape":"Hash",
                     "location":"header",
-                    "locationName":"ETag",
+                    "locationName":"Hash",
                     "documentation":"Entity tag for the uploaded object."
                 }
             }
@@ -2508,7 +2508,7 @@
         "UploadPartRequest":{
             "type":"structure",
             "required":[
-                        "Bucket",
+                        "Container",
                         "Key",
                         "PartNumber",
                         "UploadId"
@@ -2518,10 +2518,10 @@
                     "shape":"Body",
                     "streaming":true
                 },
-                "Bucket":{
-                    "shape":"BucketName",
+                "Container":{
+                    "shape":"ContainerName",
                     "location":"uri",
-                    "locationName":"Bucket"
+                    "locationName":"Container"
                 },
                 "ContentLength":{
                     "shape":"ContentLength",
@@ -2556,4 +2556,5 @@
         },
         "Value":{"type":"string"},
         "VersionIdMarker":{"type":"string"}
+}
 }

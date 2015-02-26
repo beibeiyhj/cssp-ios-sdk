@@ -626,7 +626,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"ETag" : @"ETag",
+             @"Hash" : @"Hash",
              @"key" : @"Key",
              @"lastModified" : @"LastModified",
              @"owner" : @"Owner",

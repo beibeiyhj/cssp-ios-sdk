@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1526514A1A8DE1980089761C /* cssp-2015-02-09.json in Resources */ = {isa = PBXBuildFile; fileRef = 157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */; };
 		1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1536203B1A835A4300C23D7E /* CSSPNetworking.m */; };
 		154A32941A85AFBD0014C99A /* CSSPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32931A85AFBD0014C99A /* CSSPSerialization.m */; };
 		154A32971A85BC290014C99A /* CSSPURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32961A85BC290014C99A /* CSSPURLRequestSerialization.m */; };
@@ -329,6 +330,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1526514A1A8DE1980089761C /* cssp-2015-02-09.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

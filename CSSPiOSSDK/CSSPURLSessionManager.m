@@ -190,7 +190,7 @@ typedef NS_ENUM(NSInteger, CSSPURLSessionTaskType) {
                     return resultTask;
                 }
             }
-            
+
             BFTask *sequencialTask = [BFTask taskWithResult:nil];
             for(id<CSSPNetworkingRequestInterceptor>interceptor in request.requestInterceptors) {
                 if ([interceptor respondsToSelector:@selector(interceptRequest:)]) {
@@ -199,7 +199,7 @@ typedef NS_ENUM(NSInteger, CSSPURLSessionTaskType) {
                     }];
                 }
             }
-        
+
             return task;
     }]continueWithSuccessBlock:^id(BFTask *task) {
         CSSPNetworkingRequest *request = delegate.request;
@@ -209,6 +209,7 @@ typedef NS_ENUM(NSInteger, CSSPURLSessionTaskType) {
             return [BFTask taskWithResult:nil];
         }
     }] continueWithSuccessBlock:^id(BFTask *task) {
+        
         switch (delegate.taskType) {
             case CSSPURLSessionTaskTypeData:
                 delegate.request.task = [self.session dataTaskWithRequest:mutableURLRequest];

@@ -262,7 +262,14 @@ NSString *const CSSPNetworkingErrorDomain = @"com.cssp.csspNetworkingErrorDomain
 
 - (BFTask *)sendRequest:(CSSPNetworkingRequest *)request{
     BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
-    
+    [self.networkManager dataTaskWithRequest:request
+                           completionHandler:^(id responseObject, NSError *error) {
+                               if (!error) {
+                                   taskCompletionSource.result = responseObject;
+                               } else {
+                                   taskCompletionSource.error = error;
+                               }
+                           }];
     
     return taskCompletionSource.task;
 }
@@ -344,7 +351,6 @@ NSString *const CSSPNetworkingErrorDomain = @"com.cssp.csspNetworkingErrorDomain
 }
 
 - (BFTask *)interceptRequest:(NSMutableURLRequest *)request {
-    
     NSString *userAgent = [self userAgent];
     [request setValue:userAgent forHTTPHeaderField:@"User-Agent"];
     

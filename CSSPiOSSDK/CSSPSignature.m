@@ -11,20 +11,9 @@
 #import <CommonCrypto/CommonHMAC.h>
 #import <CommonCrypto/CommonCryptor.h>
 #import "CSSPCredentialsProvider.h"
+#import "CSSPCategory.h"
 #import "CSSPLogging.h"
 #import "Bolts.h"
-
-static NSDateFormatter * DateFormatter (){
-    NSMutableDictionary * threadDictionary = [[NSThread currentThread] threadDictionary];
-    NSDateFormatter * dataFormatter = [threadDictionary objectForKey:@"cachedDateFormatter"];
-    if (dataFormatter == nil) {
-        dataFormatter = [[NSDateFormatter alloc] init];
-        [dataFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-        [dataFormatter setDateFormat:@"EEE, dd MMM yyyy HH:mm:ss GMT"];
-        [threadDictionary setObject:dataFormatter forKey:@"cachedDateFormatter"];
-    }
-    return dataFormatter;
-}
 
 @implementation CSSPSignatureSignerUtility
 
@@ -152,9 +141,7 @@ static NSDateFormatter * DateFormatter (){
 }
 
 -(NSString *)signRequest :(NSMutableURLRequest *)request{
-    NSDate *date = [NSDate date];
-    NSString *gmtDate = [DateFormatter() stringFromDate:date];
-    
+    NSString *gmtDate = [[NSDate date]cssp_stringValue:CSSPDateRFC822DateFormat1];
     NSMutableDictionary	*mutableHeaderFields = [NSMutableDictionary dictionary];
     [[request allHTTPHeaderFields]enumerateKeysAndObjectsUsingBlock:^(NSString *key, id obj, BOOL *stop) {
         key = [key lowercaseString];
@@ -188,7 +175,7 @@ static NSDateFormatter * DateFormatter (){
 
     NSString *signature = [NSString stringWithFormat:@"CSSP %@:%@",
                            self.credentialsProvider.accessKey,
-                           [CSSPSignatureSignerUtility HMACSign:[mutableCanonicalizedHeaderString dataUsingEncoding:NSUTF8StringEncoding]
+                           [CSSPSignatureSignerUtility HMACSign:[mutableString dataUsingEncoding:NSUTF8StringEncoding]
                                                        withKey:self.credentialsProvider.secretKey
                                                 usingAlgorithm:kCCHmacAlgSHA1]];
     

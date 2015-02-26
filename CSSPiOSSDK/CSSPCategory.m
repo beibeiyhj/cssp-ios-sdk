@@ -53,7 +53,7 @@ NSString *const CSSPDateShortDateFormat1 = @"yyyyMMdd";
     dateFormatter.dateFormat = dateFormat;
     
     //ClockSkew Correction
-    NSString *formatted = [dateFormatter stringFromDate:[NSDate date]];
+    NSString *formatted = [dateFormatter stringFromDate:self];
     
     return formatted;
 }

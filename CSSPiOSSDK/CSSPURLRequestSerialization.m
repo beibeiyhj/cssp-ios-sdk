@@ -111,7 +111,7 @@ static NSDictionary *errorCodeDictionary = nil;
             }
         }
     }
-    
+  
     if (error) {
         return [BFTask taskWithError:error];
     } else {
@@ -217,6 +217,8 @@ static NSDictionary *errorCodeDictionary = nil;
             }
         }
     }];
+    
+    [queryStringDictionary setObject:@"xml" forKey:@"format"];
     
     if (*error) {
         return NO;

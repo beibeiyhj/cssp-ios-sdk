@@ -768,7 +768,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPObject : CSSPModel
 
-@property (nonatomic, strong) NSString *ETag;
+@property (nonatomic, strong) NSString *Hash;
 @property (nonatomic, strong) NSString *key;
 @property (nonatomic, strong) NSDate *lastModified;
 @property (nonatomic, strong) CSSPOwner *owner;
