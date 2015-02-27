@@ -626,12 +626,11 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"Hash" : @"Hash",
-             @"key" : @"Key",
-             @"lastModified" : @"LastModified",
-             @"owner" : @"Owner",
-             @"size" : @"Size",
-             @"storageClass" : @"StorageClass",
+             @"etag" : @"hash",
+             @"name" : @"name",
+             @"lastModified" : @"last_modified",
+             @"size" : @"bytes",
+             @"contentType" : @"content_type",
              };
 }
 
@@ -643,79 +642,18 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     }];
 }
 
-+ (NSValueTransformer *)ownerJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPOwner class]];
-}
-
-+ (NSValueTransformer *)storageClassJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"STANDARD"]) {
-            return @(CSSPObjectStorageClassStandard);
-        }
-        if ([value isEqualToString:@"REDUCED_REDUNDANCY"]) {
-            return @(CSSPObjectStorageClassReducedRedundancy);
-        }
-        if ([value isEqualToString:@"GLACIER"]) {
-            return @(CSSPObjectStorageClassGlacier);
-        }
-        return @(CSSPObjectStorageClassUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPObjectStorageClassStandard:
-                return @"STANDARD";
-            case CSSPObjectStorageClassReducedRedundancy:
-                return @"REDUCED_REDUNDANCY";
-            case CSSPObjectStorageClassGlacier:
-                return @"GLACIER";
-            case CSSPObjectStorageClassUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 @end
 
 @implementation CSSPListObjectsOutput
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"commonPrefixes" : @"CommonPrefixes",
-             @"contents" : @"Contents",
-             @"delimiter" : @"Delimiter",
-             @"encodingType" : @"EncodingType",
-             @"isTruncated" : @"IsTruncated",
-             @"marker" : @"Marker",
-             @"maxKeys" : @"MaxKeys",
-             @"name" : @"Name",
-             @"nextMarker" : @"NextMarker",
-             @"prefix" : @"Prefix",
+             @"contents" : @"object"
              };
-}
-
-+ (NSValueTransformer *)commonPrefixesJSONTransformer {
-    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPCommonPrefix class]];
 }
 
 + (NSValueTransformer *)contentsJSONTransformer {
     return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPObject class]];
-}
-
-+ (NSValueTransformer *)encodingTypeJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"url"]) {
-            return @(CSSPEncodingTypeURL);
-        }
-        return @(CSSPEncodingTypeUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPEncodingTypeURL:
-                return @"url";
-            case CSSPEncodingTypeUnknown:
-            default:
-                return nil;
-        }
-    }];
 }
 
 @end
@@ -728,7 +666,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"delimiter" : @"Delimiter",
              @"encodingType" : @"EncodingType",
              @"marker" : @"Marker",
-             @"maxKeys" : @"MaxKeys",
+             @"limit" : @"MaxKeys",
              @"prefix" : @"Prefix",
              };
 }

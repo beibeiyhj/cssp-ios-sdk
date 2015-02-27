@@ -376,8 +376,8 @@
                     "locationName":"x-amz-expiration",
                     "documentation":"If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
                 },
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "documentation":"Entity tag of the object."
                 }
             }
@@ -425,8 +425,8 @@
         "CompletedPart":{
             "type":"structure",
             "members":{
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "documentation":"Entity tag returned when the part was uploaded."
                 },
                 "PartNumber":{
@@ -584,15 +584,15 @@
         "CopyObjectResult":{
             "type":"structure",
             "members":{
-                "Hash":{"shape":"Hash"},
+                "ETag":{"shape":"ETag"},
                 "LastModified":{"shape":"LastModified"}
             }
         },
         "CopyPartResult":{
             "type":"structure",
             "members":{
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "documentation":"Entity tag of the object."
                 },
                 "LastModified":{
@@ -847,7 +847,7 @@
         },
         "Delimiter":{"type":"string"},
         "DisplayName":{"type":"string"},
-        "Hash":{"type":"string"},
+        "ETag":{"type":"string"},
         "EmailAddress":{"type":"string"},
         "EncodingType":{
             "type":"string",
@@ -994,11 +994,11 @@
                     "locationName":"Content-Length",
                     "documentation":"Size of the body in bytes."
                 },
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "location":"header",
-                    "locationName":"Hash",
-                    "documentation":"An Hash is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
+                    "locationName":"ETag",
+                    "documentation":"An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
                 },
                 "MissingMeta":{
                     "shape":"MissingMeta",
@@ -1213,11 +1213,11 @@
                     "locationName":"Content-Length",
                     "documentation":"Size of the body in bytes."
                 },
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "location":"header",
-                    "locationName":"Hash",
-                    "documentation":"An Hash is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
+                    "locationName":"ETag",
+                    "documentation":"An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
                 },
                 "MissingMeta":{
                     "shape":"MissingMeta",
@@ -1518,25 +1518,7 @@
         "ListObjectsOutput":{
             "type":"structure",
             "members":{
-                "IsTruncated":{
-                    "shape":"IsTruncated",
-                    "documentation":"A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria."
-                },
-                "Marker":{"shape":"Marker"},
-                "NextMarker":{
-                    "shape":"NextMarker",
-                    "documentation":"When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys."
-                },
-                "Contents":{"shape":"ObjectList"},
-                "Name":{"shape":"ContainerName"},
-                "Prefix":{"shape":"Prefix"},
-                "Delimiter":{"shape":"Delimiter"},
-                "MaxKeys":{"shape":"MaxKeys"},
-                "CommonPrefixes":{"shape":"CommonPrefixList"},
-                "EncodingType":{
-                    "shape":"EncodingType",
-                    "documentation":"Encoding type used by Amazon S3 to encode object keys in the response."
-                }
+                "object":{"shape":"ObjectList"}
             }
         },
         "ListObjectsRequest":{
@@ -1568,7 +1550,7 @@
                 "MaxKeys":{
                     "shape":"MaxKeys",
                     "location":"querystring",
-                    "locationName":"max-keys",
+                    "locationName":"limit",
                     "documentation":"Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more."
                 },
                 "Prefix":{
@@ -1793,15 +1775,11 @@
         "Object":{
             "type":"structure",
             "members":{
-                "Key":{"shape":"ObjectKey"},
-                "LastModified":{"shape":"LastModified"},
-                "Hash":{"shape":"Hash"},
-                "Size":{"shape":"Size"},
-                "StorageClass":{
-                    "shape":"ObjectStorageClass",
-                    "documentation":"The class of storage used to store the object."
-                },
-                "Owner":{"shape":"Owner"}
+                "name":{"shape":"ObjectKey"},
+                "last_modified":{"shape":"LastModified"},
+                "hash":{"shape":"ETag"},
+                "bytes":{"shape":"Size"},
+                "content_type":{"shape":"ContentType"}
             }
         },
         "ObjectAlreadyInActiveTierError":{
@@ -1865,7 +1843,7 @@
         "ObjectVersion":{
             "type":"structure",
             "members":{
-                "Hash":{"shape":"Hash"},
+                "ETag":{"shape":"ETag"},
                 "Size":{
                     "shape":"Size",
                     "documentation":"Size in bytes of the object."
@@ -1921,8 +1899,8 @@
                     "shape":"LastModified",
                     "documentation":"Date and time at which the part was uploaded."
                 },
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "documentation":"Entity tag returned when the part was uploaded."
                 },
                 "Size":{
@@ -2097,10 +2075,10 @@
                     "locationName":"x-amz-expiration",
                     "documentation":"If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
                 },
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "location":"header",
-                    "locationName":"Hash",
+                    "locationName":"ETag",
                     "documentation":"Entity tag for the uploaded object."
                 }
             }
@@ -2497,10 +2475,10 @@
                     "locationName":"x-amz-server-side-encryption",
                     "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
                 },
-                "Hash":{
-                    "shape":"Hash",
+                "ETag":{
+                    "shape":"ETag",
                     "location":"header",
-                    "locationName":"Hash",
+                    "locationName":"ETag",
                     "documentation":"Entity tag for the uploaded object."
                 }
             }
@@ -2556,5 +2534,5 @@
         },
         "Value":{"type":"string"},
         "VersionIdMarker":{"type":"string"}
-}
+    }
 }

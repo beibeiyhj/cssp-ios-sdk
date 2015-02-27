@@ -48,6 +48,10 @@
     
     CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
     listObjectReq.container = @"photos";
+    //listObjectReq.limit = [NSNumber numberWithInt:1];
+    //listObjectReq.marker = @"eee";
+    listObjectReq.prefix = @"animals/";
+    listObjectReq.delimiter = @"/";
     
     [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);

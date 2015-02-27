@@ -768,38 +768,18 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPObject : CSSPModel
 
-@property (nonatomic, strong) NSString *Hash;
-@property (nonatomic, strong) NSString *key;
+@property (nonatomic, strong) NSString *etag;
+@property (nonatomic, strong) NSString *name;
 @property (nonatomic, strong) NSDate *lastModified;
-@property (nonatomic, strong) CSSPOwner *owner;
 @property (nonatomic, strong) NSNumber *size;
-
-/**
- * The class of storage used to store the object.
- */
-@property (nonatomic, assign) CSSPObjectStorageClass storageClass;
+@property (nonatomic, strong) NSString *contentType;
 
 @end
 
 @interface CSSPListObjectsOutput : CSSPModel
 
-@property (nonatomic, strong) NSArray *commonPrefixes;
+
 @property (nonatomic, strong) NSArray *contents;
-@property (nonatomic, strong) NSString *delimiter;
-
-/**
- * A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria.
- */
-@property (nonatomic, strong) NSNumber *isTruncated;
-@property (nonatomic, strong) NSString *marker;
-@property (nonatomic, strong) NSNumber *maxKeys;
-@property (nonatomic, strong) NSString *name;
-
-/**
- * When response is truncated (the IsTruncated element value in the response is true), you can use the key name in this field as marker in the subsequent request to get next set of objects. Amazon S3 lists objects in alphabetical order Note: This element is returned only if you have delimiter request parameter specified. If response does not include the NextMaker and it is truncated, you can use the value of the last Key in the response as the marker in the subsequent request to get the next set of object keys.
- */
-@property (nonatomic, strong) NSString *nextMarker;
-@property (nonatomic, strong) NSString *prefix;
 
 @end
 

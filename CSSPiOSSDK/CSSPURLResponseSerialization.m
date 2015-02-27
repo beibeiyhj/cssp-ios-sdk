@@ -196,6 +196,15 @@ static NSDictionary *errorCodeDictionary = nil;
             }
         }
     }
+    
+    if (self.outputClass) {
+        id responseObject = [MTLJSONAdapter modelOfClass:self.outputClass
+                                   fromJSONDictionary:resultDic
+                                                error:error];
+        return responseObject;
+    }
+    
+    
     return resultDic;
 }
 
