@@ -11,7 +11,7 @@
 #import "CSSPLogging.h"
 #import "CSSPSerialization.h"
 
-NSString *const CSSPGeneralErrorDomain = @"com.amazonaws.CSSPGeneralErrorDomain";
+NSString *const CSSPGeneralErrorDomain = @"com.iflycssp.CSSPGeneralErrorDomain";
 
 #pragma mark - Service errors
 
@@ -138,21 +138,21 @@ static NSDictionary *errorCodeDictionary = nil;
                                                                     encoding:NSUTF8StringEncoding]);
     }
     
-    NSString *responseContentTypeStr = [[response allHeaderFields] objectForKey:@"Content-Type"];
-    if (responseContentTypeStr) {
-        if ([responseContentTypeStr rangeOfString:@"text/html"].location != NSNotFound) {
-            //found html response rather than xml format. should be an error.
-            if (error) {
-                NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                
-                
-                *error = [NSError errorWithDomain:CSSPGeneralErrorDomain
-                                             code:CSSPGeneralErrorUnknown
-                                         userInfo:@{NSLocalizedDescriptionKey : message?message:[NSNull null]}];
-                return nil;
-            }
-        }
-    }
+//    NSString *responseContentTypeStr = [[response allHeaderFields] objectForKey:@"Content-Type"];
+//    if (responseContentTypeStr) {
+//        if ([responseContentTypeStr rangeOfString:@"text/html"].location != NSNotFound) {
+//            //found html response rather than xml format. should be an error.
+//            if (error) {
+//                NSString *message = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+//                
+//                
+//                *error = [NSError errorWithDomain:CSSPGeneralErrorDomain
+//                                             code:CSSPGeneralErrorUnknown
+//                                         userInfo:@{NSLocalizedDescriptionKey : message?message:[NSNull null]}];
+//                return nil;
+//            }
+//        }
+//    }
     
     if (![self validateResponse:response fromRequest:currentRequest data:data error:error]) {
         return nil;

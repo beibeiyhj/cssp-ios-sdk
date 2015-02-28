@@ -12,7 +12,7 @@
             "name":"AbortMultipartUpload",
             "http":{
                 "method":"DELETE",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"AbortMultipartUploadRequest"},
             "errors":[
@@ -28,7 +28,7 @@
             "name":"CompleteMultipartUpload",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"CompleteMultipartUploadRequest"},
             "output":{"shape":"CompleteMultipartUploadOutput"},
@@ -38,7 +38,7 @@
             "name":"CreateMultipartUpload",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Container}/{Key+}?uploads"
+                "requestUri":"/{Container}/{Object+}?uploads"
             },
             "input":{"shape":"CreateMultipartUploadRequest"},
             "output":{"shape":"CreateMultipartUploadOutput"},
@@ -49,7 +49,7 @@
             "name":"DeleteObject",
             "http":{
                 "method":"DELETE",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"DeleteObjectRequest"},
             "output":{"shape":"DeleteObjectOutput"},
@@ -80,7 +80,7 @@
             "name":"GetObject",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"GetObjectRequest"},
             "output":{"shape":"GetObjectOutput"},
@@ -97,7 +97,7 @@
             "name":"GetObjectAcl",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}/{Key+}?acl"
+                "requestUri":"/{Container}/{Object+}?acl"
             },
             "input":{"shape":"GetObjectAclRequest"},
             "output":{"shape":"GetObjectAclOutput"},
@@ -131,7 +131,7 @@
             "name":"HeadObject",
             "http":{
                 "method":"HEAD",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"HeadObjectRequest"},
             "output":{"shape":"HeadObjectOutput"},
@@ -176,7 +176,7 @@
             "name":"ListParts",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"ListPartsRequest"},
             "output":{"shape":"ListPartsOutput"},
@@ -195,33 +195,17 @@
             "name":"PutObject",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"PutObjectRequest"},
             "output":{"shape":"PutObjectOutput"},
             "documentation":"Adds an object to a Container."
         },
-        "PutObjectAcl":{
-            "name":"PutObjectAcl",
-            "http":{
-                "method":"PUT",
-                "requestUri":"/{Container}/{Key+}?acl"
-            },
-            "input":{"shape":"PutObjectAclRequest"},
-            "errors":[
-                      {
-                      "shape":"NoSuchKey",
-                      "exception":true,
-                      "documentation":"The specified key does not exist."
-                      }
-                      ],
-            "documentation":"uses the acl subresource to set the access control list (ACL) permissions for an object that already exists in a Container"
-        },
         "UploadPart":{
             "name":"UploadPart",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Container}/{Key+}"
+                "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"UploadPartRequest"},
             "output":{"shape":"UploadPartOutput"},
@@ -765,14 +749,8 @@
                 "DeleteMarker":{
                     "shape":"DeleteMarker",
                     "location":"header",
-                    "locationName":"x-amz-delete-marker",
+                    "locationName":"x-object-delete-marker",
                     "documentation":"Specifies whether the versioned object that was permanently deleted was (true) or was not (false) a delete marker."
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "location":"header",
-                    "locationName":"x-amz-version-id",
-                    "documentation":"Returns the version ID of the delete marker created as a result of the DELETE operation."
                 }
             }
         },
@@ -780,7 +758,7 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key"
+                        "Object"
                         ],
             "members":{
                 "Container":{
@@ -788,10 +766,10 @@
                     "location":"uri",
                     "locationName":"Container"
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 }
             }
         },
@@ -962,7 +940,7 @@
                 "DeleteMarker":{
                     "shape":"DeleteMarker",
                     "location":"header",
-                    "locationName":"x-amz-delete-marker",
+                    "locationName":"x-object-delete-marker",
                     "documentation":"Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
                 },
                 "AcceptRanges":{
@@ -973,13 +951,13 @@
                 "Expiration":{
                     "shape":"Expiration",
                     "location":"header",
-                    "locationName":"x-amz-expiration",
+                    "locationName":"x-object-expiration",
                     "documentation":"If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
                 },
                 "Restore":{
                     "shape":"Restore",
                     "location":"header",
-                    "locationName":"x-amz-restore",
+                    "locationName":"x-object-restore",
                     "documentation":"Provides information about object restoration operation and expiration time of the restored object copy."
                 },
                 "LastModified":{
@@ -1003,26 +981,8 @@
                 "MissingMeta":{
                     "shape":"MissingMeta",
                     "location":"header",
-                    "locationName":"x-amz-missing-meta",
+                    "locationName":"x-object-missing-meta",
                     "documentation":"This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "location":"header",
-                    "locationName":"x-amz-version-id",
-                    "documentation":"Version of the object."
-                },
-                "CacheControl":{
-                    "shape":"CacheControl",
-                    "location":"header",
-                    "locationName":"Cache-Control",
-                    "documentation":"Specifies caching behavior along the request/reply chain."
-                },
-                "ContentDisposition":{
-                    "shape":"ContentDisposition",
-                    "location":"header",
-                    "locationName":"Content-Disposition",
-                    "documentation":"Specifies presentational information for the object."
                 },
                 "ContentEncoding":{
                     "shape":"ContentEncoding",
@@ -1047,6 +1007,12 @@
                     "location":"header",
                     "locationName":"Expires",
                     "documentation":"The date and time at which the object is no longer cacheable."
+                },
+                "Metadata":{
+                    "shape":"Metadata",
+                    "location":"headers",
+                    "documentation":"A map of metadata to store with the object in S3.",
+                    "locationName":"X-Object-Meta-"
                 }
             },
             "payload":"Body"
@@ -1055,7 +1021,7 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key"
+                        "Object"
                         ],
             "members":{
                 "Container":{
@@ -1063,10 +1029,10 @@
                     "location":"uri",
                     "locationName":"Container"
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "Range":{
                     "shape":"Range",
@@ -1181,7 +1147,7 @@
                 "DeleteMarker":{
                     "shape":"DeleteMarker",
                     "location":"header",
-                    "locationName":"x-amz-delete-marker",
+                    "locationName":"x-object-delete-marker",
                     "documentation":"Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
                 },
                 "AcceptRanges":{
@@ -1192,13 +1158,13 @@
                 "Expiration":{
                     "shape":"Expiration",
                     "location":"header",
-                    "locationName":"x-amz-expiration",
+                    "locationName":"x-object-expiration",
                     "documentation":"If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
                 },
                 "Restore":{
                     "shape":"Restore",
                     "location":"header",
-                    "locationName":"x-amz-restore",
+                    "locationName":"x-object-restore",
                     "documentation":"Provides information about object restoration operation and expiration time of the restored object copy."
                 },
                 "LastModified":{
@@ -1222,20 +1188,8 @@
                 "MissingMeta":{
                     "shape":"MissingMeta",
                     "location":"header",
-                    "locationName":"x-amz-missing-meta",
+                    "locationName":"x-object-missing-meta",
                     "documentation":"This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "location":"header",
-                    "locationName":"x-amz-version-id",
-                    "documentation":"Version of the object."
-                },
-                "CacheControl":{
-                    "shape":"CacheControl",
-                    "location":"header",
-                    "locationName":"Cache-Control",
-                    "documentation":"Specifies caching behavior along the request/reply chain."
                 },
                 "ContentDisposition":{
                     "shape":"ContentDisposition",
@@ -1266,6 +1220,12 @@
                     "location":"header",
                     "locationName":"Expires",
                     "documentation":"The date and time at which the object is no longer cacheable."
+                },
+                "Metadata":{
+                    "shape":"Metadata",
+                    "location":"headers",
+                    "documentation":"A map of metadata to store with the object in S3.",
+                    "locationName":"X-Object-Meta-"
                 }
             }
         },
@@ -1273,7 +1233,7 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key"
+                        "Object"
                         ],
             "members":{
                 "Container":{
@@ -1281,10 +1241,10 @@
                     "location":"uri",
                     "locationName":"Container"
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "Range":{
                     "shape":"Range",
@@ -1518,7 +1478,8 @@
         "ListObjectsOutput":{
             "type":"structure",
             "members":{
-                "object":{"shape":"ObjectList"}
+                "object":{"shape":"ObjectList"},
+                "subdir":{"shape":"SubdirList"}
             }
         },
         "ListObjectsRequest":{
@@ -2072,7 +2033,7 @@
                 "Expiration":{
                     "shape":"Expiration",
                     "location":"header",
-                    "locationName":"x-amz-expiration",
+                    "locationName":"x-object-expiration",
                     "documentation":"If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
                 },
                 "ETag":{
@@ -2087,15 +2048,9 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key"
+                        "Object"
                         ],
             "members":{
-                "ACL":{
-                    "shape":"ObjectCannedACL",
-                    "location":"header",
-                    "locationName":"x-amz-acl",
-                    "documentation":"The canned ACL to apply to the object."
-                },
                 "Body":{
                     "shape":"Body",
                     "streaming":true,
@@ -2153,52 +2108,16 @@
                     "locationName":"Expires",
                     "documentation":"The date and time at which the object is no longer cacheable."
                 },
-                "GrantFullControl":{
-                    "shape":"GrantFullControl",
-                    "location":"header",
-                    "locationName":"x-amz-grant-full-control",
-                    "documentation":"Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object."
-                },
-                "GrantRead":{
-                    "shape":"GrantRead",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read",
-                    "documentation":"Allows grantee to read the object data and its metadata."
-                },
-                "GrantReadACP":{
-                    "shape":"GrantReadACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the object ACL."
-                },
-                "GrantWriteACP":{
-                    "shape":"GrantWriteACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable object."
-                },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "Metadata":{
                     "shape":"Metadata",
                     "location":"headers",
                     "documentation":"A map of metadata to store with the object in S3.",
-                    "locationName":"x-amz-meta-"
-                },
-                "ServerSideEncryption":{
-                    "shape":"ServerSideEncryption",
-                    "location":"header",
-                    "locationName":"x-amz-server-side-encryption",
-                    "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
-                },
-                "StorageClass":{
-                    "shape":"StorageClass",
-                    "location":"header",
-                    "locationName":"x-amz-storage-class",
-                    "documentation":"The type of storage to use for the object. Defaults to 'STANDARD'."
+                    "locationName":"x-object-meta-"
                 }
             },
             "payload":"Body"
@@ -2352,6 +2271,17 @@
         "Rules":{
             "type":"list",
             "member":{"shape":"Rule"},
+            "flattened":true
+        },
+        "Subdir":{
+            "type":"structure",
+            "members":{
+                "name":{"shape":"ObjectKey"}
+            }
+        },
+        "SubdirList":{
+            "type":"list",
+            "member":{"shape":"Subdir"},
             "flattened":true
         },
         "Size":{"type":"integer"},

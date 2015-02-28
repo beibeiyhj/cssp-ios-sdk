@@ -634,6 +634,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPHeadObjectRequest : CSSPRequest
 
+@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 @end
@@ -776,10 +777,17 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @end
 
+@interface CSSPSubdir : CSSPModel
+
+@property (nonatomic, strong) NSString *name;
+
+@end
+
 @interface CSSPListObjectsOutput : CSSPModel
 
 
 @property (nonatomic, strong) NSArray *contents;
+@property (nonatomic, strong) NSArray *subdirs;
 
 @end
 
