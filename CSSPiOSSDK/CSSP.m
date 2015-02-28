@@ -151,12 +151,18 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 }
 
 - (BFTask *)createMultipartUpload:(CSSPCreateMultipartUploadRequest *)request {
-    return [self invokeRequest:request
-                    HTTPMethod:CSSPHTTPMethodPOST
-                     URLString:@"/{Container}/{Object+}?uploads"
-                  targetPrefix:@""
-                 operationName:@"CreateMultipartUpload"
-                   outputClass:[CSSPCreateMultipartUploadOutput class]];
+    NSMutableDictionary *resultDic = [NSMutableDictionary new];
+    id responseObject = [MTLJSONAdapter modelOfClass:[CSSPCreateMultipartUploadOutput class]
+                                  fromJSONDictionary:resultDic
+                                               error:nil];
+    CSSPCreateMultipartUploadOutput *createMultipartUploadOutput = responseObject;
+    createMultipartUploadOutput.object = request.object;
+    createMultipartUploadOutput.container = request.container;
+    createMultipartUploadOutput.uploadId = [[NSUUID UUID] UUIDString];
+   
+    BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
+    [taskCompletionSource setResult:createMultipartUploadOutput];
+    return taskCompletionSource.task;
 }
 
 - (BFTask *)deleteObject:(CSSPDeleteObjectRequest *)request {

@@ -50,26 +50,28 @@
 
 - (BFTask *)completeMultipartUpload:(CSSPCompleteMultipartUploadRequest *)request;
 
--(BFTask *) deleteObject:(CSSPDeleteObjectRequest *)request;
+- (BFTask *)createMultipartUpload:(CSSPCreateMultipartUploadRequest *)request;
 
--(BFTask *) getContainerAcl:(CSSPGetContainerAclRequest*)request;
+- (BFTask *) deleteObject:(CSSPDeleteObjectRequest *)request;
 
--(BFTask *) getObject:(CSSPGetObjectRequest *)request;
+- (BFTask *) getContainerAcl:(CSSPGetContainerAclRequest*)request;
 
--(BFTask *) headContainer:(CSSPHeadContainerRequest *)request;
+- (BFTask *) getObject:(CSSPGetObjectRequest *)request;
 
--(BFTask *) headObject:(CSSPHeadObjectRequest *)request;
+- (BFTask *) headContainer:(CSSPHeadContainerRequest *)request;
 
--(BFTask *) listObjects:(CSSPListObjectsRequest *)request;
+- (BFTask *) headObject:(CSSPHeadObjectRequest *)request;
 
--(BFTask *) listParts:(CSSPListPartsRequest *) request;
+- (BFTask *) listObjects:(CSSPListObjectsRequest *)request;
 
--(BFTask *) putContainerAcl:(CSSPPutContainerAclRequest *)request;
+- (BFTask *) listParts:(CSSPListPartsRequest *) request;
 
--(BFTask *) putObject:(CSSPPutObjectRequest *)request;
+- (BFTask *) putContainerAcl:(CSSPPutContainerAclRequest *)request;
 
--(BFTask *) replicateObject:(CSSPReplicateObjectRequest *) request;
+- (BFTask *) putObject:(CSSPPutObjectRequest *)request;
 
--(BFTask *) uploadPart:(CSSPUploadPartRequest *) request;
+- (BFTask *) replicateObject:(CSSPReplicateObjectRequest *) request;
+
+- (BFTask *) uploadPart:(CSSPUploadPartRequest *) request;
 
 @end

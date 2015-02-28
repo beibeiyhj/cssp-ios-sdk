@@ -144,7 +144,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"ACL" : @"ACL",
              @"container" : @"Container",
              @"cacheControl" : @"CacheControl",
              @"contentDisposition" : @"ContentDisposition",
@@ -152,86 +151,17 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"contentLanguage" : @"ContentLanguage",
              @"contentType" : @"ContentType",
              @"expires" : @"Expires",
-             @"grantFullControl" : @"GrantFullControl",
-             @"grantRead" : @"GrantRead",
-             @"grantReadACP" : @"GrantReadACP",
-             @"grantWriteACP" : @"GrantWriteACP",
              @"object" : @"Object",
-             @"metadata" : @"Metadata",
-             @"storageClass" : @"StorageClass",
+             @"metadata" : @"Metadata"
              };
 }
 
-+ (NSValueTransformer *)ACLJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"private"]) {
-            return @(CSSPObjectCannedACLPrivate);
-        }
-        if ([value isEqualToString:@"public-read"]) {
-            return @(CSSPObjectCannedACLPublicRead);
-        }
-        if ([value isEqualToString:@"public-read-write"]) {
-            return @(CSSPObjectCannedACLPublicReadWrite);
-        }
-        if ([value isEqualToString:@"authenticated-read"]) {
-            return @(CSSPObjectCannedACLAuthenticatedRead);
-        }
-        if ([value isEqualToString:@"container-owner-read"]) {
-            return @(CSSPObjectCannedACLContainerOwnerRead);
-        }
-        if ([value isEqualToString:@"container-owner-full-control"]) {
-            return @(CSSPObjectCannedACLContainerOwnerFullControl);
-        }
-        return @(CSSPObjectCannedACLUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPObjectCannedACLPrivate:
-                return @"private";
-            case CSSPObjectCannedACLPublicRead:
-                return @"public-read";
-            case CSSPObjectCannedACLPublicReadWrite:
-                return @"public-read-write";
-            case CSSPObjectCannedACLAuthenticatedRead:
-                return @"authenticated-read";
-            case CSSPObjectCannedACLContainerOwnerRead:
-                return @"container-owner-read";
-            case CSSPObjectCannedACLContainerOwnerFullControl:
-                return @"container-owner-full-control";
-            case CSSPObjectCannedACLUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
 
 + (NSValueTransformer *)expiresJSONTransformer {
     return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
         return [NSDate cssp_dateFromString:str];
     } reverseBlock:^id(NSDate *date) {
         return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-
-+ (NSValueTransformer *)storageClassJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"STANDARD"]) {
-            return @(CSSPStorageClassStandard);
-        }
-        if ([value isEqualToString:@"REDUCED_REDUNDANCY"]) {
-            return @(CSSPStorageClassReducedRedundancy);
-        }
-        return @(CSSPStorageClassUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPStorageClassStandard:
-                return @"STANDARD";
-            case CSSPStorageClassReducedRedundancy:
-                return @"REDUCED_REDUNDANCY";
-            case CSSPStorageClassUnknown:
-            default:
-                return nil;
-        }
     }];
 }
 

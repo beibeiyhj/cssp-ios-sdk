@@ -359,10 +359,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @interface CSSPCreateMultipartUploadRequest : CSSPRequest
 
 
-/**
- * The canned ACL to apply to the object.
- */
-@property (nonatomic, assign) CSSPObjectCannedACL ACL;
 @property (nonatomic, strong) NSString *container;
 
 /**
@@ -395,37 +391,8 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSDate *expires;
 
-/**
- * Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object.
- */
-@property (nonatomic, strong) NSString *grantFullControl;
-
-/**
- * Allows grantee to read the object data and its metadata.
- */
-@property (nonatomic, strong) NSString *grantRead;
-
-/**
- * Allows grantee to read the object ACL.
- */
-@property (nonatomic, strong) NSString *grantReadACP;
-
-/**
- * Allows grantee to write the ACL for the applicable object.
- */
-@property (nonatomic, strong) NSString *grantWriteACP;
 @property (nonatomic, strong) NSString *object;
 
-/**
- * A map of metadata to store with the object in S3.
- */
-@property (nonatomic, strong) NSDictionary *metadata;
-
-
-/**
- * The type of storage to use for the object. Defaults to 'STANDARD'.
- */
-@property (nonatomic, assign) CSSPStorageClass storageClass;
 
 @end
 
