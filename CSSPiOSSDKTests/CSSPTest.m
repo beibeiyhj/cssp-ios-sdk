@@ -165,10 +165,6 @@
     __block NSUInteger const transferManagerMinimumPartSize = 5 * 1024 * 1024;
     
     NSUInteger partCount = ceil((double)[testData length] / transferManagerMinimumPartSize);
-    NSMutableArray *completedParts = [NSMutableArray arrayWithCapacity:partCount];
-    for (int32_t i = 0; i < partCount; i++) {
-        [completedParts addObject:[NSNull null]];
-    }
     
     CSSPCreateMultipartUploadRequest *createReq = [CSSPCreateMultipartUploadRequest new];
     createReq.container = @"photos";
@@ -182,51 +178,37 @@
         
         NSMutableArray *partUploadTasks = [NSMutableArray arrayWithCapacity:partCount];
         
-//        for (int32_t i = 1; i < partCount + 1; i++) {
-//            NSUInteger dataLength = i == partCount ? [testData length] - ((i - 1) * transferManagerMinimumPartSize) : transferManagerMinimumPartSize;
-//            NSData *partData = [testData subdataWithRange:NSMakeRange((i - 1) * transferManagerMinimumPartSize, dataLength)];
-//            
-//            CSSPUploadPartRequest *uploadPartRequest = [CSSPUploadPartRequest new];
-//            uploadPartRequest.bucket = testBucketNameGeneral;
-//            uploadPartRequest.key = keyName;
-//            uploadPartRequest.partNumber = @(i);
-//            uploadPartRequest.body = partData;
-//            uploadPartRequest.contentLength = @(dataLength);
-//            uploadPartRequest.uploadId = uploadId;
-//            
-//            [partUploadTasks addObject:[[s3 uploadPart:uploadPartRequest] continueWithSuccessBlock:^id(BFTask *task) {
-//                XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
-//                XCTAssertTrue([task.result isKindOfClass:[CSSPUploadPartOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPUploadPartOutput class]),[task.result description]);
-//                CSSPUploadPartOutput *partOuput = task.result;
-//                XCTAssertNotNil(partOuput.ETag);
-//                
-//                CSSPCompletedPart *completedPart = [CSSPCompletedPart new];
-//                completedPart.partNumber = @(i);
-//                completedPart.ETag = partOuput.ETag;
-//                
-//                [completedParts replaceObjectAtIndex:i - 1 withObject:completedPart];
-//                
-//                return nil;
-//            }]];
-//        }
+        for (int32_t i = 1; i < partCount + 1; i++) {
+            NSUInteger dataLength = i == partCount ? [testData length] - ((i - 1) * transferManagerMinimumPartSize) : transferManagerMinimumPartSize;
+            NSData *partData = [testData subdataWithRange:NSMakeRange((i - 1) * transferManagerMinimumPartSize, dataLength)];
+            
+            CSSPUploadPartRequest *uploadPartRequest = [CSSPUploadPartRequest new];
+            uploadPartRequest.container = @"photos";
+            uploadPartRequest.object = keyName;
+            uploadPartRequest.partNumber = @(i);
+            uploadPartRequest.body = partData;
+            uploadPartRequest.contentLength = @(dataLength);
+            uploadPartRequest.uploadId = uploadId;
+            
+            [partUploadTasks addObject:[[cssp uploadPart:uploadPartRequest] continueWithSuccessBlock:^id(BFTask *task) {
+                XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+                XCTAssertTrue([task.result isKindOfClass:[CSSPUploadPartOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPUploadPartOutput class]),[task.result description]);
+                CSSPUploadPartOutput *partOuput = task.result;
+                XCTAssertNotNil(partOuput.ETag);
+                
+                return nil;
+            }]];
+        }
         
         return [BFTask taskForCompletionOfAllTasks:partUploadTasks];
     }] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         
-        for (id cp in completedParts) {
-            XCTAssertTrue([cp isKindOfClass:[CSSPCompletedPart class]]);
-        }
-        
-        //Construct CompleteUploadRequest
-        CSSPCompletedMultipartUpload *multipartUpload = [CSSPCompletedMultipartUpload new];
-        multipartUpload.parts = completedParts;
-        
         CSSPCompleteMultipartUploadRequest *compReq = [CSSPCompleteMultipartUploadRequest new];
         compReq.container = @"photos";
         compReq.object = keyName;
         compReq.uploadId = uploadId;
-        compReq.multipartUpload = multipartUpload;
+        compReq.manifest = [NSString stringWithFormat:@"%@/%@/%@", compReq.container, compReq.object, compReq.uploadId];
         
         return [cssp completeMultipartUpload:compReq];
     }] continueWithBlock:^id(BFTask *task) {
@@ -234,37 +216,34 @@
         XCTAssertTrue([task.result isKindOfClass:[CSSPCompleteMultipartUploadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPCompleteMultipartUploadOutput class]),[task.result description]);
         CSSPCompleteMultipartUploadOutput *compOutput = task.result;
         resultETag = compOutput.ETag;
-        
-        XCTAssertNotNil(compOutput.location);
+ 
         XCTAssertNotNil(compOutput.ETag);
-        XCTAssertEqualObjects(compOutput.container, @"photos");
-        XCTAssertEqualObjects(compOutput.object, keyName);
-        
         return nil;
     }] waitUntilFinished];
     
-//    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:20]];
-//    
-//    CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
-//    listObjectReq.bucket = testBucketNameGeneral;
-//    
-//    [[[s3 listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
-//        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
-//        XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
-//        CSSPListObjectsOutput *listObjectsOutput = task.result;
-//        XCTAssertEqualObjects(listObjectsOutput.name, testBucketNameGeneral);
-//        
-//        BOOL match = NO;
-//        for (CSSPObject *s3Object in listObjectsOutput.contents) {
-//            if ([s3Object.key isEqualToString:keyName] && [s3Object.ETag isEqualToString:resultETag]) {
-//                match = YES;
-//            }
-//        }
-//        
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:20]];
+    
+    
+    CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
+    listObjectReq.container = @"photos";
+    listObjectReq.prefix = [NSString stringWithFormat:@"%@/%@", keyName, uploadId];
+    
+    [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+        XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
+        CSSPListObjectsOutput *listObjectsOutput = task.result;
+        
+        BOOL match = NO;
+        for (CSSPObject *object in listObjectsOutput.contents) {
+            if ([object.name isEqualToString:keyName] && [object.etag isEqualToString:resultETag]) {
+                match = YES;
+            }
+        }
+        
 //        XCTAssertTrue(match, @"Didn't find the uploaded object in the bucket!");
-//        
-//        return nil;
-//    }] waitUntilFinished];
+        
+        return nil;
+    }] waitUntilFinished];
     
     CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
     deleteObjectRequest.container = @"photos";

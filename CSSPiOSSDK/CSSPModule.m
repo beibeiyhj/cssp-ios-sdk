@@ -50,12 +50,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     return @{
              @"container" : @"Container",
              @"ETag" : @"ETag",
-             @"expiration" : @"Expiration",
-             @"object" : @"Object",
-             @"location" : @"Location",
-             @"SSEKMSKeyId" : @"SSEKMSKeyId",
-             @"serverSideEncryption" : @"ServerSideEncryption",
-             @"versionId" : @"VersionId",
+             @"object" : @"Object"
              };
 }
 
@@ -92,30 +87,13 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     return @{
              @"container" : @"Container",
              @"object" : @"Object",
-             @"multipartUpload" : @"MultipartUpload",
+             @"manifest" : @"Manifest",
              @"uploadId" : @"UploadId",
              };
 }
 
-+ (NSValueTransformer *)multipartUploadJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPCompletedMultipartUpload class]];
-}
-
 @end
 
-@implementation CSSPCompletedMultipartUpload
-
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
-             @"parts" : @"Parts",
-             };
-}
-
-+ (NSValueTransformer *)partsJSONTransformer {
-    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPCompletedPart class]];
-}
-
-@end
 
 @implementation CSSPCompletedPart
 
@@ -472,77 +450,27 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
-             @"commonPrefixes" : @"CommonPrefixes",
-             @"delimiter" : @"Delimiter",
-             @"encodingType" : @"EncodingType",
-             @"isTruncated" : @"IsTruncated",
-             @"keyMarker" : @"KeyMarker",
-             @"maxUploads" : @"MaxUploads",
-             @"nextKeyMarker" : @"NextKeyMarker",
-             @"nextUploadIdMarker" : @"NextUploadIdMarker",
-             @"prefix" : @"Prefix",
-             @"uploadIdMarker" : @"UploadIdMarker",
              @"uploads" : @"Uploads",
              };
 }
 
-+ (NSValueTransformer *)commonPrefixesJSONTransformer {
-    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPCommonPrefix class]];
-}
-
-+ (NSValueTransformer *)encodingTypeJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"url"]) {
-            return @(CSSPEncodingTypeURL);
-        }
-        return @(CSSPEncodingTypeUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPEncodingTypeURL:
-                return @"url";
-            case CSSPEncodingTypeUnknown:
-            default:
-                return nil;
-        }
-    }];
-}
-
 + (NSValueTransformer *)uploadsJSONTransformer {
-    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPMultipartUpload class]];
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPObject class]];
 }
 
 @end
+
 
 @implementation CSSPListMultipartUploadsRequest
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"container" : @"Container",
-             @"delimiter" : @"Delimiter",
-             @"encodingType" : @"EncodingType",
-             @"keyMarker" : @"KeyMarker",
+             @"object":@"Object",
              @"maxUploads" : @"MaxUploads",
              @"prefix" : @"Prefix",
-             @"uploadIdMarker" : @"UploadIdMarker",
+             @"uploadId" : @"UploadId",
              };
-}
-
-+ (NSValueTransformer *)encodingTypeJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"url"]) {
-            return @(CSSPEncodingTypeURL);
-        }
-        return @(CSSPEncodingTypeUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPEncodingTypeURL:
-                return @"url";
-            case CSSPEncodingTypeUnknown:
-            default:
-                return nil;
-        }
-    }];
 }
 
 @end
@@ -633,52 +561,12 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
-             @"initiator" : @"Initiator",
-             @"isTruncated" : @"IsTruncated",
-             @"object" : @"Object",
-             @"maxParts" : @"MaxParts",
-             @"nextPartNumberMarker" : @"NextPartNumberMarker",
-             @"owner" : @"Owner",
-             @"partNumberMarker" : @"PartNumberMarker",
-             @"parts" : @"Parts",
-             @"storageClass" : @"StorageClass",
-             @"uploadId" : @"UploadId",
+             @"contents" : @"object"
              };
 }
 
-+ (NSValueTransformer *)initiatorJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPInitiator class]];
-}
-
-+ (NSValueTransformer *)ownerJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPOwner class]];
-}
-
-+ (NSValueTransformer *)partsJSONTransformer {
-    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPPart class]];
-}
-
-+ (NSValueTransformer *)storageClassJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^NSNumber *(NSString *value) {
-        if ([value isEqualToString:@"STANDARD"]) {
-            return @(CSSPStorageClassStandard);
-        }
-        if ([value isEqualToString:@"REDUCED_REDUNDANCY"]) {
-            return @(CSSPStorageClassReducedRedundancy);
-        }
-        return @(CSSPStorageClassUnknown);
-    } reverseBlock:^NSString *(NSNumber *value) {
-        switch ([value integerValue]) {
-            case CSSPStorageClassStandard:
-                return @"STANDARD";
-            case CSSPStorageClassReducedRedundancy:
-                return @"REDUCED_REDUNDANCY";
-            case CSSPStorageClassUnknown:
-            default:
-                return nil;
-        }
-    }];
++ (NSValueTransformer *)contentsJSONTransformer {
+    return [NSValueTransformer mtl_JSONArrayTransformerWithModelClass:[CSSPObject class]];
 }
 
 @end
@@ -689,9 +577,8 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
     return @{
              @"container" : @"Container",
              @"object" : @"Object",
-             @"maxParts" : @"MaxParts",
-             @"partNumberMarker" : @"PartNumberMarker",
-             @"uploadId" : @"UploadId",
+             @"uploadID":@"UploadID",
+             @"prefix" : @"Prefix",
              };
 }
 

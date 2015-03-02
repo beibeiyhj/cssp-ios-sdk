@@ -54,8 +54,6 @@
 
 - (BFTask *) deleteObject:(CSSPDeleteObjectRequest *)request;
 
-- (BFTask *) getContainerAcl:(CSSPGetContainerAclRequest*)request;
-
 - (BFTask *) getObject:(CSSPGetObjectRequest *)request;
 
 - (BFTask *) headContainer:(CSSPHeadContainerRequest *)request;
@@ -64,13 +62,9 @@
 
 - (BFTask *) listObjects:(CSSPListObjectsRequest *)request;
 
-- (BFTask *) listParts:(CSSPListPartsRequest *) request;
-
-- (BFTask *) putContainerAcl:(CSSPPutContainerAclRequest *)request;
+- (BFTask *)listMultipartUploads:(CSSPListMultipartUploadsRequest *)request;
 
 - (BFTask *) putObject:(CSSPPutObjectRequest *)request;
-
-- (BFTask *) replicateObject:(CSSPReplicateObjectRequest *) request;
 
 - (BFTask *) uploadPart:(CSSPUploadPartRequest *) request;
 

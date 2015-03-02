@@ -27,7 +27,7 @@
         "CompleteMultipartUpload":{
             "name":"CompleteMultipartUpload",
             "http":{
-                "method":"POST",
+                "method":"PUT",
                 "requestUri":"/{Container}/{Object+}"
             },
             "input":{"shape":"CompleteMultipartUploadRequest"},
@@ -148,7 +148,7 @@
             "name":"ListMultipartUploads",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}?uploads"
+                "requestUri":"/{Container}"
             },
             "input":{"shape":"ListMultipartUploadsRequest"},
             "output":{"shape":"ListMultipartUploadsOutput"},
@@ -351,17 +351,9 @@
         "CompleteMultipartUploadOutput":{
             "type":"structure",
             "members":{
-                "Location":{"shape":"Location"},
-                "Container":{"shape":"ContainerName"},
-                "Key":{"shape":"ObjectKey"},
-                "Expiration":{
-                    "shape":"Expiration",
-                    "location":"header",
-                    "locationName":"x-amz-expiration",
-                    "documentation":"If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded."
-                },
                 "ETag":{
                     "shape":"ETag",
+                    "location":"header",
                     "documentation":"Entity tag of the object."
                 }
             }
@@ -370,8 +362,7 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key",
-                        "UploadId"
+                        "Object"
                         ],
             "members":{
                 "Container":{
@@ -379,50 +370,17 @@
                     "location":"uri",
                     "locationName":"Container"
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
-                "MultipartUpload":{
-                    "shape":"CompletedMultipartUpload",
-                    "locationName":"CompleteMultipartUpload",
-                    "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"}
-                },
-                "UploadId":{
-                    "shape":"MultipartUploadId",
-                    "location":"querystring",
-                    "locationName":"uploadId"
-                }
-            },
-            "payload":"MultipartUpload"
-        },
-        "CompletedMultipartUpload":{
-            "type":"structure",
-            "members":{
-                "Parts":{
-                    "shape":"CompletedPartList",
-                    "locationName":"Part"
+                "Manifest":{
+                    "shape":"Manifest",
+                    "location":"header",
+                    "locationName":"X-Object-Manifest"
                 }
             }
-        },
-        "CompletedPart":{
-            "type":"structure",
-            "members":{
-                "ETag":{
-                    "shape":"ETag",
-                    "documentation":"Entity tag returned when the part was uploaded."
-                },
-                "PartNumber":{
-                    "shape":"PartNumber",
-                    "documentation":"Part number that identifies the part."
-                }
-            }
-        },
-        "CompletedPartList":{
-            "type":"list",
-            "member":{"shape":"CompletedPart"},
-            "flattened":true
         },
         "ContentDisposition":{"type":"string"},
         "ContentEncoding":{"type":"string"},
@@ -622,7 +580,7 @@
                     "documentation":"Name of the Container to which the multipart upload was initiated.",
                     "locationName":"Container"
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "documentation":"Object key for which the multipart upload was initiated."
                 },
@@ -636,15 +594,9 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key"
+                        "Object"
                         ],
             "members":{
-                "ACL":{
-                    "shape":"ObjectCannedACL",
-                    "location":"header",
-                    "locationName":"x-amz-acl",
-                    "documentation":"The canned ACL to apply to the object."
-                },
                 "Container":{
                     "shape":"ContainerName",
                     "location":"uri",
@@ -686,34 +638,10 @@
                     "locationName":"Expires",
                     "documentation":"The date and time at which the object is no longer cacheable."
                 },
-                "GrantFullControl":{
-                    "shape":"GrantFullControl",
-                    "location":"header",
-                    "locationName":"x-amz-grant-full-control",
-                    "documentation":"Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object."
-                },
-                "GrantRead":{
-                    "shape":"GrantRead",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read",
-                    "documentation":"Allows grantee to read the object data and its metadata."
-                },
-                "GrantReadACP":{
-                    "shape":"GrantReadACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the object ACL."
-                },
-                "GrantWriteACP":{
-                    "shape":"GrantWriteACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable object."
-                },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "Metadata":{
                     "shape":"Metadata",
@@ -1300,47 +1228,8 @@
         "ListMultipartUploadsOutput":{
             "type":"structure",
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "documentation":"Name of the Container to which the multipart upload was initiated."
-                },
-                "KeyMarker":{
-                    "shape":"KeyMarker",
-                    "documentation":"The key at or after which the listing began."
-                },
-                "UploadIdMarker":{
-                    "shape":"UploadIdMarker",
-                    "documentation":"Upload ID after which listing began."
-                },
-                "NextKeyMarker":{
-                    "shape":"NextKeyMarker",
-                    "documentation":"When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request."
-                },
-                "Prefix":{
-                    "shape":"Prefix",
-                    "documentation":"When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix."
-                },
-                "Delimiter":{"shape":"Delimiter"},
-                "NextUploadIdMarker":{
-                    "shape":"NextUploadIdMarker",
-                    "documentation":"When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request."
-                },
-                "MaxUploads":{
-                    "shape":"MaxUploads",
-                    "documentation":"Maximum number of multipart uploads that could have been included in the response."
-                },
-                "IsTruncated":{
-                    "shape":"IsTruncated",
-                    "documentation":"Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads."
-                },
                 "Uploads":{
-                    "shape":"MultipartUploadList",
-                    "locationName":"Upload"
-                },
-                "CommonPrefixes":{"shape":"CommonPrefixList"},
-                "EncodingType":{
-                    "shape":"EncodingType",
-                    "documentation":"Encoding type used by Amazon S3 to encode object keys in the response."
+                    "object":{"shape":"ObjectList"}
                 }
             }
         },
@@ -1353,27 +1242,10 @@
                     "location":"uri",
                     "locationName":"Container"
                 },
-                "Delimiter":{
-                    "shape":"Delimiter",
-                    "location":"querystring",
-                    "locationName":"delimiter",
-                    "documentation":"Character you use to group keys."
-                },
-                "EncodingType":{
-                    "shape":"EncodingType",
-                    "location":"querystring",
-                    "locationName":"encoding-type"
-                },
-                "KeyMarker":{
-                    "shape":"KeyMarker",
-                    "location":"querystring",
-                    "locationName":"key-marker",
-                    "documentation":"Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin."
-                },
                 "MaxUploads":{
                     "shape":"MaxUploads",
                     "location":"querystring",
-                    "locationName":"max-uploads",
+                    "locationName":"limit",
                     "documentation":"Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response."
                 },
                 "Prefix":{
@@ -1381,12 +1253,6 @@
                     "location":"querystring",
                     "locationName":"prefix",
                     "documentation":"Lists in-progress uploads only for those keys that begin with the specified prefix."
-                },
-                "UploadIdMarker":{
-                    "shape":"UploadIdMarker",
-                    "location":"querystring",
-                    "locationName":"upload-id-marker",
-                    "documentation":"Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored."
                 }
             }
         },
@@ -1621,6 +1487,7 @@
                 }
             }
         },
+        "Manifest":{"type":"string"},
         "Marker":{"type":"string"},
         "MaxAgeSeconds":{"type":"integer"},
         "MaxKeys":{"type":"integer"},
@@ -2417,9 +2284,7 @@
             "type":"structure",
             "required":[
                         "Container",
-                        "Key",
-                        "PartNumber",
-                        "UploadId"
+                        "Object"
                         ],
             "members":{
                 "Body":{
@@ -2442,22 +2307,10 @@
                     "location":"header",
                     "locationName":"Content-MD5"
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
-                },
-                "PartNumber":{
-                    "shape":"PartNumber",
-                    "location":"querystring",
-                    "locationName":"partNumber",
-                    "documentation":"Part number of part being uploaded."
-                },
-                "UploadId":{
-                    "shape":"MultipartUploadId",
-                    "location":"querystring",
-                    "locationName":"uploadId",
-                    "documentation":"Upload ID identifying the multipart upload whose part is being uploaded."
+                    "locationName":"Object"
                 }
             },
             "payload":"Body"

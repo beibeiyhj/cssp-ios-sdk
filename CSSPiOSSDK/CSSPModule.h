@@ -171,7 +171,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @class CSSPCommonPrefix;
 @class CSSPCompleteMultipartUploadOutput;
 @class CSSPCompleteMultipartUploadRequest;
-@class CSSPCompletedMultipartUpload;
 @class CSSPCompletedPart;
 @class CSSPCreateMultipartUploadOutput;
 @class CSSPCreateMultipartUploadRequest;
@@ -279,13 +278,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 
-@interface CSSPCompletedMultipartUpload : NSObject
-
-@property (nonatomic, strong) NSArray *parts;
-
-@end
-
-
 @interface CSSPCompleteMultipartUploadOutput : CSSPModel
 
 @property (nonatomic, strong) NSString *container;
@@ -295,18 +287,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSString *ETag;
 
-/**
- * If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
- */
-@property (nonatomic, strong) NSDate *expiration;
 @property (nonatomic, strong) NSString *object;
-@property (nonatomic, strong) NSString *location;
-
-/**
- * Version of the object.
- */
-@property (nonatomic, strong) NSString *versionId;
-
 @end
 
 
@@ -329,8 +310,8 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
-@property (nonatomic, strong) CSSPCompletedMultipartUpload *multipartUpload;
 @property (nonatomic, strong) NSString *uploadId;
+@property (nonatomic, strong) NSString *manifest;
 
 @end
 
@@ -646,53 +627,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPListMultipartUploadsOutput : CSSPModel
 
-
-/**
- * Name of the container to which the multipart upload was initiated.
- */
-@property (nonatomic, strong) NSString *container;
-@property (nonatomic, strong) NSArray *commonPrefixes;
-@property (nonatomic, strong) NSString *delimiter;
-
-/**
- * Encoding type used by Amazon S3 to encode object keys in the response.
- */
-@property (nonatomic, assign) CSSPEncodingType encodingType;
-
-/**
- * Indicates whether the returned list of multipart uploads is truncated. A value of true indicates that the list was truncated. The list can be truncated if the number of multipart uploads exceeds the limit allowed or specified by max uploads.
- */
-@property (nonatomic, strong) NSNumber *isTruncated;
-
-/**
- * The key at or after which the listing began.
- */
-@property (nonatomic, strong) NSString *keyMarker;
-
-/**
- * Maximum number of multipart uploads that could have been included in the response.
- */
-@property (nonatomic, strong) NSNumber *maxUploads;
-
-/**
- * When a list is truncated, this element specifies the value that should be used for the key-marker request parameter in a subsequent request.
- */
-@property (nonatomic, strong) NSString *nextKeyMarker;
-
-/**
- * When a list is truncated, this element specifies the value that should be used for the upload-id-marker request parameter in a subsequent request.
- */
-@property (nonatomic, strong) NSString *nextUploadIdMarker;
-
-/**
- * When a prefix is provided in the request, this field contains the specified prefix. The result contains only keys starting with the specified prefix.
- */
-@property (nonatomic, strong) NSString *prefix;
-
-/**
- * Upload ID after which listing began.
- */
-@property (nonatomic, strong) NSString *uploadIdMarker;
 @property (nonatomic, strong) NSArray *uploads;
 
 @end
@@ -700,21 +634,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @interface CSSPListMultipartUploadsRequest : CSSPRequest
 
 @property (nonatomic, strong) NSString *container;
-
-/**
- * Character you use to group keys.
- */
-@property (nonatomic, strong) NSString *delimiter;
-
-/**
- * Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response.
- */
-@property (nonatomic, assign) CSSPEncodingType encodingType;
-
-/**
- * Together with upload-id-marker, this parameter specifies the multipart upload after which listing should begin.
- */
-@property (nonatomic, strong) NSString *keyMarker;
+@property (nonatomic, strong) NSString *object;
 
 /**
  * Sets the maximum number of multipart uploads, from 1 to 1,000, to return in the response body. 1,000 is the maximum number of uploads that can be returned in a response.
@@ -726,10 +646,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSString *prefix;
 
-/**
- * Together with key-marker, specifies the multipart upload after which listing should begin. If key-marker is not specified, the upload-id-marker parameter is ignored.
- */
-@property (nonatomic, strong) NSString *uploadIdMarker;
+@property (nonatomic, strong) NSString *uploadId;
 
 @end
 
@@ -803,53 +720,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPListPartsOutput : CSSPModel
 
-
-/**
- * Name of the container to which the multipart upload was initiated.
- */
-@property (nonatomic, strong) NSString *container;
-
-/**
- * Identifies who initiated the multipart upload.
- */
-@property (nonatomic, strong) CSSPInitiator *initiator;
-
-/**
- * Indicates whether the returned list of parts is truncated.
- */
-@property (nonatomic, strong) NSNumber *isTruncated;
-
-/**
- * Object key for which the multipart upload was initiated.
- */
-@property (nonatomic, strong) NSString *object;
-
-/**
- * Maximum number of parts that were allowed in the response.
- */
-@property (nonatomic, strong) NSNumber *maxParts;
-
-/**
- * When a list is truncated, this element specifies the last part in the list, as well as the value to use for the part-number-marker request parameter in a subsequent request.
- */
-@property (nonatomic, strong) NSNumber *nextPartNumberMarker;
-@property (nonatomic, strong) CSSPOwner *owner;
-
-/**
- * Part number after which listing begins.
- */
-@property (nonatomic, strong) NSNumber *partNumberMarker;
-@property (nonatomic, strong) NSArray *parts;
-
-/**
- * The class of storage used to store the object.
- */
-@property (nonatomic, assign) CSSPStorageClass storageClass;
-
-/**
- * Upload ID identifying the multipart upload whose parts are being listed.
- */
-@property (nonatomic, strong) NSString *uploadId;
+@property (nonatomic, strong) NSArray *contents;
 
 @end
 
@@ -858,21 +729,9 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
-
-/**
- * Sets the maximum number of parts to return.
- */
-@property (nonatomic, strong) NSNumber *maxParts;
-
-/**
- * Specifies the part after which listing should begin. Only parts with higher part numbers will be listed.
- */
-@property (nonatomic, strong) NSNumber *partNumberMarker;
-
-/**
- * Upload ID identifying the multipart upload whose parts are being listed.
- */
 @property (nonatomic, strong) NSString *uploadId;
+
+@property (nonatomic, strong) NSString *prefix;
 
 @end
 
@@ -911,32 +770,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, assign) CSSPContainerCannedACL ACL;
 @property (nonatomic, strong) CSSPAccessControlPolicy *accessControlPolicy;
 @property (nonatomic, strong) NSString *container;
-@property (nonatomic, strong) NSString *contentMD5;
-
-/**
- * Allows grantee the read, write, read ACP, and write ACP permissions on the container.
- */
-@property (nonatomic, strong) NSString *grantFullControl;
-
-/**
- * Allows grantee to list the objects in the container.
- */
-@property (nonatomic, strong) NSString *grantRead;
-
-/**
- * Allows grantee to read the container ACL.
- */
-@property (nonatomic, strong) NSString *grantReadACP;
-
-/**
- * Allows grantee to create, overwrite, and delete any object in the container.
- */
-@property (nonatomic, strong) NSString *grantWrite;
-
-/**
- * Allows grantee to write the ACL for the applicable container.
- */
-@property (nonatomic, strong) NSString *grantWriteACP;
 
 @end
 
