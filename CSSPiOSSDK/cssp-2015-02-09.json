@@ -12,7 +12,7 @@
             "name":"AbortMultipartUpload",
             "http":{
                 "method":"DELETE",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"AbortMultipartUploadRequest"},
             "errors":[
@@ -28,7 +28,7 @@
             "name":"CompleteMultipartUpload",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"CompleteMultipartUploadRequest"},
             "output":{"shape":"CompleteMultipartUploadOutput"},
@@ -38,7 +38,7 @@
             "name":"CreateMultipartUpload",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Container}/{Object+}?uploads"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"CreateMultipartUploadRequest"},
             "output":{"shape":"CreateMultipartUploadOutput"},
@@ -49,7 +49,7 @@
             "name":"DeleteObject",
             "http":{
                 "method":"DELETE",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"DeleteObjectRequest"},
             "output":{"shape":"DeleteObjectOutput"},
@@ -59,7 +59,7 @@
             "name":"DeleteObjects",
             "http":{
                 "method":"POST",
-                "requestUri":"/{Container}?delete"
+                "requestUri":""
             },
             "input":{"shape":"DeleteObjectsRequest"},
             "output":{"shape":"DeleteObjectsOutput"},
@@ -70,7 +70,7 @@
             "name":"GetContainerAcl",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}?acl"
+                "requestUri":""
             },
             "input":{"shape":"GetContainerAclRequest"},
             "output":{"shape":"GetContainerAclOutput"},
@@ -80,7 +80,7 @@
             "name":"GetObject",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"GetObjectRequest"},
             "output":{"shape":"GetObjectOutput"},
@@ -97,7 +97,7 @@
             "name":"GetObjectAcl",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}/{Object+}?acl"
+                "requestUri":"/{Object+}?acl"
             },
             "input":{"shape":"GetObjectAclRequest"},
             "output":{"shape":"GetObjectAclOutput"},
@@ -115,7 +115,7 @@
             "name":"HeadContainer",
             "http":{
                 "method":"HEAD",
-                "requestUri":"/{Container}"
+                "requestUri":""
             },
             "input":{"shape":"HeadContainerRequest"},
             "errors":[
@@ -131,7 +131,7 @@
             "name":"HeadObject",
             "http":{
                 "method":"HEAD",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"HeadObjectRequest"},
             "output":{"shape":"HeadObjectOutput"},
@@ -148,7 +148,7 @@
             "name":"ListMultipartUploads",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}"
+                "requestUri":""
             },
             "input":{"shape":"ListMultipartUploadsRequest"},
             "output":{"shape":"ListMultipartUploadsOutput"},
@@ -158,7 +158,7 @@
             "name":"ListObjects",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}"
+                "requestUri":""
             },
             "input":{"shape":"ListObjectsRequest"},
             "output":{"shape":"ListObjectsOutput"},
@@ -176,7 +176,7 @@
             "name":"ListParts",
             "http":{
                 "method":"GET",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"ListPartsRequest"},
             "output":{"shape":"ListPartsOutput"},
@@ -186,7 +186,7 @@
             "name":"PutContainerAcl",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Container}?acl"
+                "requestUri":"?acl"
             },
             "input":{"shape":"PutContainerAclRequest"},
             "documentation":"Sets the permissions on a Container using access control lists (ACL)."
@@ -195,7 +195,7 @@
             "name":"PutObject",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"PutObjectRequest"},
             "output":{"shape":"PutObjectOutput"},
@@ -205,7 +205,7 @@
             "name":"UploadPart",
             "http":{
                 "method":"PUT",
-                "requestUri":"/{Container}/{Object+}"
+                "requestUri":"/{Object+}"
             },
             "input":{"shape":"UploadPartRequest"},
             "output":{"shape":"UploadPartOutput"},
@@ -216,20 +216,14 @@
         "AbortMultipartUploadRequest":{
             "type":"structure",
             "required":[
-                        "Container",
-                        "Key",
+                        "Object",
                         "UploadId"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "UploadId":{
                     "shape":"MultipartUploadId",
@@ -361,15 +355,9 @@
         "CompleteMultipartUploadRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
@@ -404,9 +392,8 @@
         "CopyObjectRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "CopySource",
-                        "Key"
+                        "Object"
                         ],
             "members":{
                 "ACL":{
@@ -414,11 +401,6 @@
                     "location":"header",
                     "locationName":"x-amz-acl",
                     "documentation":"The canned ACL to apply to the object."
-                },
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
                 },
                 "CacheControl":{
                     "shape":"CacheControl",
@@ -486,10 +468,10 @@
                     "locationName":"x-amz-grant-write-acp",
                     "documentation":"Allows grantee to write the ACL for the applicable object."
                 },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "Metadata":{
                     "shape":"Metadata",
@@ -593,15 +575,9 @@
         "CreateMultipartUploadRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "CacheControl":{
                     "shape":"CacheControl",
                     "location":"header",
@@ -685,15 +661,9 @@
         "DeleteObjectRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
@@ -714,15 +684,9 @@
         "DeleteObjectsRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Delete"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "Delete":{
                     "shape":"Delete",
                     "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
@@ -812,49 +776,7 @@
         },
         "GetContainerAclRequest":{
             "type":"structure",
-            "required":["Container"],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                }
-            }
-        },
-        "GetObjectAclOutput":{
-            "type":"structure",
-            "members":{
-                "Owner":{"shape":"Owner"},
-                "Grants":{
-                    "shape":"Grants",
-                    "documentation":"A list of grants.",
-                    "locationName":"AccessControlList"
-                }
-            }
-        },
-        "GetObjectAclRequest":{
-            "type":"structure",
-            "required":[
-                        "Container",
-                        "Key"
-                        ],
-            "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
-                "Key":{
-                    "shape":"ObjectKey",
-                    "location":"uri",
-                    "locationName":"Key"
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "location":"querystring",
-                    "locationName":"versionId",
-                    "documentation":"VersionId used to reference a specific version of the object."
-                }
             }
         },
         "GetObjectOutput":{
@@ -948,15 +870,9 @@
         "GetObjectRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
@@ -1060,13 +976,7 @@
         },
         "HeadContainerRequest":{
             "type":"structure",
-            "required":["Container"],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                }
             }
         },
         "HeadObjectOutput":{
@@ -1160,15 +1070,9 @@
         "HeadObjectRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
@@ -1235,13 +1139,7 @@
         },
         "ListMultipartUploadsRequest":{
             "type":"structure",
-            "required":["Container"],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "MaxUploads":{
                     "shape":"MaxUploads",
                     "location":"querystring",
@@ -1295,52 +1193,6 @@
                 }
             }
         },
-        "ListObjectVersionsRequest":{
-            "type":"structure",
-            "required":["Container"],
-            "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
-                "Delimiter":{
-                    "shape":"Delimiter",
-                    "location":"querystring",
-                    "locationName":"delimiter",
-                    "documentation":"A delimiter is a character you use to group keys."
-                },
-                "EncodingType":{
-                    "shape":"EncodingType",
-                    "location":"querystring",
-                    "locationName":"encoding-type"
-                },
-                "KeyMarker":{
-                    "shape":"KeyMarker",
-                    "location":"querystring",
-                    "locationName":"key-marker",
-                    "documentation":"Specifies the key to start with when listing objects in a Container."
-                },
-                "MaxKeys":{
-                    "shape":"MaxKeys",
-                    "location":"querystring",
-                    "locationName":"max-keys",
-                    "documentation":"Sets the maximum number of keys returned in the response. The response might contain fewer keys but will never contain more."
-                },
-                "Prefix":{
-                    "shape":"Prefix",
-                    "location":"querystring",
-                    "locationName":"prefix",
-                    "documentation":"Limits the response to keys that begin with the specified prefix."
-                },
-                "VersionIdMarker":{
-                    "shape":"VersionIdMarker",
-                    "location":"querystring",
-                    "locationName":"version-id-marker",
-                    "documentation":"Specifies the object version you want to start listing from."
-                }
-            }
-        },
         "ListObjectsOutput":{
             "type":"structure",
             "members":{
@@ -1350,13 +1202,7 @@
         },
         "ListObjectsRequest":{
             "type":"structure",
-            "required":["Container"],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "Delimiter":{
                     "shape":"Delimiter",
                     "location":"querystring",
@@ -1391,10 +1237,6 @@
         "ListPartsOutput":{
             "type":"structure",
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "documentation":"Name of the Container to which the multipart upload was initiated."
-                },
                 "Key":{
                     "shape":"ObjectKey",
                     "documentation":"Object key for which the multipart upload was initiated."
@@ -1437,20 +1279,14 @@
         "ListPartsRequest":{
             "type":"structure",
             "required":[
-                        "Container",
-                        "Key",
+                        "Object",
                         "UploadId"
                         ],
             "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
-                "Key":{
+                "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
-                    "locationName":"Key"
+                    "locationName":"Object"
                 },
                 "MaxParts":{
                     "shape":"MaxParts",
@@ -1772,7 +1608,6 @@
         },
         "PutContainerAclRequest":{
             "type":"structure",
-            "required":["Container"],
             "members":{
                 "ACL":{
                     "shape":"ContainerCannedACL",
@@ -1785,11 +1620,6 @@
                     "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
                     "locationName":"AccessControlPolicy"
                 },
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
                 "ContentMD5":{
                     "shape":"ContentMD5",
                     "location":"header",
@@ -1824,72 +1654,6 @@
                     "location":"header",
                     "locationName":"x-amz-grant-write-acp",
                     "documentation":"Allows grantee to write the ACL for the applicable Container."
-                }
-            },
-            "payload":"AccessControlPolicy"
-        },
-        "PutObjectAclRequest":{
-            "type":"structure",
-            "required":[
-                        "Container",
-                        "Key"
-                        ],
-            "members":{
-                "ACL":{
-                    "shape":"ObjectCannedACL",
-                    "location":"header",
-                    "locationName":"x-amz-acl",
-                    "documentation":"The canned ACL to apply to the object."
-                },
-                "AccessControlPolicy":{
-                    "shape":"AccessControlPolicy",
-                    "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-                    "locationName":"AccessControlPolicy"
-                },
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
-                "ContentMD5":{
-                    "shape":"ContentMD5",
-                    "location":"header",
-                    "locationName":"Content-MD5"
-                },
-                "GrantFullControl":{
-                    "shape":"GrantFullControl",
-                    "location":"header",
-                    "locationName":"x-amz-grant-full-control",
-                    "documentation":"Allows grantee the read, write, read ACP, and write ACP permissions on the Container."
-                },
-                "GrantRead":{
-                    "shape":"GrantRead",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read",
-                    "documentation":"Allows grantee to list the objects in the Container."
-                },
-                "GrantReadACP":{
-                    "shape":"GrantReadACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the Container ACL."
-                },
-                "GrantWrite":{
-                    "shape":"GrantWrite",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write",
-                    "documentation":"Allows grantee to create, overwrite, and delete any object in the Container."
-                },
-                "GrantWriteACP":{
-                    "shape":"GrantWriteACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable Container."
-                },
-                "Key":{
-                    "shape":"ObjectKey",
-                    "location":"uri",
-                    "locationName":"Key"
                 }
             },
             "payload":"AccessControlPolicy"
@@ -1914,7 +1678,6 @@
         "PutObjectRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
@@ -1922,11 +1685,6 @@
                     "shape":"Body",
                     "streaming":true,
                     "documentation":"Object data."
-                },
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
                 },
                 "CacheControl":{
                     "shape":"CacheControl",
@@ -2049,46 +1807,6 @@
         "ResponseContentType":{"type":"string"},
         "ResponseExpires":{"type":"timestamp"},
         "Restore":{"type":"string"},
-        "RestoreObjectRequest":{
-            "type":"structure",
-            "required":[
-                        "Container",
-                        "Key"
-                        ],
-            "members":{
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
-                },
-                "Key":{
-                    "shape":"ObjectKey",
-                    "location":"uri",
-                    "locationName":"Key"
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "location":"querystring",
-                    "locationName":"versionId"
-                },
-                "RestoreRequest":{
-                    "shape":"RestoreRequest",
-                    "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-                    "locationName":"RestoreRequest"
-                }
-            },
-            "payload":"RestoreRequest"
-        },
-        "RestoreRequest":{
-            "type":"structure",
-            "required":["Days"],
-            "members":{
-                "Days":{
-                    "shape":"Days",
-                    "documentation":"Lifetime of the active copy in days"
-                }
-            }
-        },
         "RoutingRule":{
             "type":"structure",
             "required":["Redirect"],
@@ -2283,18 +2001,12 @@
         "UploadPartRequest":{
             "type":"structure",
             "required":[
-                        "Container",
                         "Object"
                         ],
             "members":{
                 "Body":{
                     "shape":"Body",
                     "streaming":true
-                },
-                "Container":{
-                    "shape":"ContainerName",
-                    "location":"uri",
-                    "locationName":"Container"
                 },
                 "ContentLength":{
                     "shape":"ContentLength",

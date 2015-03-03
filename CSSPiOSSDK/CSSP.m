@@ -85,10 +85,9 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 
 @implementation CSSP
 
--(instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration withEndpoint:(CSSPEndpoint *)endpoint {
+-(instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration {
     if (self = [super init]) {
         _configuration = configuration;
-        _configuration.endpoint = endpoint;
         
         CSSPSignatureSigner *signer = [CSSPSignatureSigner signerWithCredentialsProvider:configuration.credentialsProvider];
         _configuration.baseURL = _configuration.endpoint.URL;
@@ -133,20 +132,32 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 }
 
 -(BFTask *)abortMultipartUpload:(CSSPAbortMultipartUploadRequest *)request {
-    return [self invokeRequest:request
-                    HTTPMethod:CSSPHTTPMethodDELETE
-                     URLString:@"/{Container}/{Object+}"
-                  targetPrefix:@""
-                 operationName:@"AbortMultipartUpload"
-                   outputClass:nil];
+    CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
+    listObjectReq.prefix = [NSString stringWithFormat:@"%@/%@", request.object, request.uploadId];
+    
+    return [[self listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+        CSSPListObjectsOutput *listObjectsOutput = task.result;
+        
+        NSMutableArray *partUploadTasks = [NSMutableArray arrayWithCapacity:listObjectsOutput.contents.count];
+        for (CSSPObject *object in listObjectsOutput.contents) {
+            CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
+            deleteObjectRequest.object = object.name;
+            
+            [partUploadTasks addObject:[[self deleteObject:deleteObjectRequest]continueWithBlock:^id(BFTask *task) {
+                return nil;
+            }]];
+        }
+        
+        return [BFTask taskForCompletionOfAllTasks:partUploadTasks];
+    }];
 }
 
 - (BFTask *)completeMultipartUpload:(CSSPCompleteMultipartUploadRequest *)request {
-    request.manifest = [NSString stringWithFormat:@"%@/%@/%@", request.container, request.object, request.uploadId];
+    request.manifest = [NSString stringWithFormat:@"%@/%@/%@", _configuration.endpoint.containerName, request.object, request.uploadId];
     
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodPUT
-                     URLString:@"/{Container}/{Object+}"
+                     URLString:@"/{Object+}"
                   targetPrefix:@""
                  operationName:@"CompleteMultipartUpload"
                    outputClass:[CSSPCompleteMultipartUploadOutput class]];
@@ -159,7 +170,6 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
                                                error:nil];
     CSSPCreateMultipartUploadOutput *createMultipartUploadOutput = responseObject;
     createMultipartUploadOutput.object = request.object;
-    createMultipartUploadOutput.container = request.container;
     createMultipartUploadOutput.uploadId = [[NSUUID UUID] UUIDString];
    
     BFTaskCompletionSource *taskCompletionSource = [BFTaskCompletionSource taskCompletionSource];
@@ -170,7 +180,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 - (BFTask *)deleteObject:(CSSPDeleteObjectRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodDELETE
-                     URLString:@"/{Container}/{Object+}"
+                     URLString:@"/{Object+}"
                   targetPrefix:@""
                  operationName:@"DeleteObject"
                    outputClass:[CSSPDeleteObjectOutput class]];
@@ -179,7 +189,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 //- (BFTask *)getContainerAcl:(CSSPGetContainerAclRequest *)request {
 //    return [self invokeRequest:request
 //                    HTTPMethod:CSSPHTTPMethodGET
-//                     URLString:@"/{Container}?acl"
+//                     URLString:@"?acl"
 //                  targetPrefix:@""
 //                 operationName:@"GetContainerAcl"
 //                   outputClass:[CSSPGetContainerAclOutput class]];
@@ -188,7 +198,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 - (BFTask *)getObject:(CSSPGetObjectRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodGET
-                     URLString:@"/{Container}/{Object+}"
+                     URLString:@"/{Object+}"
                   targetPrefix:@""
                  operationName:@"GetObject"
                    outputClass:[CSSPGetObjectOutput class]];
@@ -196,7 +206,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 - (BFTask *)headContainer:(CSSPHeadContainerRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodHEAD
-                     URLString:@"/{Container}"
+                     URLString:@""
                   targetPrefix:@""
                  operationName:@"HeadContainer"
                    outputClass:nil];
@@ -205,7 +215,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 - (BFTask *)headObject:(CSSPHeadObjectRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodHEAD
-                     URLString:@"/{Container}/{Object+}"
+                     URLString:@"/{Object+}"
                   targetPrefix:@""
                  operationName:@"HeadObject"
                    outputClass:[CSSPHeadObjectOutput class]];
@@ -216,7 +226,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
     
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodGET
-                     URLString:@"/{Container}"
+                     URLString:@""
                   targetPrefix:@""
                  operationName:@"ListMultipartUploads"
                    outputClass:[CSSPListMultipartUploadsOutput class]];
@@ -226,7 +236,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 - (BFTask *)listObjects:(CSSPListObjectsRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodGET
-                     URLString:@"/{Container}"
+                     URLString:@""
                   targetPrefix:@""
                  operationName:@"ListObjects"
                    outputClass:[CSSPListObjectsOutput class]];
@@ -236,7 +246,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 //- (BFTask *)putContainerAcl:(CSSPPutContainerAclRequest *)request {
 //    return [self invokeRequest:request
 //                    HTTPMethod:CSSPHTTPMethodPUT
-//                     URLString:@"/{Container}?acl"
+//                     URLString:@"?acl"
 //                  targetPrefix:@""
 //                 operationName:@"PutContainerAcl"
 //                   outputClass:nil];
@@ -245,7 +255,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 - (BFTask *)putObject:(CSSPPutObjectRequest *)request {
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodPUT
-                     URLString:@"/{Container}/{Object+}"
+                     URLString:@"/{Object+}"
                   targetPrefix:@""
                  operationName:@"PutObject"
                    outputClass:[CSSPPutObjectOutput class]];
@@ -254,7 +264,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 //- (BFTask *)replicateObject:(CSSPReplicateObjectRequest *)request {
 //    return [self invokeRequest:request
 //                    HTTPMethod:CSSPHTTPMethodPUT
-//                     URLString:@"/{Container}/{Object+}"
+//                     URLString:@"/{Object+}"
 //                  targetPrefix:@""
 //                 operationName:@"ReplicateObject"
 //                   outputClass:[CSSPReplicateObjectOutput class]];
@@ -266,7 +276,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
     
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodPUT
-                     URLString:@"/{Container}/{Object+}"
+                     URLString:@"/{Object+}"
                   targetPrefix:@""
                  operationName:@"UploadPart"
                    outputClass:[CSSPUploadPartOutput class]];

@@ -15,7 +15,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"object" : @"Object",
              @"uploadId" : @"UploadId",
              };
@@ -85,7 +84,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"object" : @"Object",
              @"manifest" : @"Manifest",
              @"uploadId" : @"UploadId",
@@ -122,7 +120,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"cacheControl" : @"CacheControl",
              @"contentDisposition" : @"ContentDisposition",
              @"contentEncoding" : @"ContentEncoding",
@@ -159,7 +156,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"object" : @"Object",
              };
 }
@@ -246,7 +242,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"object" : @"Object",
              @"range" : @"Range",
              @"responseExpires" : @"ResponseExpires",
@@ -359,12 +354,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 @implementation CSSPHeadContainerRequest
 
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
-             @"container" : @"Container",
-             };
-}
-
 @end
 
 @implementation CSSPHeadObjectOutput
@@ -417,7 +406,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"object" : @"Object",
              };
 }
@@ -465,7 +453,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"object":@"Object",
              @"maxUploads" : @"MaxUploads",
              @"prefix" : @"Prefix",
@@ -529,7 +516,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
              @"delimiter" : @"Delimiter",
              @"encodingType" : @"EncodingType",
              @"marker" : @"Marker",
@@ -774,7 +760,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"body" : @"Body",
-             @"container" : @"Container",
              @"cacheControl" : @"CacheControl",
              @"contentDisposition" : @"ContentDisposition",
              @"contentEncoding" : @"ContentEncoding",
@@ -975,7 +960,6 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
              @"body" : @"Body",
-             @"container" : @"Container",
              @"contentLength" : @"ContentLength",
              @"contentMD5" : @"ContentMD5",
              @"object" : @"Object",

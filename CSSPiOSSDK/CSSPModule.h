@@ -271,7 +271,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPAbortMultipartUploadRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 @property (nonatomic, strong) NSString *uploadId;
 
@@ -279,8 +278,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 
 @interface CSSPCompleteMultipartUploadOutput : CSSPModel
-
-@property (nonatomic, strong) NSString *container;
 
 /**
  * Entity tag of the object.
@@ -308,7 +305,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPCompleteMultipartUploadRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 @property (nonatomic, strong) NSString *uploadId;
 @property (nonatomic, strong) NSString *manifest;
@@ -317,12 +313,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 
 @interface CSSPCreateMultipartUploadOutput : CSSPModel
-
-
-/**
- * Name of the container to which the multipart upload was initiated.
- */
-@property (nonatomic, strong) NSString *container;
 
 /**
  * Object key for which the multipart upload was initiated.
@@ -338,10 +328,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 @interface CSSPCreateMultipartUploadRequest : CSSPRequest
-
-
-@property (nonatomic, strong) NSString *container;
-
 /**
  * Specifies caching behavior along the request/reply chain.
  */
@@ -387,7 +373,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPDeleteObjectRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 @end
@@ -405,8 +390,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 @interface CSSPGetContainerAclRequest : CSSPRequest
-
-@property (nonatomic, strong) NSString *container;
 
 @end
 
@@ -486,7 +469,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPGetObjectRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 @property (nonatomic, strong) NSOutputStream * outputStream;
@@ -500,7 +482,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPHeadContainerRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 
 @end
 
@@ -582,7 +563,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPHeadObjectRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 @end
@@ -633,7 +613,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPListMultipartUploadsRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 
 /**
@@ -677,9 +656,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 
 @interface CSSPListObjectsRequest : CSSPRequest
-
-@property (nonatomic, strong) NSString *container;
-
 /**
  * A delimiter is a character you use to group keys.
  */
@@ -727,7 +703,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPListPartsRequest : CSSPRequest
 
-@property (nonatomic, strong) NSString *container;
 @property (nonatomic, strong) NSString *object;
 @property (nonatomic, strong) NSString *uploadId;
 
@@ -769,7 +744,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, assign) CSSPContainerCannedACL ACL;
 @property (nonatomic, strong) CSSPAccessControlPolicy *accessControlPolicy;
-@property (nonatomic, strong) NSString *container;
 
 @end
 
@@ -794,8 +768,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  * Object data.
  */
 @property (nonatomic, strong) id body;
-@property (nonatomic, strong) NSString *container;
-
 /**
  * Specifies caching behavior along the request/reply chain.
  */
@@ -923,7 +895,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @interface CSSPUploadPartRequest : CSSPRequest
 
 @property (nonatomic, strong) id body;
-@property (nonatomic, strong) NSString *container;
 
 /**
  * Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.

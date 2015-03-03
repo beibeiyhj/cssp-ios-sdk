@@ -17,19 +17,19 @@
 + (CSSPServiceConfiguration *)setupCredentialsProvider {
     CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:@"841bd27b5ecc48c18d828f6007bfc400" secretKey:@"6b7362b058a24000af041903b314795a"];
 
-    CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:nil];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/photos"];
+    
+    CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:endpoint];
     return configuration;
 }
 
 
 - (void)testHeadContainer {
     CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn"];
 
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration withEndpoint:endpoint];
+    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
 
     CSSPHeadContainerRequest *request = [CSSPHeadContainerRequest new];
-    request.container = @"photos";
 
     [[[cssp headContainer:request] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
@@ -41,13 +41,10 @@
 
 - (void)testListObjects {
     CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn"];
-    
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration withEndpoint:endpoint];
+    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
     
     
     CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
-    listObjectReq.container = @"photos";
     //listObjectReq.limit = [NSNumber numberWithInt:1];
     //listObjectReq.marker = @"eee";
     listObjectReq.prefix = @"animals/";
@@ -83,12 +80,9 @@
     NSData *testObjectData = [testObjectStr dataUsingEncoding:NSUTF8StringEncoding];
     
     CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn"];
-    
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration withEndpoint:endpoint];
+    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
     
     CSSPPutObjectRequest *putObjectRequest = [CSSPPutObjectRequest new];
-    putObjectRequest.container = @"photos";
     putObjectRequest.object = keyName;
     putObjectRequest.body = testObjectData;
     putObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:[testObjectData length]];
@@ -107,7 +101,6 @@
         XCTAssertNotNil(putObjectOutput.ETag);
         
         CSSPHeadObjectRequest *headObjectRequest = [CSSPHeadObjectRequest new];
-        headObjectRequest.container = @"photos";
         headObjectRequest.object = keyName;
         
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:15]];
@@ -120,7 +113,6 @@
         XCTAssertEqualObjects(userMetaData, headObjectOutput.metadata, @"headObjectOutput doesn't contains the metadata we expected");
         
         CSSPGetObjectRequest *getObjectRequest = [CSSPGetObjectRequest new];
-        getObjectRequest.container = @"photos";
         getObjectRequest.object = keyName;
         
         return [cssp getObject:getObjectRequest];
@@ -133,7 +125,6 @@
         XCTAssertEqualObjects(userMetaData, getObjectOutput.metadata, @"getObjectOutput doesn't contains the metadata we expected");
         
         CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
-        deleteObjectRequest.container = @"photos";
         deleteObjectRequest.object = keyName;
         
         return [cssp deleteObject:deleteObjectRequest];
@@ -149,9 +140,7 @@
 
 - (void)testMultipartUploadWithComplete {
     CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn"];
-    
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration withEndpoint:endpoint];
+    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
     
     NSString *keyName = @"testMultipartUploadKey";
     NSMutableString *testString = [NSMutableString string];
@@ -167,7 +156,6 @@
     NSUInteger partCount = ceil((double)[testData length] / transferManagerMinimumPartSize);
     
     CSSPCreateMultipartUploadRequest *createReq = [CSSPCreateMultipartUploadRequest new];
-    createReq.container = @"photos";
     createReq.object = keyName;
     
     [[[[[cssp createMultipartUpload:createReq] continueWithBlock:^id(BFTask *task) {
@@ -183,7 +171,6 @@
             NSData *partData = [testData subdataWithRange:NSMakeRange((i - 1) * transferManagerMinimumPartSize, dataLength)];
             
             CSSPUploadPartRequest *uploadPartRequest = [CSSPUploadPartRequest new];
-            uploadPartRequest.container = @"photos";
             uploadPartRequest.object = keyName;
             uploadPartRequest.partNumber = @(i);
             uploadPartRequest.body = partData;
@@ -205,10 +192,8 @@
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         
         CSSPCompleteMultipartUploadRequest *compReq = [CSSPCompleteMultipartUploadRequest new];
-        compReq.container = @"photos";
         compReq.object = keyName;
         compReq.uploadId = uploadId;
-        compReq.manifest = [NSString stringWithFormat:@"%@/%@/%@", compReq.container, compReq.object, compReq.uploadId];
         
         return [cssp completeMultipartUpload:compReq];
     }] continueWithBlock:^id(BFTask *task) {
@@ -225,7 +210,6 @@
     
     
     CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
-    listObjectReq.container = @"photos";
     listObjectReq.prefix = [NSString stringWithFormat:@"%@/%@", keyName, uploadId];
     
     [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
@@ -246,7 +230,6 @@
     }] waitUntilFinished];
     
     CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
-    deleteObjectRequest.container = @"photos";
     deleteObjectRequest.object = keyName;
     
     [[[cssp deleteObject:deleteObjectRequest] continueWithBlock:^id(BFTask *task) {

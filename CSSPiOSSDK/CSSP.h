@@ -43,8 +43,7 @@
 
 @property (nonatomic, strong, readonly) CSSPServiceConfiguration *configuration;
 
-- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration
-                         withEndpoint:(CSSPEndpoint *)endpoint;
+- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
 
 - (BFTask *)abortMultipartUpload:(CSSPAbortMultipartUploadRequest *)request;
 
