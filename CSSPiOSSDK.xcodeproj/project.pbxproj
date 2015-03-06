@@ -76,6 +76,7 @@
 		15501C0A1A768BB40040E0FE /* CSSP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSSP.m; sourceTree = "<group>"; };
 		15501C101A768BB40040E0FE /* CSSPiOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSSPiOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C161A768BB40040E0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		157643D71AA94C2B00E307F6 /* CSSPiOSSDKTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CSSPiOSSDKTests-Prefix.pch"; sourceTree = "<group>"; };
 		157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cssp-2015-02-09.json"; sourceTree = "<group>"; };
 		157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPTest.m; sourceTree = "<group>"; };
 		159B4B681A83BC410064DCB0 /* CSSPURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPURLSessionManager.h; sourceTree = "<group>"; };
@@ -214,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				15501C161A768BB40040E0FE /* Info.plist */,
+				157643D71AA94C2B00E307F6 /* CSSPiOSSDKTests-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
