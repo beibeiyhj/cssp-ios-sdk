@@ -1719,7 +1719,7 @@
                 "ContentMD5":{
                     "shape":"ContentMD5",
                     "location":"header",
-                    "locationName":"Content-MD5"
+                    "locationName":"ETag"
                 },
                 "ContentType":{
                     "shape":"ContentType",

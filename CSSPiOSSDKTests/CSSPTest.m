@@ -9,6 +9,11 @@
 #import <XCTest/XCTest.h>
 #import "CSSP.h"
 
+#define CSSP_ACCESS_KEY @"4755ec75dbd74c909598d4ec59d3865a"
+#define CSSP_SECRET_KEY @"c755bacdc1ce4a8993430c150dc29517"
+
+#define CSSP_UPLOAD_URL @"http://speechplusios.hfdn.openstorage.cn/speechplussharecontainer"
+
 @interface CSSPTest :XCTestCase
 @end
 
@@ -86,6 +91,7 @@
     putObjectRequest.object = keyName;
     putObjectRequest.body = testObjectData;
     putObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:[testObjectData length]];
+    //putObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:1];
     putObjectRequest.contentType = @"video/mpeg";
     
     //Add User Metadata
@@ -238,5 +244,54 @@
         return nil;
     }] waitUntilFinished];
 }
+
+-(void)testcssp{
+    //    NSString *audioName = note.ttsAudioPath;
+    NSString *audioName = @"test.mp3";
+    //    NSString *audioPath = [NSHomeDirectory() stringByAppendingFormat:@"%@/%@", LOCAL_AUDIO_DIR, audioName];
+    //    NSData *testObjectData = [NSData dataWithContentsOfFile:audioPath];
+    NSData *testObjectData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp3"]];
+    
+    CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:CSSP_ACCESS_KEY secretKey:CSSP_SECRET_KEY];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:CSSP_UPLOAD_URL];
+    CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:endpoint];
+    
+    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
+    
+    CSSPPutObjectRequest *putObjectRequest = [CSSPPutObjectRequest new];
+    putObjectRequest.object = audioName;
+    putObjectRequest.body = testObjectData;
+    putObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:[testObjectData length]];
+    putObjectRequest.contentType = @"audio/mp3";
+    
+    //Add User Metadata
+    NSDictionary *userMetaData = @{@"lyric": @"按住我向左滑动可以迅速删除信息，试试看吧。",
+                                   @"vcnid": [NSString stringWithFormat:@"%d", 3]};
+    putObjectRequest.metadata = userMetaData;
+    
+//    [SPLog log:@"uploading.................."];
+    
+    [[[[cssp putObject:putObjectRequest] continueWithBlock:^id(BFTask *task) {
+//        [SPLog log:@"uploaded.................."];
+        
+        NSError *error = task.error;
+        if (error) {
+//            [SPLog log:@"%@", error.description];
+        }
+        
+        CSSPPutObjectOutput *putObjectOutput = task.result;
+        XCTAssertNotNil(putObjectOutput.ETag);
+
+//        [SPLog log:@"ETAG is %@.", putObjectOutput.ETag];
+        return nil;
+    }] continueWithBlock:^id(BFTask *task) {
+        NSError *error = task.error;
+        if (error) {
+//            [SPLog log:@"%@", error.description];
+        }
+        return nil;
+    }] waitUntilFinished];
+}
+
 
 @end
