@@ -55,17 +55,6 @@
             "output":{"shape":"DeleteObjectOutput"},
             "documentation":"Removes the null version (if there is one) of an object and inserts a delete marker, which becomes the latest version of the object. If there isn't a null version, Amazon S3 does not remove any objects."
         },
-        "DeleteObjects":{
-            "name":"DeleteObjects",
-            "http":{
-                "method":"POST",
-                "requestUri":""
-            },
-            "input":{"shape":"DeleteObjectsRequest"},
-            "output":{"shape":"DeleteObjectsOutput"},
-            "documentation":"This operation enables you to delete multiple objects from a Container using a single HTTP request. You may specify up to 1000 keys.",
-            "alias":"DeleteMultipleObjects"
-        },
         "GetContainerAcl":{
             "name":"GetContainerAcl",
             "http":{
@@ -93,31 +82,13 @@
                       ],
             "documentation":"Retrieves objects from Amazon S3."
         },
-        "GetObjectAcl":{
-            "name":"GetObjectAcl",
-            "http":{
-                "method":"GET",
-                "requestUri":"/{Object+}?acl"
-            },
-            "input":{"shape":"GetObjectAclRequest"},
-            "output":{"shape":"GetObjectAclOutput"},
-            "errors":[
-                      {
-                      "shape":"NoSuchKey",
-                      "exception":true,
-                      "documentation":"The specified key does not exist."
-                      }
-                      ],
-            "documentation":"Returns the access control list (ACL) of an object.",
-            "documentationUrl":"http://docs.amazonwebservices.com/AmazonS3/latest/API/RESTObjectGETacl.html"
-        },
         "HeadContainer":{
             "name":"HeadContainer",
             "http":{
                 "method":"HEAD",
                 "requestUri":""
             },
-            "input":{"shape":"HeadContainerRequest"},
+            "output":{"shape":"HeadContainerOutput"},
             "errors":[
                       {
                       "shape":"NoSuchContainer",
@@ -233,115 +204,8 @@
             }
         },
         "AcceptRanges":{"type":"string"},
-        "AccessControlPolicy":{
-            "type":"structure",
-            "members":{
-                "Grants":{
-                    "shape":"Grants",
-                    "documentation":"A list of grants.",
-                    "locationName":"AccessControlList"
-                },
-                "Owner":{"shape":"Owner"}
-            }
-        },
-        "AllowedHeader":{"type":"string"},
-        "AllowedHeaders":{
-            "type":"list",
-            "member":{"shape":"AllowedHeader"},
-            "flattened":true
-        },
-        "AllowedMethod":{"type":"string"},
-        "AllowedMethods":{
-            "type":"list",
-            "member":{"shape":"AllowedMethod"},
-            "flattened":true
-        },
-        "AllowedOrigin":{"type":"string"},
-        "AllowedOrigins":{
-            "type":"list",
-            "member":{"shape":"AllowedOrigin"},
-            "flattened":true
-        },
         "Body":{"type":"blob"},
-        "Container":{
-            "type":"structure",
-            "members":{
-                "Name":{
-                    "shape":"ContainerName",
-                    "documentation":"The name of the Container."
-                },
-                "CreationDate":{
-                    "shape":"CreationDate",
-                    "documentation":"Date the Container was created."
-                }
-            }
-        },
-        "ContainerAlreadyExists":{
-            "type":"structure",
-            "members":{
-            },
-            "exception":true,
-            "documentation":"The requested Container name is not available. The Container namespace is shared by all users of the system. Please select a different name and try again."
-        },
-        "ContainerCannedACL":{
-            "type":"string",
-            "enum":[
-                    "private",
-                    "public-read",
-                    "public-read-write",
-                    "authenticated-read"
-                    ]
-        },
-        "ContainerLocationConstraint":{
-            "type":"string",
-            "enum":[
-                    "EU",
-                    "eu-west-1",
-                    "us-west-1",
-                    "us-west-2",
-                    "ap-southeast-1",
-                    "ap-southeast-2",
-                    "ap-northeast-1",
-                    "sa-east-1",
-                    "",
-                    "cn-north-1",
-                    "eu-central-1"
-                    ]
-        },
-        "ContainerLoggingStatus":{
-            "type":"structure",
-            "members":{
-                "LoggingEnabled":{"shape":"LoggingEnabled"}
-            }
-        },
-        "ContainerLogsPermission":{
-            "type":"string",
-            "enum":[
-                    "FULL_CONTROL",
-                    "READ",
-                    "WRITE"
-                    ]
-        },
-        "ContainerName":{"type":"string"},
-        "ContainerVersioningStatus":{
-            "type":"string",
-            "enum":[
-                    "Enabled",
-                    "Suspended"
-                    ]
-        },
-        "Containers":{
-            "type":"list",
-            "member":{
-                "shape":"Container",
-                "locationName":"Container"
-            }
-        },
-        "CommonPrefixList":{
-            "type":"list",
-            "member":{"shape":"CommonPrefix"},
-            "flattened":true
-        },
+        "BytesUsed":{"type":"integer"},
         "CompleteMultipartUploadOutput":{
             "type":"structure",
             "members":{
@@ -376,184 +240,6 @@
         "ContentLength":{"type":"integer"},
         "ContentMD5":{"type":"string"},
         "ContentType":{"type":"string"},
-        "CopyObjectOutput":{
-            "type":"structure",
-            "members":{
-                "CopyObjectResult":{"shape":"CopyObjectResult"},
-                "Expiration":{
-                    "shape":"Expiration",
-                    "location":"header",
-                    "locationName":"x-amz-expiration",
-                    "documentation":"If the object expiration is configured, the response includes this header."
-                }
-            },
-            "payload":"CopyObjectResult"
-        },
-        "CopyObjectRequest":{
-            "type":"structure",
-            "required":[
-                        "CopySource",
-                        "Object"
-                        ],
-            "members":{
-                "ACL":{
-                    "shape":"ObjectCannedACL",
-                    "location":"header",
-                    "locationName":"x-amz-acl",
-                    "documentation":"The canned ACL to apply to the object."
-                },
-                "CacheControl":{
-                    "shape":"CacheControl",
-                    "location":"header",
-                    "locationName":"Cache-Control",
-                    "documentation":"Specifies caching behavior along the request/reply chain."
-                },
-                "ContentDisposition":{
-                    "shape":"ContentDisposition",
-                    "location":"header",
-                    "locationName":"Content-Disposition",
-                    "documentation":"Specifies presentational information for the object."
-                },
-                "ContentEncoding":{
-                    "shape":"ContentEncoding",
-                    "location":"header",
-                    "locationName":"Content-Encoding",
-                    "documentation":"Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field."
-                },
-                "ContentLanguage":{
-                    "shape":"ContentLanguage",
-                    "location":"header",
-                    "locationName":"Content-Language",
-                    "documentation":"The language the content is in."
-                },
-                "ContentType":{
-                    "shape":"ContentType",
-                    "location":"header",
-                    "locationName":"Content-Type",
-                    "documentation":"A standard MIME type describing the format of the object data."
-                },
-                "CopySource":{
-                    "shape":"CopySource",
-                    "location":"header",
-                    "locationName":"x-amz-copy-source",
-                    "documentation":"The name of the source Container and key name of the source object, separated by a slash (/). Must be URL-encoded."
-                },
-                "Expires":{
-                    "shape":"Expires",
-                    "location":"header",
-                    "locationName":"Expires",
-                    "documentation":"The date and time at which the object is no longer cacheable."
-                },
-                "GrantFullControl":{
-                    "shape":"GrantFullControl",
-                    "location":"header",
-                    "locationName":"x-amz-grant-full-control",
-                    "documentation":"Gives the grantee READ, READ_ACP, and WRITE_ACP permissions on the object."
-                },
-                "GrantRead":{
-                    "shape":"GrantRead",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read",
-                    "documentation":"Allows grantee to read the object data and its metadata."
-                },
-                "GrantReadACP":{
-                    "shape":"GrantReadACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the object ACL."
-                },
-                "GrantWriteACP":{
-                    "shape":"GrantWriteACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable object."
-                },
-                "Object":{
-                    "shape":"ObjectKey",
-                    "location":"uri",
-                    "locationName":"Object"
-                },
-                "Metadata":{
-                    "shape":"Metadata",
-                    "location":"headers",
-                    "documentation":"A map of metadata to store with the object in S3.",
-                    "locationName":"x-amz-meta-"
-                },
-                "MetadataDirective":{
-                    "shape":"MetadataDirective",
-                    "location":"header",
-                    "locationName":"x-amz-metadata-directive",
-                    "documentation":"Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request."
-                },
-                "ServerSideEncryption":{
-                    "shape":"ServerSideEncryption",
-                    "location":"header",
-                    "locationName":"x-amz-server-side-encryption",
-                    "documentation":"The Server-side encryption algorithm used when storing this object in S3 (e.g., AES256, aws:kms)."
-                },
-                "StorageClass":{
-                    "shape":"StorageClass",
-                    "location":"header",
-                    "locationName":"x-amz-storage-class",
-                    "documentation":"The type of storage to use for the object. Defaults to 'STANDARD'."
-                },
-                "WebsiteRedirectLocation":{
-                    "shape":"WebsiteRedirectLocation",
-                    "location":"header",
-                    "locationName":"x-amz-website-redirect-location",
-                    "documentation":"If the Container is configured as a website, redirects requests for this object to another object in the same Container or to an external URL. Amazon S3 stores the value of this header in the object metadata."
-                }
-            }
-        },
-        "CopyObjectResult":{
-            "type":"structure",
-            "members":{
-                "ETag":{"shape":"ETag"},
-                "LastModified":{"shape":"LastModified"}
-            }
-        },
-        "CopyPartResult":{
-            "type":"structure",
-            "members":{
-                "ETag":{
-                    "shape":"ETag",
-                    "documentation":"Entity tag of the object."
-                },
-                "LastModified":{
-                    "shape":"LastModified",
-                    "documentation":"Date and time at which the object was uploaded."
-                }
-            }
-        },
-        "CopySource":{
-            "type":"string",
-            "pattern":"\\/.+\\/.+"
-        },
-        "CopySourceIfMatch":{"type":"string"},
-        "CopySourceIfModifiedSince":{"type":"timestamp"},
-        "CopySourceIfNoneMatch":{"type":"string"},
-        "CopySourceIfUnmodifiedSince":{"type":"timestamp"},
-        "CopySourceRange":{"type":"string"},
-        "CopySourceSSECustomerAlgorithm":{"type":"string"},
-        "CopySourceSSECustomerKey":{
-            "type":"string",
-            "sensitive":true
-        },
-        "CopySourceSSECustomerKeyMD5":{"type":"string"},
-        "CopySourceSSEKMSKeyId":{
-            "type":"string",
-            "sensitive":true
-        },
-        "CopySourceVersionId":{"type":"string"},
-        "CreateContainerConfiguration":{
-            "type":"structure",
-            "members":{
-                "LocationConstraint":{
-                    "shape":"ContainerLocationConstraint",
-                    "documentation":"Specifies the region where the Container will be created."
-                }
-            }
-        },
         "CreateMultipartUploadOutput":{
             "type":"structure",
             "members":{
@@ -578,74 +264,11 @@
                         "Object"
                         ],
             "members":{
-                "CacheControl":{
-                    "shape":"CacheControl",
-                    "location":"header",
-                    "locationName":"Cache-Control",
-                    "documentation":"Specifies caching behavior along the request/reply chain."
-                },
-                "ContentDisposition":{
-                    "shape":"ContentDisposition",
-                    "location":"header",
-                    "locationName":"Content-Disposition",
-                    "documentation":"Specifies presentational information for the object."
-                },
-                "ContentEncoding":{
-                    "shape":"ContentEncoding",
-                    "location":"header",
-                    "locationName":"Content-Encoding",
-                    "documentation":"Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field."
-                },
-                "ContentLanguage":{
-                    "shape":"ContentLanguage",
-                    "location":"header",
-                    "locationName":"Content-Language",
-                    "documentation":"The language the content is in."
-                },
-                "ContentType":{
-                    "shape":"ContentType",
-                    "location":"header",
-                    "locationName":"Content-Type",
-                    "documentation":"A standard MIME type describing the format of the object data."
-                },
-                "Expires":{
-                    "shape":"Expires",
-                    "location":"header",
-                    "locationName":"Expires",
-                    "documentation":"The date and time at which the object is no longer cacheable."
-                },
                 "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
                     "locationName":"Object"
-                },
-                "Metadata":{
-                    "shape":"Metadata",
-                    "location":"headers",
-                    "documentation":"A map of metadata to store with the object in S3.",
-                    "locationName":"x-amz-meta-"
-                }
-            }
-        },
-        "CreationDate":{"type":"timestamp"},
-        "Date":{
-            "type":"timestamp",
-            "timestampFormat":"iso8601"
-        },
-        "Days":{"type":"integer"},
-        "Delete":{
-            "type":"structure",
-            "required":["Objects"],
-            "members":{
-                "Objects":{
-                    "shape":"ObjectIdentifierList",
-                    "locationName":"Object"
-                },
-                "Quiet":{
-                    "shape":"Quiet",
-                    "documentation":"Element to enable quiet mode for the request. When you add this element, you must set its value to true."
-                }
-            }
+                }            }
         },
         "DeleteObjectOutput":{
             "type":"structure",
@@ -671,83 +294,9 @@
                 }
             }
         },
-        "DeleteObjectsOutput":{
-            "type":"structure",
-            "members":{
-                "Deleted":{"shape":"DeletedObjects"},
-                "Errors":{
-                    "shape":"Errors",
-                    "locationName":"Error"
-                }
-            }
-        },
-        "DeleteObjectsRequest":{
-            "type":"structure",
-            "required":[
-                        "Delete"
-                        ],
-            "members":{
-                "Delete":{
-                    "shape":"Delete",
-                    "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-                    "locationName":"Delete"
-                },
-                "MFA":{
-                    "shape":"MFA",
-                    "location":"header",
-                    "locationName":"x-amz-mfa",
-                    "documentation":"The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device."
-                }
-            },
-            "payload":"Delete"
-        },
-        "DeletedObject":{
-            "type":"structure",
-            "members":{
-                "Key":{"shape":"ObjectKey"},
-                "VersionId":{"shape":"ObjectVersionId"},
-                "DeleteMarker":{"shape":"DeleteMarker"},
-                "DeleteMarkerVersionId":{"shape":"DeleteMarkerVersionId"}
-            }
-        },
-        "DeletedObjects":{
-            "type":"list",
-            "member":{"shape":"DeletedObject"},
-            "flattened":true
-        },
         "Delimiter":{"type":"string"},
         "DisplayName":{"type":"string"},
         "ETag":{"type":"string"},
-        "EmailAddress":{"type":"string"},
-        "EncodingType":{
-            "type":"string",
-            "enum":["url"],
-            "documentation":"Requests Amazon S3 to encode the object keys in the response and specifies the encoding method to use. An object key may contain any Unicode character; however, XML 1.0 parser cannot parse some characters, such as characters with an ASCII value from 0 to 10. For characters that are not supported in XML 1.0, you can add this parameter to request that Amazon S3 encode the keys in the response."
-        },
-        "Error":{
-            "type":"structure",
-            "members":{
-                "Key":{"shape":"ObjectKey"},
-                "VersionId":{"shape":"ObjectVersionId"},
-                "Code":{"shape":"Code"},
-                "Message":{"shape":"Message"}
-            }
-        },
-        "ErrorDocument":{
-            "type":"structure",
-            "required":["Key"],
-            "members":{
-                "Key":{
-                    "shape":"ObjectKey",
-                    "documentation":"The object key name to use when a 4XX class error occurs."
-                }
-            }
-        },
-        "Errors":{
-            "type":"list",
-            "member":{"shape":"Error"},
-            "flattened":true
-        },
         "Expiration":{"type":"timestamp"},
         "ExpirationStatus":{
             "type":"string",
@@ -757,12 +306,6 @@
                     ]
         },
         "Expires":{"type":"timestamp"},
-        "ExposeHeader":{"type":"string"},
-        "ExposeHeaders":{
-            "type":"list",
-            "member":{"shape":"ExposeHeader"},
-            "flattened":true
-        },
         "GetContainerAclOutput":{
             "type":"structure",
             "members":{
@@ -787,28 +330,10 @@
                     "streaming":true,
                     "documentation":"Object data."
                 },
-                "DeleteMarker":{
-                    "shape":"DeleteMarker",
-                    "location":"header",
-                    "locationName":"x-object-delete-marker",
-                    "documentation":"Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
-                },
                 "AcceptRanges":{
                     "shape":"AcceptRanges",
                     "location":"header",
                     "locationName":"accept-ranges"
-                },
-                "Expiration":{
-                    "shape":"Expiration",
-                    "location":"header",
-                    "locationName":"x-object-expiration",
-                    "documentation":"If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
-                },
-                "Restore":{
-                    "shape":"Restore",
-                    "location":"header",
-                    "locationName":"x-object-restore",
-                    "documentation":"Provides information about object restoration operation and expiration time of the restored object copy."
                 },
                 "LastModified":{
                     "shape":"LastModified",
@@ -828,23 +353,11 @@
                     "locationName":"ETag",
                     "documentation":"An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
                 },
-                "MissingMeta":{
-                    "shape":"MissingMeta",
-                    "location":"header",
-                    "locationName":"x-object-missing-meta",
-                    "documentation":"This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
-                },
                 "ContentEncoding":{
                     "shape":"ContentEncoding",
                     "location":"header",
                     "locationName":"Content-Encoding",
                     "documentation":"Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field."
-                },
-                "ContentLanguage":{
-                    "shape":"ContentLanguage",
-                    "location":"header",
-                    "locationName":"Content-Language",
-                    "documentation":"The language the content is in."
                 },
                 "ContentType":{
                     "shape":"ContentType",
@@ -855,7 +368,7 @@
                 "Expires":{
                     "shape":"Expires",
                     "location":"header",
-                    "locationName":"Expires",
+                    "locationName":"X-Delete-At",
                     "documentation":"The date and time at which the object is no longer cacheable."
                 },
                 "Metadata":{
@@ -883,97 +396,39 @@
                     "location":"header",
                     "locationName":"Range",
                     "documentation":"Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35."
-                },
-                "ResponseCacheControl":{
-                    "shape":"ResponseCacheControl",
-                    "location":"querystring",
-                    "locationName":"response-cache-control",
-                    "documentation":"Sets the Cache-Control header of the response."
-                },
-                "ResponseContentDisposition":{
-                    "shape":"ResponseContentDisposition",
-                    "location":"querystring",
-                    "locationName":"response-content-disposition",
-                    "documentation":"Sets the Content-Disposition header of the response"
-                },
-                "ResponseContentEncoding":{
-                    "shape":"ResponseContentEncoding",
-                    "location":"querystring",
-                    "locationName":"response-content-encoding",
-                    "documentation":"Sets the Content-Encoding header of the response."
-                },
-                "ResponseContentLanguage":{
-                    "shape":"ResponseContentLanguage",
-                    "location":"querystring",
-                    "locationName":"response-content-language",
-                    "documentation":"Sets the Content-Language header of the response."
-                },
-                "ResponseContentType":{
-                    "shape":"ResponseContentType",
-                    "location":"querystring",
-                    "locationName":"response-content-type",
-                    "documentation":"Sets the Content-Type header of the response."
-                },
-                "ResponseExpires":{
-                    "shape":"ResponseExpires",
-                    "location":"querystring",
-                    "locationName":"response-expires",
-                    "documentation":"Sets the Expires header of the response."
                 }
             }
         },
-        "Grant":{
-            "type":"structure",
-            "members":{
-                "Grantee":{"shape":"Grantee"},
-                "Permission":{
-                    "shape":"Permission",
-                    "documentation":"Specifies the permission given to the grantee."
-                }
-            }
-        },
-        "GrantFullControl":{"type":"string"},
         "GrantRead":{"type":"string"},
-        "GrantReadACP":{"type":"string"},
-        "GrantWrite":{"type":"string"},
-        "GrantWriteACP":{"type":"string"},
-        "Grantee":{
+        
+        "HeadContainerOutput":{
             "type":"structure",
-            "required":["Type"],
             "members":{
-                "DisplayName":{
-                    "shape":"DisplayName",
-                    "documentation":"Screen name of the grantee."
+                "ObjectCount":{
+                    "shape":"ObjectCount",
+                    "location":"header",
+                    "locationName":"X-Container-Object-Count"
                 },
-                "EmailAddress":{
-                    "shape":"EmailAddress",
-                    "documentation":"Email address of the grantee."
+                "BytesUsed":{
+                    "shape":"BytesUsed",
+                    "location":"header",
+                    "locationName":"X-Container-Bytes-Used"
                 },
-                "ID":{
-                    "shape":"ID",
-                    "documentation":"The canonical user ID of the grantee."
+                "GrantRead":{
+                    "shape":"GrantRead",
+                    "location":"header",
+                    "locationName":"X-Container-Read",
+                    "documentation":"The ACL that grants read access"
                 },
-                "Type":{
-                    "shape":"Type",
-                    "documentation":"Type of grantee"
-                },
-                "URI":{
-                    "shape":"URI",
-                    "documentation":"URI of the grantee group."
+                "Metadata":{
+                    "shape":"Metadata",
+                    "location":"headers",
+                    "documentation":"A map of metadata to store with the object in S3.",
+                    "locationName":"X-Container-Meta-"
                 }
-            },
-            "xmlNamespace":{
-                "prefix":"xsi",
-                "uri":"http://www.w3.org/2001/XMLSchema-instance"
             }
         },
-        "Grants":{
-            "type":"list",
-            "member":{
-                "shape":"Grant",
-                "locationName":"Grant"
-            }
-        },
+
         "HeadContainerRequest":{
             "type":"structure",
             "members":{
@@ -982,29 +437,6 @@
         "HeadObjectOutput":{
             "type":"structure",
             "members":{
-                "DeleteMarker":{
-                    "shape":"DeleteMarker",
-                    "location":"header",
-                    "locationName":"x-object-delete-marker",
-                    "documentation":"Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response."
-                },
-                "AcceptRanges":{
-                    "shape":"AcceptRanges",
-                    "location":"header",
-                    "locationName":"accept-ranges"
-                },
-                "Expiration":{
-                    "shape":"Expiration",
-                    "location":"header",
-                    "locationName":"x-object-expiration",
-                    "documentation":"If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded."
-                },
-                "Restore":{
-                    "shape":"Restore",
-                    "location":"header",
-                    "locationName":"x-object-restore",
-                    "documentation":"Provides information about object restoration operation and expiration time of the restored object copy."
-                },
                 "LastModified":{
                     "shape":"LastModified",
                     "location":"header",
@@ -1023,12 +455,6 @@
                     "locationName":"ETag",
                     "documentation":"An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL"
                 },
-                "MissingMeta":{
-                    "shape":"MissingMeta",
-                    "location":"header",
-                    "locationName":"x-object-missing-meta",
-                    "documentation":"This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers."
-                },
                 "ContentDisposition":{
                     "shape":"ContentDisposition",
                     "location":"header",
@@ -1041,12 +467,6 @@
                     "locationName":"Content-Encoding",
                     "documentation":"Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field."
                 },
-                "ContentLanguage":{
-                    "shape":"ContentLanguage",
-                    "location":"header",
-                    "locationName":"Content-Language",
-                    "documentation":"The language the content is in."
-                },
                 "ContentType":{
                     "shape":"ContentType",
                     "location":"header",
@@ -1056,7 +476,7 @@
                 "Expires":{
                     "shape":"Expires",
                     "location":"header",
-                    "locationName":"Expires",
+                    "locationName":"X-Delete-At",
                     "documentation":"The date and time at which the object is no longer cacheable."
                 },
                 "Metadata":{
@@ -1077,53 +497,15 @@
                     "shape":"ObjectKey",
                     "location":"uri",
                     "locationName":"Object"
-                },
-                "Range":{
-                    "shape":"Range",
-                    "location":"header",
-                    "locationName":"Range",
-                    "documentation":"Downloads the specified range bytes of an object. For more information about the HTTP Range header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35."
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "location":"querystring",
-                    "locationName":"versionId",
-                    "documentation":"VersionId used to reference a specific version of the object."
                 }
             }
         },
         "HostName":{"type":"string"},
-        "HttpErrorCodeReturnedEquals":{"type":"string"},
-        "HttpRedirectCode":{"type":"string"},
         "ID":{"type":"string"},
         "IfMatch":{"type":"string"},
         "IfModifiedSince":{"type":"timestamp"},
         "IfNoneMatch":{"type":"string"},
         "IfUnmodifiedSince":{"type":"timestamp"},
-        "IndexDocument":{
-            "type":"structure",
-            "required":["Suffix"],
-            "members":{
-                "Suffix":{
-                    "shape":"Suffix",
-                    "documentation":"A suffix that is appended to a request that is for a directory on the website endpoint (e.g. if the suffix is index.html and you make a request to sampleContainer/images/ the data that is returned will be for the object with the key name images/index.html) The suffix must not be empty and must not include a slash character."
-                }
-            }
-        },
-        "Initiated":{"type":"timestamp"},
-        "Initiator":{
-            "type":"structure",
-            "members":{
-                "ID":{
-                    "shape":"ID",
-                    "documentation":"If the principal is an AWS account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value."
-                },
-                "DisplayName":{
-                    "shape":"DisplayName",
-                    "documentation":"Name of the Principal."
-                }
-            }
-        },
         "IsLatest":{"type":"boolean"},
         "IsTruncated":{"type":"boolean"},
         "KeyMarker":{"type":"string"},
@@ -1151,45 +533,6 @@
                     "location":"querystring",
                     "locationName":"prefix",
                     "documentation":"Lists in-progress uploads only for those keys that begin with the specified prefix."
-                }
-            }
-        },
-        "ListObjectVersionsOutput":{
-            "type":"structure",
-            "members":{
-                "IsTruncated":{
-                    "shape":"IsTruncated",
-                    "documentation":"A flag that indicates whether or not Amazon S3 returned all of the results that satisfied the search criteria. If your results were truncated, you can make a follow-up paginated request using the NextKeyMarker and NextVersionIdMarker response parameters as a starting place in another request to return the rest of the results."
-                },
-                "KeyMarker":{
-                    "shape":"KeyMarker",
-                    "documentation":"Marks the last Key returned in a truncated response."
-                },
-                "VersionIdMarker":{"shape":"VersionIdMarker"},
-                "NextKeyMarker":{
-                    "shape":"NextKeyMarker",
-                    "documentation":"Use this value for the key marker request parameter in a subsequent request."
-                },
-                "NextVersionIdMarker":{
-                    "shape":"NextVersionIdMarker",
-                    "documentation":"Use this value for the next version id marker parameter in a subsequent request."
-                },
-                "Versions":{
-                    "shape":"ObjectVersionList",
-                    "locationName":"Version"
-                },
-                "DeleteMarkers":{
-                    "shape":"DeleteMarkers",
-                    "locationName":"DeleteMarker"
-                },
-                "Name":{"shape":"ContainerName"},
-                "Prefix":{"shape":"Prefix"},
-                "Delimiter":{"shape":"Delimiter"},
-                "MaxKeys":{"shape":"MaxKeys"},
-                "CommonPrefixes":{"shape":"CommonPrefixList"},
-                "EncodingType":{
-                    "shape":"EncodingType",
-                    "documentation":"Encoding type used by Amazon S3 to encode object keys in the response."
                 }
             }
         },
@@ -1268,11 +611,6 @@
                 "Initiator":{
                     "shape":"Initiator",
                     "documentation":"Identifies who initiated the multipart upload."
-                },
-                "Owner":{"shape":"Owner"},
-                "StorageClass":{
-                    "shape":"StorageClass",
-                    "documentation":"The class of storage used to store the object."
                 }
             }
         },
@@ -1309,20 +647,6 @@
             }
         },
         "Location":{"type":"string"},
-        "LoggingEnabled":{
-            "type":"structure",
-            "members":{
-                "TargetContainer":{
-                    "shape":"TargetContainer",
-                    "documentation":"Specifies the Container where you want Amazon S3 to store server access logs. You can have your logs delivered to any Container that you own, including the same Container that is being logged. You can also configure multiple Containers to deliver their logs to the same target Container. In this case you should choose a different TargetPrefix for each source Container so that the delivered log files can be distinguished by key."
-                },
-                "TargetGrants":{"shape":"TargetGrants"},
-                "TargetPrefix":{
-                    "shape":"TargetPrefix",
-                    "documentation":"This element lets you specify a prefix for the keys that the log files will be stored under."
-                }
-            }
-        },
         "Manifest":{"type":"string"},
         "Marker":{"type":"string"},
         "MaxAgeSeconds":{"type":"integer"},
@@ -1335,53 +659,9 @@
             "key":{"shape":"MetadataKey"},
             "value":{"shape":"MetadataValue"}
         },
-        "MetadataDirective":{
-            "type":"string",
-            "enum":[
-                    "COPY",
-                    "REPLACE"
-                    ]
-        },
         "MetadataKey":{"type":"string"},
         "MetadataValue":{"type":"string"},
-        "MissingMeta":{"type":"integer"},
-        "MultipartUpload":{
-            "type":"structure",
-            "members":{
-                "UploadId":{
-                    "shape":"MultipartUploadId",
-                    "documentation":"Upload ID that identifies the multipart upload."
-                },
-                "Key":{
-                    "shape":"ObjectKey",
-                    "documentation":"Key of the object for which the multipart upload was initiated."
-                },
-                "Initiated":{
-                    "shape":"Initiated",
-                    "documentation":"Date and time at which the multipart upload was initiated."
-                },
-                "StorageClass":{
-                    "shape":"StorageClass",
-                    "documentation":"The class of storage used to store the object."
-                },
-                "Owner":{"shape":"Owner"},
-                "Initiator":{
-                    "shape":"Initiator",
-                    "documentation":"Identifies who initiated the multipart upload."
-                }
-            }
-        },
         "MultipartUploadId":{"type":"string"},
-        "MultipartUploadList":{
-            "type":"list",
-            "member":{"shape":"MultipartUpload"},
-            "flattened":true
-        },
-        "NextKeyMarker":{"type":"string"},
-        "NextMarker":{"type":"string"},
-        "NextPartNumberMarker":{"type":"integer"},
-        "NextUploadIdMarker":{"type":"string"},
-        "NextVersionIdMarker":{"type":"string"},
         "NoSuchContainer":{
             "type":"structure",
             "members":{
@@ -1403,38 +683,6 @@
             "exception":true,
             "documentation":"The specified multipart upload does not exist."
         },
-        "NoncurrentVersionExpiration":{
-            "type":"structure",
-            "members":{
-                "NoncurrentDays":{
-                    "shape":"Days",
-                    "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
-                }
-            },
-            "documentation":"Specifies when noncurrent object versions expire. Upon expiration, Amazon S3 permanently deletes the noncurrent object versions. You set this lifecycle configuration action on a Container that has versioning enabled (or suspended) to request that Amazon S3 delete noncurrent object versions at a specific period in the object's lifetime."
-        },
-        "NoncurrentVersionTransition":{
-            "type":"structure",
-            "members":{
-                "NoncurrentDays":{
-                    "shape":"Days",
-                    "documentation":"Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action. For information about the noncurrent days calculations, see <a href=\"/AmazonS3/latest/dev/s3-access-control.html\">How Amazon S3 Calculates When an Object Became Noncurrent</a> in the Amazon Simple Storage Service Developer Guide."
-                },
-                "StorageClass":{
-                    "shape":"TransitionStorageClass",
-                    "documentation":"The class of storage used to store the object."
-                }
-            },
-            "documentation":"Container for the transition rule that describes when noncurrent objects transition to the GLACIER storage class. If your Container is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the GLACIER storage class at a specific period in the object's lifetime."
-        },
-        "NotificationConfiguration":{
-            "type":"structure",
-            "members":{
-                "TopicConfiguration":{"shape":"TopicConfiguration"},
-                "QueueConfiguration":{"shape":"QueueConfiguration"},
-                "CloudFunctionConfiguration":{"shape":"CloudFunctionConfiguration"}
-            }
-        },
         "NotificationId":{"type":"string"},
         "Object":{
             "type":"structure",
@@ -1446,104 +694,12 @@
                 "content_type":{"shape":"ContentType"}
             }
         },
-        "ObjectAlreadyInActiveTierError":{
-            "type":"structure",
-            "members":{
-            },
-            "exception":true,
-            "documentation":"This operation is not allowed against this storage tier"
-        },
-        "ObjectCannedACL":{
-            "type":"string",
-            "enum":[
-                    "private",
-                    "public-read",
-                    "public-read-write",
-                    "authenticated-read",
-                    "Container-owner-read",
-                    "Container-owner-full-control"
-                    ]
-        },
-        "ObjectIdentifier":{
-            "type":"structure",
-            "required":["Key"],
-            "members":{
-                "Key":{
-                    "shape":"ObjectKey",
-                    "documentation":"Key name of the object to delete."
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "documentation":"VersionId for the specific version of the object to delete."
-                }
-            }
-        },
-        "ObjectIdentifierList":{
-            "type":"list",
-            "member":{"shape":"ObjectIdentifier"},
-            "flattened":true
-        },
+        "ObjectCount":{"type":"integer"},
         "ObjectKey":{"type":"string"},
         "ObjectList":{
             "type":"list",
             "member":{"shape":"Object"},
             "flattened":true
-        },
-        "ObjectNotInActiveTierError":{
-            "type":"structure",
-            "members":{
-            },
-            "exception":true,
-            "documentation":"The source object of the COPY operation is not in the active tier and is only stored in Amazon Glacier."
-        },
-        "ObjectStorageClass":{
-            "type":"string",
-            "enum":[
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY",
-                    "GLACIER"
-                    ]
-        },
-        "ObjectVersion":{
-            "type":"structure",
-            "members":{
-                "ETag":{"shape":"ETag"},
-                "Size":{
-                    "shape":"Size",
-                    "documentation":"Size in bytes of the object."
-                },
-                "StorageClass":{
-                    "shape":"ObjectVersionStorageClass",
-                    "documentation":"The class of storage used to store the object."
-                },
-                "Key":{
-                    "shape":"ObjectKey",
-                    "documentation":"The object key."
-                },
-                "VersionId":{
-                    "shape":"ObjectVersionId",
-                    "documentation":"Version ID of an object."
-                },
-                "IsLatest":{
-                    "shape":"IsLatest",
-                    "documentation":"Specifies whether the object is (true) or is not (false) the latest version of an object."
-                },
-                "LastModified":{
-                    "shape":"LastModified",
-                    "documentation":"Date and time the object was last modified."
-                },
-                "Owner":{"shape":"Owner"}
-            }
-        },
-        "ObjectVersionId":{"type":"string"},
-        "ObjectVersionList":{
-            "type":"list",
-            "member":{"shape":"ObjectVersion"},
-            "flattened":true
-        },
-        "ObjectVersionStorageClass":{
-            "type":"string",
-            "enum":["STANDARD"]
         },
         "Owner":{
             "type":"structure",
@@ -1587,16 +743,6 @@
                     "ContainerOwner"
                     ]
         },
-        "Permission":{
-            "type":"string",
-            "enum":[
-                    "FULL_CONTROL",
-                    "WRITE",
-                    "WRITE_ACP",
-                    "READ",
-                    "READ_ACP"
-                    ]
-        },
         "Policy":{"type":"string"},
         "Prefix":{"type":"string"},
         "Protocol":{
@@ -1609,51 +755,11 @@
         "PutContainerAclRequest":{
             "type":"structure",
             "members":{
-                "ACL":{
-                    "shape":"ContainerCannedACL",
-                    "location":"header",
-                    "locationName":"x-amz-acl",
-                    "documentation":"The canned ACL to apply to the Container."
-                },
-                "AccessControlPolicy":{
-                    "shape":"AccessControlPolicy",
-                    "xmlNamespace":{"uri":"http://s3.amazonaws.com/doc/2006-03-01/"},
-                    "locationName":"AccessControlPolicy"
-                },
-                "ContentMD5":{
-                    "shape":"ContentMD5",
-                    "location":"header",
-                    "locationName":"Content-MD5"
-                },
-                "GrantFullControl":{
-                    "shape":"GrantFullControl",
-                    "location":"header",
-                    "locationName":"x-amz-grant-full-control",
-                    "documentation":"Allows grantee the read, write, read ACP, and write ACP permissions on the Container."
-                },
                 "GrantRead":{
                     "shape":"GrantRead",
                     "location":"header",
                     "locationName":"x-amz-grant-read",
                     "documentation":"Allows grantee to list the objects in the Container."
-                },
-                "GrantReadACP":{
-                    "shape":"GrantReadACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-read-acp",
-                    "documentation":"Allows grantee to read the Container ACL."
-                },
-                "GrantWrite":{
-                    "shape":"GrantWrite",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write",
-                    "documentation":"Allows grantee to create, overwrite, and delete any object in the Container."
-                },
-                "GrantWriteACP":{
-                    "shape":"GrantWriteACP",
-                    "location":"header",
-                    "locationName":"x-amz-grant-write-acp",
-                    "documentation":"Allows grantee to write the ACL for the applicable Container."
                 }
             },
             "payload":"AccessControlPolicy"
@@ -1704,12 +810,6 @@
                     "locationName":"Content-Encoding",
                     "documentation":"Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field."
                 },
-                "ContentLanguage":{
-                    "shape":"ContentLanguage",
-                    "location":"header",
-                    "locationName":"Content-Language",
-                    "documentation":"The language the content is in."
-                },
                 "ContentLength":{
                     "shape":"ContentLength",
                     "location":"header",
@@ -1730,7 +830,7 @@
                 "Expires":{
                     "shape":"Expires",
                     "location":"header",
-                    "locationName":"Expires",
+                    "locationName":"X-Delete-At",
                     "documentation":"The date and time at which the object is no longer cacheable."
                 },
                 "Object":{
@@ -1747,117 +847,7 @@
             },
             "payload":"Body"
         },
-        "Quiet":{"type":"boolean"},
         "Range":{"type":"string"},
-        "Redirect":{
-            "type":"structure",
-            "members":{
-                "HostName":{
-                    "shape":"HostName",
-                    "documentation":"The host name to use in the redirect request."
-                },
-                "HttpRedirectCode":{
-                    "shape":"HttpRedirectCode",
-                    "documentation":"The HTTP redirect code to use on the response. Not required if one of the siblings is present."
-                },
-                "Protocol":{
-                    "shape":"Protocol",
-                    "documentation":"Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request."
-                },
-                "ReplaceKeyPrefixWith":{
-                    "shape":"ReplaceKeyPrefixWith",
-                    "documentation":"The object key prefix to use in the redirect request. For example, to redirect requests for all pages with prefix docs/ (objects in the docs/ folder) to documents/, you can set a condition block with KeyPrefixEquals set to docs/ and in the Redirect set ReplaceKeyPrefixWith to /documents. Not required if one of the siblings is present. Can be present only if ReplaceKeyWith is not provided."
-                },
-                "ReplaceKeyWith":{
-                    "shape":"ReplaceKeyWith",
-                    "documentation":"The specific object key to use in the redirect request. For example, redirect request to error.html. Not required if one of the sibling is present. Can be present only if ReplaceKeyPrefixWith is not provided."
-                }
-            }
-        },
-        "RedirectAllRequestsTo":{
-            "type":"structure",
-            "required":["HostName"],
-            "members":{
-                "HostName":{
-                    "shape":"HostName",
-                    "documentation":"Name of the host where requests will be redirected."
-                },
-                "Protocol":{
-                    "shape":"Protocol",
-                    "documentation":"Protocol to use (http, https) when redirecting requests. The default is the protocol that is used in the original request."
-                }
-            }
-        },
-        "ReplaceKeyPrefixWith":{"type":"string"},
-        "ReplaceKeyWith":{"type":"string"},
-        "RequestPaymentConfiguration":{
-            "type":"structure",
-            "required":["Payer"],
-            "members":{
-                "Payer":{
-                    "shape":"Payer",
-                    "documentation":"Specifies who pays for the download and request fees."
-                }
-            }
-        },
-        "ResponseCacheControl":{"type":"string"},
-        "ResponseContentDisposition":{"type":"string"},
-        "ResponseContentEncoding":{"type":"string"},
-        "ResponseContentLanguage":{"type":"string"},
-        "ResponseContentType":{"type":"string"},
-        "ResponseExpires":{"type":"timestamp"},
-        "Restore":{"type":"string"},
-        "RoutingRule":{
-            "type":"structure",
-            "required":["Redirect"],
-            "members":{
-                "Condition":{
-                    "shape":"Condition",
-                    "documentation":"A container for describing a condition that must be met for the specified redirect to apply. For example, 1. If request is for pages in the /docs folder, redirect to the /documents folder. 2. If request results in HTTP error 4xx, redirect request to another host where you might process the error."
-                },
-                "Redirect":{
-                    "shape":"Redirect",
-                    "documentation":"Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can can specify a different error code to return."
-                }
-            }
-        },
-        "RoutingRules":{
-            "type":"list",
-            "member":{
-                "shape":"RoutingRule",
-                "locationName":"RoutingRule"
-            }
-        },
-        "Rule":{
-            "type":"structure",
-            "required":[
-                        "Prefix",
-                        "Status"
-                        ],
-            "members":{
-                "Expiration":{"shape":"LifecycleExpiration"},
-                "ID":{
-                    "shape":"ID",
-                    "documentation":"Unique identifier for the rule. The value cannot be longer than 255 characters."
-                },
-                "Prefix":{
-                    "shape":"Prefix",
-                    "documentation":"Prefix identifying one or more objects to which the rule applies."
-                },
-                "Status":{
-                    "shape":"ExpirationStatus",
-                    "documentation":"If 'Enabled', the rule is currently being applied. If 'Disabled', the rule is not currently being applied."
-                },
-                "Transition":{"shape":"Transition"},
-                "NoncurrentVersionTransition":{"shape":"NoncurrentVersionTransition"},
-                "NoncurrentVersionExpiration":{"shape":"NoncurrentVersionExpiration"}
-            }
-        },
-        "Rules":{
-            "type":"list",
-            "member":{"shape":"Rule"},
-            "flattened":true
-        },
         "Subdir":{
             "type":"structure",
             "members":{
@@ -1870,13 +860,6 @@
             "flattened":true
         },
         "Size":{"type":"integer"},
-        "StorageClass":{
-            "type":"string",
-            "enum":[
-                    "STANDARD",
-                    "REDUCED_REDUNDANCY"
-                    ]
-        },
         "Suffix":{"type":"string"},
         "Tag":{
             "type":"structure",
@@ -1894,80 +877,6 @@
                     "documentation":"Value of the tag."
                 }
             }
-        },
-        "TagSet":{
-            "type":"list",
-            "member":{
-                "shape":"Tag",
-                "locationName":"Tag"
-            }
-        },
-        "Tagging":{
-            "type":"structure",
-            "required":["TagSet"],
-            "members":{
-                "TagSet":{"shape":"TagSet"}
-            }
-        },
-        "TargetContainer":{"type":"string"},
-        "TargetGrant":{
-            "type":"structure",
-            "members":{
-                "Grantee":{"shape":"Grantee"},
-                "Permission":{
-                    "shape":"ContainerLogsPermission",
-                    "documentation":"Logging permissions assigned to the Grantee for the Container."
-                }
-            }
-        },
-        "TargetGrants":{
-            "type":"list",
-            "member":{
-                "shape":"TargetGrant",
-                "locationName":"Grant"
-            }
-        },
-        "TargetPrefix":{"type":"string"},
-        "Topic":{"type":"string"},
-        "TopicConfiguration":{
-            "type":"structure",
-            "members":{
-                "Id":{"shape":"NotificationId"},
-                "Events":{
-                    "shape":"Events",
-                    "locationName":"Event"
-                },
-                "Event":{
-                    "shape":"Event",
-                    "deprecated":true,
-                    "documentation":"Container event for which to send notifications."
-                },
-                "Topic":{
-                    "shape":"Topic",
-                    "documentation":"Amazon SNS topic to which Amazon S3 will publish a message to report the specified events for the Container."
-                }
-            }
-        },
-        "Transition":{
-            "type":"structure",
-            "members":{
-                "Date":{
-                    "shape":"Date",
-                    "documentation":"Indicates at what date the object is to be moved or deleted. Should be in GMT ISO 8601 Format."
-                },
-                "Days":{
-                    "shape":"Days",
-                    "documentation":"Indicates the lifetime, in days, of the objects that are subject to the rule. The value must be a non-zero positive integer."
-                },
-                "StorageClass":{
-                    "shape":"TransitionStorageClass",
-                    "documentation":"The class of storage used to store the object."
-                }
-            }
-        },
-        "TransitionStorageClass":{
-            "type":"string",
-            "enum":["GLACIER"]
         },
         "Type":{
             "type":"string",

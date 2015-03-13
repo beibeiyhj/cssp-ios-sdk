@@ -9,132 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "CSSPNetworking.h"
 
-typedef NS_ENUM(NSInteger, CSSPErrorType) {
-    CSSPErrorUnknown,
-    CSSPErrorAccessDenied,
-    CSSPErrorExpiredToken,
-    CSSPErrorInvalidAccessKeyId,
-    CSSPErrorInvalidToken,
-    CSSPErrorSignatureDoesNotMatch,
-    CSSPErrorTokenRefreshRequired,
-    CSSPErrorContainerAlreadyExists,
-    CSSPErrorNoSuchContainer,
-    CSSPErrorNoSuchKey,
-    CSSPErrorNoSuchUpload,
-    CSSPErrorObjectAlreadyInActiveTier,
-    CSSPErrorObjectNotInActiveTier,
-};
-
-typedef NS_ENUM(NSInteger, CSSPContainerCannedACL) {
-    CSSPContainerCannedACLUnknown,
-    CSSPContainerCannedACLPrivate,
-    CSSPContainerCannedACLPublicRead,
-    CSSPContainerCannedACLPublicReadWrite,
-    CSSPContainerCannedACLAuthenticatedRead,
-};
-
-typedef NS_ENUM(NSInteger, CSSPContainerLocationConstraint) {
-    CSSPContainerLocationConstraintUnknown,
-    CSSPContainerLocationConstraintEU,
-    CSSPContainerLocationConstraintEUWest1,
-    CSSPContainerLocationConstraintUSWest1,
-    CSSPContainerLocationConstraintUSWest2,
-    CSSPContainerLocationConstraintAPSoutheast1,
-    CSSPContainerLocationConstraintAPSoutheast2,
-    CSSPContainerLocationConstraintAPNortheast1,
-    CSSPContainerLocationConstraintSAEast1,
-    CSSPContainerLocationConstraintBlank,
-    CSSPContainerLocationConstraintCNNorth1,
-    CSSPContainerLocationConstraintEUCentral1,
-};
-
-typedef NS_ENUM(NSInteger, CSSPContainerLogsPermission) {
-    CSSPContainerLogsPermissionUnknown,
-    CSSPContainerLogsPermissionFullControl,
-    CSSPContainerLogsPermissionRead,
-    CSSPContainerLogsPermissionWrite,
-};
-
-typedef NS_ENUM(NSInteger, CSSPContainerVersioningStatus) {
-    CSSPContainerVersioningStatusUnknown,
-    CSSPContainerVersioningStatusEnabled,
-    CSSPContainerVersioningStatusSuspended,
-};
 
 typedef NS_ENUM(NSInteger, CSSPEncodingType) {
     CSSPEncodingTypeUnknown,
     CSSPEncodingTypeURL,
 };
 
-typedef NS_ENUM(NSInteger, CSSPEvent) {
-    CSSPEventUnknown,
-    CSSPEventS3ReducedRedundancyLostObject,
-    CSSPEventS3ObjectCreatedPut,
-    CSSPEventS3ObjectCreatedPost,
-    CSSPEventS3ObjectCreatedCopy,
-    CSSPEventS3ObjectCreatedCompleteMultipartUpload,
-};
-
-typedef NS_ENUM(NSInteger, CSSPExpirationStatus) {
-    CSSPExpirationStatusUnknown,
-    CSSPExpirationStatusEnabled,
-    CSSPExpirationStatusDisabled,
-};
-
-typedef NS_ENUM(NSInteger, CSSPMFADelete) {
-    CSSPMFADeleteUnknown,
-    CSSPMFADeleteEnabled,
-    CSSPMFADeleteDisabled,
-};
-
-typedef NS_ENUM(NSInteger, CSSPMFADeleteStatus) {
-    CSSPMFADeleteStatusUnknown,
-    CSSPMFADeleteStatusEnabled,
-    CSSPMFADeleteStatusDisabled,
-};
-
-typedef NS_ENUM(NSInteger, CSSPMetadataDirective) {
-    CSSPMetadataDirectiveUnknown,
-    CSSPMetadataDirectiveCopy,
-    CSSPMetadataDirectiveReplace,
-};
-
-typedef NS_ENUM(NSInteger, CSSPObjectCannedACL) {
-    CSSPObjectCannedACLUnknown,
-    CSSPObjectCannedACLPrivate,
-    CSSPObjectCannedACLPublicRead,
-    CSSPObjectCannedACLPublicReadWrite,
-    CSSPObjectCannedACLAuthenticatedRead,
-    CSSPObjectCannedACLContainerOwnerRead,
-    CSSPObjectCannedACLContainerOwnerFullControl,
-};
-
-typedef NS_ENUM(NSInteger, CSSPObjectStorageClass) {
-    CSSPObjectStorageClassUnknown,
-    CSSPObjectStorageClassStandard,
-    CSSPObjectStorageClassReducedRedundancy,
-    CSSPObjectStorageClassGlacier,
-};
-
-typedef NS_ENUM(NSInteger, CSSPObjectVersionStorageClass) {
-    CSSPObjectVersionStorageClassUnknown,
-    CSSPObjectVersionStorageClassStandard,
-};
-
-typedef NS_ENUM(NSInteger, CSSPPayer) {
-    CSSPPayerUnknown,
-    CSSPPayerRequester,
-    CSSPPayerContainerOwner,
-};
-
-typedef NS_ENUM(NSInteger, CSSPPermission) {
-    CSSPPermissionUnknown,
-    CSSPPermissionFullControl,
-    CSSPPermissionWrite,
-    CSSPPermissionWriteAcp,
-    CSSPPermissionRead,
-    CSSPPermissionReadAcp,
-};
 
 typedef NS_ENUM(NSInteger, CSSPProtocol) {
     CSSPProtocolUnknown,
@@ -142,33 +22,8 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
     CSSPProtocolHTTPS,
 };
 
-typedef NS_ENUM(NSInteger, CSSPServerSideEncryption) {
-    CSSPServerSideEncryptionUnknown,
-    CSSPServerSideEncryptionAES256,
-};
-
-typedef NS_ENUM(NSInteger, CSSPStorageClass) {
-    CSSPStorageClassUnknown,
-    CSSPStorageClassStandard,
-    CSSPStorageClassReducedRedundancy,
-};
-
-typedef NS_ENUM(NSInteger, CSSPTransitionStorageClass) {
-    CSSPTransitionStorageClassUnknown,
-    CSSPTransitionStorageClassGlacier,
-};
-
-typedef NS_ENUM(NSInteger, CSSPType) {
-    CSSPTypeUnknown,
-    CSSPTypeCanonicalUser,
-    CSSPTypeAmazonCustomerByEmail,
-    CSSPTypeGroup,
-};
-
 
 @class CSSPAbortMultipartUploadRequest;
-@class CSSPAccessControlPolicy;
-@class CSSPCommonPrefix;
 @class CSSPCompleteMultipartUploadOutput;
 @class CSSPCompleteMultipartUploadRequest;
 @class CSSPCompletedPart;
@@ -178,25 +33,19 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @class CSSPDeleteObjectRequest;
 @class CSSPGetContainerAclOutput;
 @class CSSPGetContainerAclRequest;
-@class CSSPGetObjectAclOutput;
-@class CSSPGetObjectAclRequest;
 @class CSSPGetObjectOutput;
 @class CSSPGetObjectRequest;
-@class CSSPGrant;
-@class CSSPGrantee;
 @class CSSPHeadContainerRequest;
+@class CSSPHeadContainerOutput;
 @class CSSPHeadObjectOutput;
 @class CSSPHeadObjectRequest;
-@class CSSPInitiator;
 @class CSSPListMultipartUploadsOutput;
 @class CSSPListMultipartUploadsRequest;
 @class CSSPListObjectsOutput;
 @class CSSPListObjectsRequest;
 @class CSSPListPartsOutput;
 @class CSSPListPartsRequest;
-@class CSSPMultipartUpload;
 @class CSSPObject;
-@class CSSPOwner;
 @class CSSPPart;
 @class CSSPPutContainerAclRequest;
 @class CSSPPutObjectOutput;
@@ -206,67 +55,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @class CSSPReplicateObjectResult;
 @class CSSPUploadPartOutput;
 @class CSSPUploadPartRequest;
-
-
-@interface CSSPOwner :CSSPModel
-
-@property (nonatomic, strong) NSString *displayName;
-@property (nonatomic, strong) NSString *ID;
-
-@end
-
-@interface CSSPGrantee : CSSPModel
-
-
-/**
- * Screen name of the grantee.
- */
-@property (nonatomic, strong) NSString *displayName;
-
-/**
- * Email address of the grantee.
- */
-@property (nonatomic, strong) NSString *emailAddress;
-
-/**
- * The canonical user ID of the grantee.
- */
-@property (nonatomic, strong) NSString *ID;
-
-/**
- * Type of grantee
- */
-@property (nonatomic, assign) CSSPType type;
-
-/**
- * URI of the grantee group.
- */
-@property (nonatomic, strong) NSString *URI;
-
-@end
-
-@interface CSSPGrant : CSSPModel
-
-@property (nonatomic, strong) CSSPGrantee *grantee;
-
-/**
- * Specifies the permission given to the grantee.
- */
-@property (nonatomic, assign) CSSPPermission permission;
-
-@end
-
-
-@interface CSSPAccessControlPolicy : CSSPModel
-
-
-/**
- * A list of grants.
- */
-@property (nonatomic, strong) NSArray *grants;
-@property (nonatomic, strong) CSSPOwner *owner;
-
-@end
 
 
 @interface CSSPAbortMultipartUploadRequest : CSSPRequest
@@ -328,38 +116,8 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 @interface CSSPCreateMultipartUploadRequest : CSSPRequest
-/**
- * Specifies caching behavior along the request/reply chain.
- */
-@property (nonatomic, strong) NSString *cacheControl;
-
-/**
- * Specifies presentational information for the object.
- */
-@property (nonatomic, strong) NSString *contentDisposition;
-
-/**
- * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
- */
-@property (nonatomic, strong) NSString *contentEncoding;
-
-/**
- * The language the content is in.
- */
-@property (nonatomic, strong) NSString *contentLanguage;
-
-/**
- * A standard MIME type describing the format of the object data.
- */
-@property (nonatomic, strong) NSString *contentType;
-
-/**
- * The date and time at which the object is no longer cacheable.
- */
-@property (nonatomic, strong) NSDate *expires;
 
 @property (nonatomic, strong) NSString *object;
-
 
 @end
 
@@ -385,7 +143,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  * A list of grants.
  */
 @property (nonatomic, strong) NSArray *grants;
-@property (nonatomic, strong) CSSPOwner *owner;
 
 @end
 
@@ -419,11 +176,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, strong) NSString *contentEncoding;
 
 /**
- * The language the content is in.
- */
-@property (nonatomic, strong) NSString *contentLanguage;
-
-/**
  * Size of the body in bytes.
  */
 @property (nonatomic, strong) NSNumber *contentLength;
@@ -433,20 +185,11 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSString *contentType;
 
-/**
- * Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.
- */
-@property (nonatomic, strong) NSNumber *deleteMarker;
 
 /**
  * An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL
  */
 @property (nonatomic, strong) NSString *ETag;
-
-/**
- * If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
- */
-@property (nonatomic, strong) NSDate *expiration;
 
 /**
  * The date and time at which the object is no longer cacheable.
@@ -471,8 +214,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @property (nonatomic, strong) NSString *object;
 
-@property (nonatomic, strong) NSOutputStream * outputStream;
-
 /**
  * Sets the Expires header of the response.
  */
@@ -482,6 +223,15 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 
 @interface CSSPHeadContainerRequest : CSSPRequest
 
+
+@end
+
+@interface CSSPHeadContainerOutput : CSSPModel
+
+@property (nonatomic, strong) NSNumber *objectCount;
+@property (nonatomic, strong) NSNumber *bytesUsed;
+@property (nonatomic, strong) NSString *grantRead;
+@property (nonatomic, strong) NSDictionary *metadata;
 
 @end
 
@@ -505,11 +255,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @property (nonatomic, strong) NSString *contentEncoding;
 
 /**
- * The language the content is in.
- */
-@property (nonatomic, strong) NSString *contentLanguage;
-
-/**
  * Size of the body in bytes.
  */
 @property (nonatomic, strong) NSNumber *contentLength;
@@ -519,20 +264,12 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSString *contentType;
 
-/**
- * Specifies whether the object retrieved was (true) or was not (false) a Delete Marker. If false, this response header does not appear in the response.
- */
-@property (nonatomic, strong) NSNumber *deleteMarker;
 
 /**
  * An ETag is an opaque identifier assigned by a web server to a specific version of a resource found at a URL
  */
 @property (nonatomic, strong) NSString *ETag;
 
-/**
- * If the object expiration is configured (see PUT Container lifecycle), the response includes this header. It includes the expiry-date and rule-id key value pairs providing object expiration information. The value of the rule-id is URL encoded.
- */
-@property (nonatomic, strong) NSDate *expiration;
 
 /**
  * The date and time at which the object is no longer cacheable.
@@ -549,16 +286,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSDictionary *metadata;
 
-/**
- * This is set to the number of metadata entries not returned in x-amz-meta headers. This can happen if you create metadata using an API like SOAP that supports more flexible metadata than the REST API. For example, using SOAP, you can create metadata whose values are not legal HTTP headers.
- */
-@property (nonatomic, strong) NSNumber *missingMeta;
-
-/**
- * Provides information about object restoration operation and expiration time of the restored object copy.
- */
-@property (nonatomic, strong) NSString *restore;
-
 @end
 
 @interface CSSPHeadObjectRequest : CSSPRequest
@@ -568,42 +295,7 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 
-@interface CSSPCommonPrefix : CSSPModel
 
-@property (nonatomic, strong) NSString *prefix;
-
-@end
-
-@interface CSSPMultipartUpload : CSSPModel
-
-
-/**
- * Date and time at which the multipart upload was initiated.
- */
-@property (nonatomic, strong) NSDate *initiated;
-
-/**
- * Identifies who initiated the multipart upload.
- */
-@property (nonatomic, strong) CSSPInitiator *initiator;
-
-/**
- * Key of the object for which the multipart upload was initiated.
- */
-@property (nonatomic, strong) NSString *key;
-@property (nonatomic, strong) CSSPOwner *owner;
-
-/**
- * The class of storage used to store the object.
- */
-@property (nonatomic, assign) CSSPStorageClass storageClass;
-
-/**
- * Upload ID that identifies the multipart upload.
- */
-@property (nonatomic, strong) NSString *uploadId;
-
-@end
 
 @interface CSSPListMultipartUploadsOutput : CSSPModel
 
@@ -678,21 +370,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @end
 
 
-@interface CSSPInitiator : CSSPModel
-
-
-/**
- * Name of the Principal.
- */
-@property (nonatomic, strong) NSString *displayName;
-
-/**
- * If the principal is an CSSP account, it provides the Canonical User ID. If the principal is an IAM User, it provides a user ARN value.
- */
-@property (nonatomic, strong) NSString *ID;
-
-@end
-
 
 @interface CSSPListPartsOutput : CSSPModel
 
@@ -739,12 +416,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
 @interface CSSPPutContainerAclRequest : CSSPRequest
 
 
-/**
- * The canned ACL to apply to the container.
- */
-@property (nonatomic, assign) CSSPContainerCannedACL ACL;
-@property (nonatomic, strong) CSSPAccessControlPolicy *accessControlPolicy;
-
 @end
 
 @interface CSSPPutObjectOutput : CSSPModel
@@ -754,11 +425,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  * Entity tag for the uploaded object.
  */
 @property (nonatomic, strong) NSString *ETag;
-
-/**
- * If the object expiration is configured, this will contain the expiration date (expiry-date) and rule ID (rule-id). The value of rule-id is URL encoded.
- */
-@property (nonatomic, strong) NSDate *expiration;
 
 @end
 
@@ -782,11 +448,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
  */
 @property (nonatomic, strong) NSString *contentEncoding;
-
-/**
- * The language the content is in.
- */
-@property (nonatomic, strong) NSString *contentLanguage;
 
 /**
  * Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.
@@ -850,10 +511,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSString *contentEncoding;
 
-/**
- * The language the content is in.
- */
-@property (nonatomic, strong) NSString *contentLanguage;
 
 /**
  * A standard MIME type describing the format of the object data.
@@ -872,10 +529,6 @@ typedef NS_ENUM(NSInteger, CSSPType) {
  */
 @property (nonatomic, strong) NSDictionary *metadata;
 
-/**
- * Specifies whether the metadata is copied from the source object or replaced with metadata provided in the request.
- */
-@property (nonatomic, assign) CSSPMetadataDirective metadataDirective;
 @property (nonatomic, strong) NSString *replicateSource;
 
 @end

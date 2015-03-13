@@ -9,6 +9,22 @@
 /* Begin PBXBuildFile section */
 		1526514A1A8DE1980089761C /* cssp-2015-02-09.json in Resources */ = {isa = PBXBuildFile; fileRef = 157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */; };
 		1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1536203B1A835A4300C23D7E /* CSSPNetworking.m */; };
+		154478261AB2E22C003B58BF /* CSSP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSP.h */; };
+		154478271AB2E22C003B58BF /* CSSPModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15E4348A1A82165800218C8A /* CSSPModule.h */; };
+		154478281AB2E22C003B58BF /* CSSPCredentialsProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05051A84B8AA00DE3513 /* CSSPCredentialsProvider.h */; };
+		154478291AB2E22C003B58BF /* CSSPSignature.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05081A84BA4C00DE3513 /* CSSPSignature.h */; };
+		1544782A1AB2E22C003B58BF /* CSSPNetworking.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1536203A1A835A4300C23D7E /* CSSPNetworking.h */; };
+		1544782B1AB2E22C003B58BF /* CSSPURLSessionManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 159B4B681A83BC410064DCB0 /* CSSPURLSessionManager.h */; };
+		1544782C1AB2E22C003B58BF /* CSSPSerialization.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32921A85AFBD0014C99A /* CSSPSerialization.h */; };
+		1544782D1AB2E22C003B58BF /* CSSPURLRequestSerialization.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32951A85BC290014C99A /* CSSPURLRequestSerialization.h */; };
+		1544782E1AB2E22C003B58BF /* CSSPURLResponseSerialization.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A329C1A8606090014C99A /* CSSPURLResponseSerialization.h */; };
+		1544782F1AB2E22C003B58BF /* CSSPSynchronizedMutableDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 159B4B6C1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.h */; };
+		154478301AB2E22C003B58BF /* CSSPCategory.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D04FB1A84AECF00DE3513 /* CSSPCategory.h */; };
+		154478311AB2E22C003B58BF /* CSSPLogging.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D04FE1A84B37400DE3513 /* CSSPLogging.h */; };
+		154478321AB2E22C003B58BF /* CSSPModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05011A84B66400DE3513 /* CSSPModel.h */; };
+		154478331AB2E22C003B58BF /* CSSPXMLWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32991A8602020014C99A /* CSSPXMLWriter.h */; };
+		154478351AB2E2F9003B58BF /* Info.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C161A768BB40040E0FE /* Info.plist */; };
+		154478371AB2E5EA003B58BF /* CSSPiOSSDK.modulemap in Sources */ = {isa = PBXBuildFile; fileRef = 154478361AB2E5EA003B58BF /* CSSPiOSSDK.modulemap */; };
 		154A32941A85AFBD0014C99A /* CSSPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32931A85AFBD0014C99A /* CSSPSerialization.m */; };
 		154A32971A85BC290014C99A /* CSSPURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32961A85BC290014C99A /* CSSPURLRequestSerialization.m */; };
 		154A329B1A8602270014C99A /* CSSPXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A329A1A8602270014C99A /* CSSPXMLWriter.m */; };
@@ -39,12 +55,45 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		154478251AB2E1F1003B58BF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Headers;
+			dstSubfolderSpec = 16;
+			files = (
+				154478261AB2E22C003B58BF /* CSSP.h in CopyFiles */,
+				154478271AB2E22C003B58BF /* CSSPModule.h in CopyFiles */,
+				154478281AB2E22C003B58BF /* CSSPCredentialsProvider.h in CopyFiles */,
+				154478291AB2E22C003B58BF /* CSSPSignature.h in CopyFiles */,
+				1544782A1AB2E22C003B58BF /* CSSPNetworking.h in CopyFiles */,
+				1544782B1AB2E22C003B58BF /* CSSPURLSessionManager.h in CopyFiles */,
+				1544782C1AB2E22C003B58BF /* CSSPSerialization.h in CopyFiles */,
+				1544782D1AB2E22C003B58BF /* CSSPURLRequestSerialization.h in CopyFiles */,
+				1544782E1AB2E22C003B58BF /* CSSPURLResponseSerialization.h in CopyFiles */,
+				1544782F1AB2E22C003B58BF /* CSSPSynchronizedMutableDictionary.h in CopyFiles */,
+				154478301AB2E22C003B58BF /* CSSPCategory.h in CopyFiles */,
+				154478311AB2E22C003B58BF /* CSSPLogging.h in CopyFiles */,
+				154478321AB2E22C003B58BF /* CSSPModel.h in CopyFiles */,
+				154478331AB2E22C003B58BF /* CSSPXMLWriter.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		154478341AB2E284003B58BF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		15501C031A768BB40040E0FE /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
+			dstPath = Resources;
+			dstSubfolderSpec = 7;
 			files = (
+				154478351AB2E2F9003B58BF /* Info.plist in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -53,6 +102,7 @@
 /* Begin PBXFileReference section */
 		1536203A1A835A4300C23D7E /* CSSPNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPNetworking.h; sourceTree = "<group>"; };
 		1536203B1A835A4300C23D7E /* CSSPNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPNetworking.m; sourceTree = "<group>"; };
+		154478361AB2E5EA003B58BF /* CSSPiOSSDK.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; name = CSSPiOSSDK.modulemap; path = CSSPiOSSDK/CSSPiOSSDK.modulemap; sourceTree = "<group>"; };
 		154A32921A85AFBD0014C99A /* CSSPSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSerialization.h; sourceTree = "<group>"; };
 		154A32931A85AFBD0014C99A /* CSSPSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSerialization.m; sourceTree = "<group>"; };
 		154A32951A85BC290014C99A /* CSSPURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPURLRequestSerialization.h; sourceTree = "<group>"; };
@@ -168,6 +218,7 @@
 		15501BFC1A768BB40040E0FE = {
 			isa = PBXGroup;
 			children = (
+				154478361AB2E5EA003B58BF /* CSSPiOSSDK.modulemap */,
 				15501C071A768BB40040E0FE /* CSSPiOSSDK */,
 				15501C141A768BB40040E0FE /* CSSPiOSSDKTests */,
 				15501C061A768BB40040E0FE /* Products */,
@@ -264,6 +315,8 @@
 				15501C021A768BB40040E0FE /* Frameworks */,
 				15501C031A768BB40040E0FE /* CopyFiles */,
 				2EC7603FE35FE87B44B3FD0D /* Copy Pods Resources */,
+				154478251AB2E1F1003B58BF /* CopyFiles */,
+				154478341AB2E284003B58BF /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -376,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				154478371AB2E5EA003B58BF /* CSSPiOSSDK.modulemap in Sources */,
 				154A329E1A8606090014C99A /* CSSPURLResponseSerialization.m in Sources */,
 				154D05071A84B8AA00DE3513 /* CSSPCredentialsProvider.m in Sources */,
 				154D05031A84B66400DE3513 /* CSSPModel.m in Sources */,
@@ -490,6 +544,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F0942B16486258057AC02A7C /* Pods.debug.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
@@ -520,6 +575,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */;
 			buildSettings = {
+				DEFINES_MODULE = NO;
 				HEADER_SEARCH_PATHS = (
 					"\"${PODS_ROOT}/Headers/Public\"",
 					"\"${PODS_ROOT}/Headers/Public/Bolts\"",

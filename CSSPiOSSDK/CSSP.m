@@ -203,13 +203,13 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
                  operationName:@"GetObject"
                    outputClass:[CSSPGetObjectOutput class]];
 }
-- (BFTask *)headContainer:(CSSPHeadContainerRequest *)request {
-    return [self invokeRequest:request
+- (BFTask *)headContainer {
+    return [self invokeRequest:nil
                     HTTPMethod:CSSPHTTPMethodHEAD
                      URLString:@""
                   targetPrefix:@""
                  operationName:@"HeadContainer"
-                   outputClass:nil];
+                   outputClass:[CSSPHeadContainerOutput class]];
 }
 
 - (BFTask *)headObject:(CSSPHeadObjectRequest *)request {

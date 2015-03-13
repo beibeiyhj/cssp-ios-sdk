@@ -170,6 +170,11 @@ static NSDictionary *errorCodeDictionary = nil;
         //if status error indicates error, need to convert NSURL to NSData for error processing
         if ([data isKindOfClass:[NSURL class]]) {
             data = [NSData dataWithContentsOfFile:[(NSURL *)data path]];
+            
+            if (error && (*error == nil)) {
+                *error = [NSError errorWithDomain:CSSPGeneralErrorDomain code:response.statusCode userInfo:nil];
+                return resultDic;
+            }
         }
     }
     

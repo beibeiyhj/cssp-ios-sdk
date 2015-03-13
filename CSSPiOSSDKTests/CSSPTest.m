@@ -22,7 +22,7 @@
 + (CSSPServiceConfiguration *)setupCredentialsProvider {
     CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:@"841bd27b5ecc48c18d828f6007bfc400" secretKey:@"6b7362b058a24000af041903b314795a"];
 
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/photos"];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/111"];
     
     CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:endpoint];
     return configuration;
@@ -34,10 +34,14 @@
 
     CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
 
-    CSSPHeadContainerRequest *request = [CSSPHeadContainerRequest new];
-
-    [[[cssp headContainer:request] continueWithBlock:^id(BFTask *task) {
+    [[[cssp headContainer] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+        
+        CSSPHeadContainerOutput *headContanerOutput = task.result;
+        
+        XCTAssertNotNil(headContanerOutput.objectCount, @"Object count required.");
+        XCTAssertNotNil(headContanerOutput.bytesUsed, @"Object count required.");
+        
         return nil;
 
     }]waitUntilFinished];
@@ -241,54 +245,6 @@
     [[[cssp deleteObject:deleteObjectRequest] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPDeleteObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPDeleteObjectOutput class]),[task.result description]);
-        return nil;
-    }] waitUntilFinished];
-}
-
--(void)testcssp{
-    //    NSString *audioName = note.ttsAudioPath;
-    NSString *audioName = @"test.mp3";
-    //    NSString *audioPath = [NSHomeDirectory() stringByAppendingFormat:@"%@/%@", LOCAL_AUDIO_DIR, audioName];
-    //    NSData *testObjectData = [NSData dataWithContentsOfFile:audioPath];
-    NSData *testObjectData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"test" ofType:@"mp3"]];
-    
-    CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:CSSP_ACCESS_KEY secretKey:CSSP_SECRET_KEY];
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:CSSP_UPLOAD_URL];
-    CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:endpoint];
-    
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
-    
-    CSSPPutObjectRequest *putObjectRequest = [CSSPPutObjectRequest new];
-    putObjectRequest.object = audioName;
-    putObjectRequest.body = testObjectData;
-    putObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:[testObjectData length]];
-    putObjectRequest.contentType = @"audio/mp3";
-    
-    //Add User Metadata
-    NSDictionary *userMetaData = @{@"lyric": @"按住我向左滑动可以迅速删除信息，试试看吧。",
-                                   @"vcnid": [NSString stringWithFormat:@"%d", 3]};
-    putObjectRequest.metadata = userMetaData;
-    
-//    [SPLog log:@"uploading.................."];
-    
-    [[[[cssp putObject:putObjectRequest] continueWithBlock:^id(BFTask *task) {
-//        [SPLog log:@"uploaded.................."];
-        
-        NSError *error = task.error;
-        if (error) {
-//            [SPLog log:@"%@", error.description];
-        }
-        
-        CSSPPutObjectOutput *putObjectOutput = task.result;
-        XCTAssertNotNil(putObjectOutput.ETag);
-
-//        [SPLog log:@"ETAG is %@.", putObjectOutput.ETag];
-        return nil;
-    }] continueWithBlock:^id(BFTask *task) {
-        NSError *error = task.error;
-        if (error) {
-//            [SPLog log:@"%@", error.description];
-        }
         return nil;
     }] waitUntilFinished];
 }

@@ -55,7 +55,7 @@
 
 - (BFTask *) getObject:(CSSPGetObjectRequest *)request;
 
-- (BFTask *) headContainer:(CSSPHeadContainerRequest *)request;
+- (BFTask *) headContainer;
 
 - (BFTask *) headObject:(CSSPHeadObjectRequest *)request;
 
