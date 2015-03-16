@@ -9,10 +9,23 @@
 #import <XCTest/XCTest.h>
 #import "CSSP.h"
 
-@interface CSSPTest :XCTestCase
+@interface iOTest :XCTestCase
 @end
 
-@implementation CSSPTest
+@implementation iOTest
+
+- (void)setUp {
+    [super setUp];
+    // Put setup code here. This method is called before the invocation of each test method in the class.
+    CSSPServiceConfiguration *configuration = [iOTest setupCredentialsProvider];
+    [[CSSP initialize] initWithConfiguration:configuration];
+}
+
+- (void)tearDown {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [super tearDown];
+}
+
 
 + (CSSPServiceConfiguration *)setupCredentialsProvider {
     CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:@"841bd27b5ecc48c18d828f6007bfc400" secretKey:@"6b7362b058a24000af041903b314795a"];
@@ -169,8 +182,6 @@
 */
 
 -(void)testheadobject{
-    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
     
     NSString *keyName = @"ios-test-put-obj";
     
@@ -179,7 +190,7 @@
     headobjectRequest.object = keyName;
     
     
-    [[[cssp headObject:headobjectRequest] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] headObject:headobjectRequest] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPHeadObjectOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPHeadObjectOutput class]));
         

@@ -60,6 +60,7 @@
 		154478321AB2E22C003B58BF /* CSSPModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05011A84B66400DE3513 /* CSSPModel.h */; };
 		154478331AB2E22C003B58BF /* CSSPXMLWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32991A8602020014C99A /* CSSPXMLWriter.h */; };
 		154478351AB2E2F9003B58BF /* Info.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C161A768BB40040E0FE /* Info.plist */; };
+		1548A9661AB6C543006FA167 /* iOSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1548A9651AB6C543006FA167 /* iOSTest.m */; };
 		154A32941A85AFBD0014C99A /* CSSPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32931A85AFBD0014C99A /* CSSPSerialization.m */; };
 		154A32971A85BC290014C99A /* CSSPURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32961A85BC290014C99A /* CSSPURLRequestSerialization.m */; };
 		154A329B1A8602270014C99A /* CSSPXMLWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A329A1A8602270014C99A /* CSSPXMLWriter.m */; };
@@ -209,6 +210,7 @@
 		153F79BA1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+MTLInversionAdditions.h"; path = "Pods/Mantle/Mantle/NSValueTransformer+MTLInversionAdditions.h"; sourceTree = "<group>"; };
 		153F79BB1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; path = "Pods/Mantle/Mantle/NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
 		153F79CD1AB682FC000B9396 /* XMLDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = Pods/XMLDictionary/XMLDictionary/XMLDictionary.h; sourceTree = "<group>"; };
+		1548A9651AB6C543006FA167 /* iOSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSTest.m; sourceTree = "<group>"; };
 		154A32921A85AFBD0014C99A /* CSSPSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSerialization.h; sourceTree = "<group>"; };
 		154A32931A85AFBD0014C99A /* CSSPSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSerialization.m; sourceTree = "<group>"; };
 		154A32951A85BC290014C99A /* CSSPURLRequestSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPURLRequestSerialization.h; sourceTree = "<group>"; };
@@ -421,6 +423,7 @@
 		15501C141A768BB40040E0FE /* CSSPiOSSDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				1548A9651AB6C543006FA167 /* iOSTest.m */,
 				15501C151A768BB40040E0FE /* Supporting Files */,
 				157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */,
 			);
@@ -616,6 +619,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				15DE7E661A8C8A8400947888 /* CSSPTest.m in Sources */,
+				1548A9661AB6C543006FA167 /* iOSTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

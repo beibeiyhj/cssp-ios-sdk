@@ -7,12 +7,9 @@
 //
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
+
+
 #import "CSSP.h"
-
-#define CSSP_ACCESS_KEY @"4755ec75dbd74c909598d4ec59d3865a"
-#define CSSP_SECRET_KEY @"c755bacdc1ce4a8993430c150dc29517"
-
-#define CSSP_UPLOAD_URL @"http://speechplusios.hfdn.openstorage.cn/speechplussharecontainer"
 
 @interface CSSPTest :XCTestCase
 @end
@@ -43,12 +40,17 @@
 
 - (void)testHeadContainer {
     [[[[CSSP initialize] headContainer] continueWithBlock:^id(BFTask *task) {
-        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+        
+        XCTAssertNotNil(task.error, @"The request failed. error: [%@]", task.error);
+
+        if (task.error) {
+            NSLog(@"The request failed. error: [%@]", task.error);
+                        return nil;
+        }
         
         CSSPHeadContainerOutput *headContanerOutput = task.result;
         
-        XCTAssertNotNil(headContanerOutput.objectCount, @"Object count required.");
-        XCTAssertNotNil(headContanerOutput.bytesUsed, @"Object count required.");
+        NSLog(@"objectCount %@, bytesUsed %@", headContanerOutput.objectCount, headContanerOutput.bytesUsed);
         
         return nil;
 
