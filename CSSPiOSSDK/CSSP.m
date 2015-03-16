@@ -85,21 +85,27 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 
 @implementation CSSP
 
--(instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration {
-    if (self = [super init]) {
-        _configuration = configuration;
-        
-        CSSPSignatureSigner *signer = [CSSPSignatureSigner signerWithCredentialsProvider:configuration.credentialsProvider];
-        _configuration.baseURL = _configuration.endpoint.URL;
-        _configuration.requestInterceptors = @[[CSSPNetworkingRequestInterceptor new], signer];
-        
-        _configuration.headers = @{
-                                   @"Host" : _configuration.endpoint.hostName,
-                                   };
++(CSSP *)initialize {
+    static CSSP *shareObj = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareObj = [[self alloc] init];
+    });
+    return shareObj;
+}
+
+-(void)initWithConfiguration:(CSSPServiceConfiguration *)configuration {
+    _configuration = configuration;
     
-        _networking = [CSSPNetworking networking:_configuration];
-    }
-    return self;
+    CSSPSignatureSigner *signer = [CSSPSignatureSigner signerWithCredentialsProvider:configuration.credentialsProvider];
+    _configuration.baseURL = _configuration.endpoint.URL;
+    _configuration.requestInterceptors = @[[CSSPNetworkingRequestInterceptor new], signer];
+    
+    _configuration.headers = @{
+                               @"Host" : _configuration.endpoint.hostName,
+                               };
+    
+    _networking = [CSSPNetworking networking:_configuration];
 }
 
 

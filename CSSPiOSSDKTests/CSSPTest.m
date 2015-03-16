@@ -19,10 +19,22 @@
 
 @implementation CSSPTest
 
+- (void)setUp {
+    [super setUp];
+    // Put setup code here. This method is called before the invocation of each test method in the class.
+    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
+    [[CSSP initialize] initWithConfiguration:configuration];
+}
+
+- (void)tearDown {
+    // Put teardown code here. This method is called after the invocation of each test method in the class.
+    [super tearDown];
+}
+
 + (CSSPServiceConfiguration *)setupCredentialsProvider {
     CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:@"841bd27b5ecc48c18d828f6007bfc400" secretKey:@"6b7362b058a24000af041903b314795a"];
 
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/111"];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/photos"];
     
     CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:endpoint];
     return configuration;
@@ -30,11 +42,7 @@
 
 
 - (void)testHeadContainer {
-    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
-
-    [[[cssp headContainer] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] headContainer] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         
         CSSPHeadContainerOutput *headContanerOutput = task.result;
@@ -49,17 +57,13 @@
 }
 
 - (void)testListObjects {
-    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
-    
-    
     CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
     //listObjectReq.limit = [NSNumber numberWithInt:1];
     //listObjectReq.marker = @"eee";
     listObjectReq.prefix = @"animals/";
     listObjectReq.delimiter = @"/";
     
-    [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
         CSSPListObjectsOutput *listObjectsOutput = task.result;
@@ -76,7 +80,7 @@
 //    listObjectReq2.container = @"ios-test-listobjects-not-existed";
 //    
 //    
-//    [[[cssp listObjects:listObjectReq2] continueWithBlock:^id(BFTask *task) {
+//    [[[[CSSP initialize] listObjects:listObjectReq2] continueWithBlock:^id(BFTask *task) {
 //        XCTAssertTrue(task.error, @"Expected NoSuchBucket Error not thrown.");
 //        return nil;
 //    }] waitUntilFinished];
@@ -87,10 +91,7 @@
     NSString *testObjectStr = @"a test object string.";
     NSString *keyName = @"ios-test-put-get-and-delete-obj";
     NSData *testObjectData = [testObjectStr dataUsingEncoding:NSUTF8StringEncoding];
-    
-    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
-    
+ 
     CSSPPutObjectRequest *putObjectRequest = [CSSPPutObjectRequest new];
     putObjectRequest.object = keyName;
     putObjectRequest.body = testObjectData;
@@ -105,7 +106,7 @@
     
     putObjectRequest.metadata = userMetaData;
     
-    [[[[[[[cssp putObject:putObjectRequest] continueWithSuccessBlock:^id(BFTask *task) {
+    [[[[[[[[CSSP initialize] putObject:putObjectRequest] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertTrue([task.result isKindOfClass:[CSSPPutObjectOutput class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPPutObjectOutput class]), [task.result description]);
         CSSPPutObjectOutput *putObjectOutput = task.result;
         XCTAssertNotNil(putObjectOutput.ETag);
@@ -114,7 +115,7 @@
         headObjectRequest.object = keyName;
         
         [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:15]];
-        return [cssp headObject:headObjectRequest];
+        return [[CSSP initialize] headObject:headObjectRequest];
     }] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertTrue([task.result isKindOfClass:[CSSPHeadObjectOutput class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPHeadObjectOutput class]), [task.result description]);
         CSSPHeadObjectOutput *headObjectOutput = task.result;
@@ -125,7 +126,7 @@
         CSSPGetObjectRequest *getObjectRequest = [CSSPGetObjectRequest new];
         getObjectRequest.object = keyName;
         
-        return [cssp getObject:getObjectRequest];
+        return [[CSSP initialize] getObject:getObjectRequest];
     }] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertTrue([task.result isKindOfClass:[CSSPGetObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPGetObjectOutput class]),[task.result description]);
         CSSPGetObjectOutput *getObjectOutput = task.result;
@@ -137,7 +138,7 @@
         CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
         deleteObjectRequest.object = keyName;
         
-        return [cssp deleteObject:deleteObjectRequest];
+        return [[CSSP initialize] deleteObject:deleteObjectRequest];
     }] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertTrue([task.result isKindOfClass:[CSSPDeleteObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPDeleteObjectOutput class]),[task.result description]);
         return nil;
@@ -149,9 +150,7 @@
 
 
 - (void)testMultipartUploadWithComplete {
-    CSSPServiceConfiguration *configuration = [CSSPTest setupCredentialsProvider];
-    CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
-    
+  
     NSString *keyName = @"testMultipartUploadKey";
     NSMutableString *testString = [NSMutableString string];
     for (int32_t i = 0; i < 3000000; i++) {
@@ -168,7 +167,7 @@
     CSSPCreateMultipartUploadRequest *createReq = [CSSPCreateMultipartUploadRequest new];
     createReq.object = keyName;
     
-    [[[[[cssp createMultipartUpload:createReq] continueWithBlock:^id(BFTask *task) {
+    [[[[[[CSSP initialize] createMultipartUpload:createReq] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         CSSPCreateMultipartUploadOutput *output = task.result;
         XCTAssertTrue([task.result isKindOfClass:[CSSPCreateMultipartUploadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPCreateMultipartUploadOutput class]),[task.result description]);
@@ -187,7 +186,7 @@
             uploadPartRequest.contentLength = @(dataLength);
             uploadPartRequest.uploadId = uploadId;
             
-            [partUploadTasks addObject:[[cssp uploadPart:uploadPartRequest] continueWithSuccessBlock:^id(BFTask *task) {
+            [partUploadTasks addObject:[[[CSSP initialize] uploadPart:uploadPartRequest] continueWithSuccessBlock:^id(BFTask *task) {
                 XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
                 XCTAssertTrue([task.result isKindOfClass:[CSSPUploadPartOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPUploadPartOutput class]),[task.result description]);
                 CSSPUploadPartOutput *partOuput = task.result;
@@ -205,7 +204,7 @@
         compReq.object = keyName;
         compReq.uploadId = uploadId;
         
-        return [cssp completeMultipartUpload:compReq];
+        return [[CSSP initialize] completeMultipartUpload:compReq];
     }] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPCompleteMultipartUploadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPCompleteMultipartUploadOutput class]),[task.result description]);
@@ -219,16 +218,17 @@
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:20]];
     
     
-    CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
-    listObjectReq.prefix = [NSString stringWithFormat:@"%@/%@", keyName, uploadId];
+    CSSPListMultipartUploadsRequest *listObjectReq = [CSSPListMultipartUploadsRequest new];
+    listObjectReq.object = keyName;
+    listObjectReq.uploadId = uploadId;
     
-    [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] listMultipartUploads:listObjectReq] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
-        XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
-        CSSPListObjectsOutput *listObjectsOutput = task.result;
+        XCTAssertTrue([task.result isKindOfClass:[CSSPListMultipartUploadsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListMultipartUploadsOutput class]));
+        CSSPListMultipartUploadsOutput *listObjectsOutput = task.result;
         
         BOOL match = NO;
-        for (CSSPObject *object in listObjectsOutput.contents) {
+        for (CSSPObject *object in listObjectsOutput.uploads) {
             if ([object.name isEqualToString:keyName] && [object.etag isEqualToString:resultETag]) {
                 match = YES;
             }
@@ -242,7 +242,7 @@
     CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
     deleteObjectRequest.object = keyName;
     
-    [[[cssp deleteObject:deleteObjectRequest] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] deleteObject:deleteObjectRequest] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPDeleteObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPDeleteObjectOutput class]),[task.result description]);
         return nil;

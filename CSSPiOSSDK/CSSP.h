@@ -41,9 +41,14 @@
 
 @interface CSSP: NSObject
 
-@property (nonatomic, strong, readonly) CSSPServiceConfiguration *configuration;
+/**
+ *  初始化
+ *
+ *  @return Client对象
+ */
++ (CSSP *)initialize;
 
-- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
+- (void)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
 
 - (BFTask *)abortMultipartUpload:(CSSPAbortMultipartUploadRequest *)request;
 

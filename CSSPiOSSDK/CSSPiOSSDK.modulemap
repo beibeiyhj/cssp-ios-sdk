@@ -1,6 +1,0 @@
-framework module CSSPiOSSDK {
-	umbrella header "CSSP.h"
-
-	export *
-	module * { export * }
-}

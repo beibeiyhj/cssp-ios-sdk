@@ -251,7 +251,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"uploads" : @"Uploads",
+             @"uploads" : @"object",
              };
 }
 

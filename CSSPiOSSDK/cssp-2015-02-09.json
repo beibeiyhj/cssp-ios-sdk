@@ -514,8 +514,8 @@
         "ListMultipartUploadsOutput":{
             "type":"structure",
             "members":{
-                "Uploads":{
-                    "object":{"shape":"ObjectList"}
+                "object":{
+                    "shape":"ObjectList"
                 }
             }
         },

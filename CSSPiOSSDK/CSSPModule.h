@@ -124,8 +124,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 
 @interface CSSPDeleteObjectOutput : CSSPModel
 
-@property (nonatomic, strong) NSNumber *deleteMarker;
-
 @end
 
 
@@ -159,21 +157,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
  * Object data.
  */
 @property (nonatomic, strong) id body;
-
-/**
- * Specifies caching behavior along the request/reply chain.
- */
-@property (nonatomic, strong) NSString *cacheControl;
-
-/**
- * Specifies presentational information for the object.
- */
-@property (nonatomic, strong) NSString *contentDisposition;
-
-/**
- * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
- */
-@property (nonatomic, strong) NSString *contentEncoding;
 
 /**
  * Size of the body in bytes.
@@ -213,11 +196,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 @interface CSSPGetObjectRequest : CSSPRequest
 
 @property (nonatomic, strong) NSString *object;
-
-/**
- * Sets the Expires header of the response.
- */
-@property (nonatomic, strong) NSDate *responseExpires;
 
 @end
 
@@ -434,20 +412,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
  * Object data.
  */
 @property (nonatomic, strong) id body;
-/**
- * Specifies caching behavior along the request/reply chain.
- */
-@property (nonatomic, strong) NSString *cacheControl;
-
-/**
- * Specifies presentational information for the object.
- */
-@property (nonatomic, strong) NSString *contentDisposition;
-
-/**
- * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
- */
-@property (nonatomic, strong) NSString *contentEncoding;
 
 /**
  * Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.
@@ -460,10 +424,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
  */
 @property (nonatomic, strong) NSString *contentType;
 
-/**
- * The date and time at which the object is no longer cacheable.
- */
-@property (nonatomic, strong) NSDate *expires;
 
 @property (nonatomic, strong) NSString *object;
 
