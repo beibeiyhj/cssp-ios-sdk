@@ -334,7 +334,7 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
  * Specifies the key to start with when listing objects in a container.
  */
 @property (nonatomic, strong) NSString *marker;
-
+@property (nonatomic, strong) NSString *endMarker;
 /**
  * Sets the maximum number of objects returned in the response. The response might contain fewer objects but will never contain more.
  */

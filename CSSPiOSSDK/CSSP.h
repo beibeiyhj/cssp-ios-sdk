@@ -44,7 +44,7 @@
 /**
  *  初始化
  *
- *  @return Client对象
+ *  @return 对象
  */
 + (CSSP *)initialize;
 

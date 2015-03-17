@@ -334,6 +334,7 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
              @"marker" : @"Marker",
              @"limit" : @"MaxKeys",
              @"prefix" : @"Prefix",
+             @"endMarker":@"EndMarker"
              };
 }
 

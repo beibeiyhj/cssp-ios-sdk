@@ -574,6 +574,12 @@
                     "location":"querystring",
                     "locationName":"prefix",
                     "documentation":"Limits the response to keys that begin with the specified prefix."
+                },
+                "EndMarker":{
+                    "shape":"Marker",
+                    "location":"querystring",
+                    "locationName":"end_marker",
+                    "documentation":"Specifies the key to start with when listing objects in a Container."
                 }
             }
         },

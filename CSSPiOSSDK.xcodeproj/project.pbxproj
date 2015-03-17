@@ -60,6 +60,10 @@
 		154478321AB2E22C003B58BF /* CSSPModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05011A84B66400DE3513 /* CSSPModel.h */; };
 		154478331AB2E22C003B58BF /* CSSPXMLWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32991A8602020014C99A /* CSSPXMLWriter.h */; };
 		154478351AB2E2F9003B58BF /* Info.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C161A768BB40040E0FE /* Info.plist */; };
+		1545E0CF1AB80506007F3BA1 /* CSSPTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */; };
+		1545E0D41AB816E3007F3BA1 /* TMCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D11AB816D1007F3BA1 /* TMCache.h */; };
+		1545E0D51AB816E3007F3BA1 /* TMDiskCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */; };
+		1545E0D61AB816E3007F3BA1 /* TMMemoryCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */; };
 		1548A9661AB6C543006FA167 /* iOSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1548A9651AB6C543006FA167 /* iOSTest.m */; };
 		154A32941A85AFBD0014C99A /* CSSPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32931A85AFBD0014C99A /* CSSPSerialization.m */; };
 		154A32971A85BC290014C99A /* CSSPURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32961A85BC290014C99A /* CSSPURLRequestSerialization.m */; };
@@ -97,6 +101,9 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
+				1545E0D41AB816E3007F3BA1 /* TMCache.h in CopyFiles */,
+				1545E0D51AB816E3007F3BA1 /* TMDiskCache.h in CopyFiles */,
+				1545E0D61AB816E3007F3BA1 /* TMMemoryCache.h in CopyFiles */,
 				153F79CE1AB682FC000B9396 /* XMLDictionary.h in CopyFiles */,
 				153F79BC1AB68288000B9396 /* EXTKeyPathCoding.h in CopyFiles */,
 				153F79BD1AB68288000B9396 /* EXTRuntimeExtensions.h in CopyFiles */,
@@ -210,6 +217,11 @@
 		153F79BA1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+MTLInversionAdditions.h"; path = "Pods/Mantle/Mantle/NSValueTransformer+MTLInversionAdditions.h"; sourceTree = "<group>"; };
 		153F79BB1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; path = "Pods/Mantle/Mantle/NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
 		153F79CD1AB682FC000B9396 /* XMLDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = Pods/XMLDictionary/XMLDictionary/XMLDictionary.h; sourceTree = "<group>"; };
+		1545E0CD1AB80506007F3BA1 /* CSSPTransferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPTransferManager.h; sourceTree = "<group>"; };
+		1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPTransferManager.m; sourceTree = "<group>"; };
+		1545E0D11AB816D1007F3BA1 /* TMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMCache.h; path = Pods/TMCache/TMCache/TMCache.h; sourceTree = "<group>"; };
+		1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDiskCache.h; path = Pods/TMCache/TMCache/TMDiskCache.h; sourceTree = "<group>"; };
+		1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMMemoryCache.h; path = Pods/TMCache/TMCache/TMMemoryCache.h; sourceTree = "<group>"; };
 		1548A9651AB6C543006FA167 /* iOSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSTest.m; sourceTree = "<group>"; };
 		154A32921A85AFBD0014C99A /* CSSPSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSerialization.h; sourceTree = "<group>"; };
 		154A32931A85AFBD0014C99A /* CSSPSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSerialization.m; sourceTree = "<group>"; };
@@ -347,6 +359,16 @@
 			name = XMLDictionary;
 			sourceTree = "<group>";
 		};
+		1545E0D01AB816B4007F3BA1 /* TMCache */ = {
+			isa = PBXGroup;
+			children = (
+				1545E0D11AB816D1007F3BA1 /* TMCache.h */,
+				1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */,
+				1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */,
+			);
+			name = TMCache;
+			sourceTree = "<group>";
+		};
 		154A32901A85AF900014C99A /* Serialization */ = {
 			isa = PBXGroup;
 			children = (
@@ -383,6 +405,7 @@
 		15501BFC1A768BB40040E0FE = {
 			isa = PBXGroup;
 			children = (
+				1545E0D01AB816B4007F3BA1 /* TMCache */,
 				153F79AA1AB68248000B9396 /* XMLDictionary */,
 				153F79A91AB681B6000B9396 /* Mantle */,
 				153F79A81AB68188000B9396 /* Bolts */,
@@ -416,6 +439,8 @@
 				154A32901A85AF900014C99A /* Serialization */,
 				159B4B6B1A83BD5E0064DCB0 /* Utility */,
 				154A32981A8601DE0014C99A /* XMLWriter */,
+				1545E0CD1AB80506007F3BA1 /* CSSPTransferManager.h */,
+				1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */,
 			);
 			path = CSSPiOSSDK;
 			sourceTree = "<group>";
@@ -599,6 +624,7 @@
 			files = (
 				154A329E1A8606090014C99A /* CSSPURLResponseSerialization.m in Sources */,
 				154D05071A84B8AA00DE3513 /* CSSPCredentialsProvider.m in Sources */,
+				1545E0CF1AB80506007F3BA1 /* CSSPTransferManager.m in Sources */,
 				154D05031A84B66400DE3513 /* CSSPModel.m in Sources */,
 				154D05001A84B37400DE3513 /* CSSPLogging.m in Sources */,
 				1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */,
