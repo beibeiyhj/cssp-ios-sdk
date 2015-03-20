@@ -27,18 +27,14 @@
 1. 从我们的官网上下载SDK，并解压.
 2. 在Xcode中打开你的项目, 右键点击 **Frameworks**，选择**Add files to "\<project name\>"...**.
 3. 在Finder中查找CSSPiOSSDK.framework，并单击选择，点击**Add**.
-4. 按照以上步骤，添加以下第三方framework,这些第三方framework在目录third-party中.
-	* `Bolts.framework`
-    * `Mantle.framework`
-    * `XMLDictionary.framework`	
-5. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
+4. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
 
 <h2><span style="color:red">2.使用iOS SDK </span></h2>  
 ###2.1 初始化
-####2.1.1 在项目中`import cssp.h`  
+####2.1.1 在项目中`CSSPiOSSDKAPI.h`  
     **Frameworks**
     
-        #import <CSSPiOSSDK/CSSP.h>
+        #import <CSSPiOSSDK/CSSPiOSSDKAPI.h>
 
 ####2.1.2 配置用户认证信息以及Endpoint信息      
 	
@@ -60,14 +56,14 @@
 	* `CSSPServiceConfiguration`
 		* CSSP存储服务配置类 
 
-####2.1.3 初始化CSSP
+####2.1.3 初始化CSSPClient
 接口定义：   
  
-	- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
+	- (void)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
 
 示例  
 
-	CSSP *cssp = [[CSSP alloc] initWithConfiguration:configuration];
+	[[[CSSPClient initialize]] initWithConfiguration:configuration];
 
 ###2.2 Contaner存储服务   
 ####2.2.1 获取容器元数据
@@ -89,7 +85,7 @@
 
 示例   
 
-    [[[cssp headContainer] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] headContainer] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
 		XCTAssertTrue([task.result isKindOfClass:[CSSPHeadContainerOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPHeadContainerOutput class]),[task.result description]);
         return nil;
@@ -115,9 +111,9 @@
 		*	前缀查询，比如`prefix='a'`，表示查询以`a`开头的`Object`
 	*	`delimiter`
 		*	以`delimiter`分割的object名，比如object名为'abc-def-123'，如果`delimiter`设置为`-`,则返回的object名为'abc def 123'
-	*	`end_marker`
+	*	`endMarker`
 		*	`marker query`
-		*	比如`end_marker='object2`，表示查询`object2`之前的`Object`列表
+		*	比如`endMarker='object2`，表示查询`object2`之前的`Object`列表
 
 *	`Returns`:`BFTask`  
 	*	`error`,异常时，error不为空
@@ -140,7 +136,7 @@
     listObjectReq.prefix = @"animals/";
     listObjectReq.delimiter = @"/";
     
-    [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+    [[[[CSSP initialize] listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
         CSSPListObjectsOutput *listObjectsOutput = task.result;
@@ -229,7 +225,6 @@
 
 *	`Returns`:`BFTask`  
 	*	`error`,异常时，error不为空
-	*	`result`,成功时，返回`CSSPGetObjectOutput`实例
 
 
 ####2.3.5 分块上传与终止
@@ -312,7 +307,7 @@
     
 	    putObjectRequest.metadata = userMetaData;
 	    
-	    [[[[[[[cssp putObject:putObjectRequest] continueWithSuccessBlock:^id(BFTask *task) {
+	    [[[[[[[[CSSP initialize] putObject:putObjectRequest] continueWithSuccessBlock:^id(BFTask *task) {
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPPutObjectOutput class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPPutObjectOutput class]), [task.result description]);
 	        CSSPPutObjectOutput *putObjectOutput = task.result;
 	        XCTAssertNotNil(putObjectOutput.ETag);
@@ -321,7 +316,7 @@
 	        headObjectRequest.object = keyName;
 	        
 	        [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:15]];
-	        return [cssp headObject:headObjectRequest];
+	        return [[CSSP initialize] headObject:headObjectRequest];
 	    }] continueWithSuccessBlock:^id(BFTask *task) {
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPHeadObjectOutput class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPHeadObjectOutput class]), [task.result description]);
 	        CSSPHeadObjectOutput *headObjectOutput = task.result;
@@ -332,7 +327,7 @@
 	        CSSPGetObjectRequest *getObjectRequest = [CSSPGetObjectRequest new];
 	        getObjectRequest.object = keyName;
 	        
-	        return [cssp getObject:getObjectRequest];
+	        return [[CSSP initialize] getObject:getObjectRequest];
 	    }] continueWithSuccessBlock:^id(BFTask *task) {
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPGetObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPGetObjectOutput class]),[task.result description]);
 	        CSSPGetObjectOutput *getObjectOutput = task.result;
@@ -344,7 +339,7 @@
 	        CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
 	        deleteObjectRequest.object = keyName;
 	        
-	        return [cssp deleteObject:deleteObjectRequest];
+	        return [[CSSP initialize] deleteObject:deleteObjectRequest];
 	    }] continueWithSuccessBlock:^id(BFTask *task) {
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPDeleteObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPDeleteObjectOutput class]),[task.result description]);
 	        return nil;
@@ -372,7 +367,7 @@
 	    CSSPCreateMultipartUploadRequest *createReq = [CSSPCreateMultipartUploadRequest new];
 	    createReq.object = keyName;
 	    
-	    [[[[[cssp createMultipartUpload:createReq] continueWithBlock:^id(BFTask *task) {
+	    [[[[[[CSSP initialize] createMultipartUpload:createReq] continueWithBlock:^id(BFTask *task) {
 	        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
 	        CSSPCreateMultipartUploadOutput *output = task.result;
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPCreateMultipartUploadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPCreateMultipartUploadOutput class]),[task.result description]);
@@ -409,7 +404,7 @@
 	        compReq.object = keyName;
 	        compReq.uploadId = uploadId;
 	        
-	        return [cssp completeMultipartUpload:compReq];
+	        return [[CSSP initialize] completeMultipartUpload:compReq];
 	    }] continueWithBlock:^id(BFTask *task) {
 	        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPCompleteMultipartUploadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPCompleteMultipartUploadOutput class]),[task.result description]);
@@ -426,7 +421,7 @@
 	    CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
 	    listObjectReq.prefix = [NSString stringWithFormat:@"%@/%@", keyName, uploadId];
 	    
-	    [[[cssp listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
+	    [[[[CSSP initialize] listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
 	        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPListObjectsOutput class]],@"The response object is not a class of [%@]", NSStringFromClass([CSSPListObjectsOutput class]));
 	        CSSPListObjectsOutput *listObjectsOutput = task.result;
@@ -444,8 +439,164 @@
 	    CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
 	    deleteObjectRequest.object = keyName;
 	    
-	    [[[cssp deleteObject:deleteObjectRequest] continueWithBlock:^id(BFTask *task) {
+	    [[[[CSSP initialize] deleteObject:deleteObjectRequest] continueWithBlock:^id(BFTask *task) {
 	        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
 	        XCTAssertTrue([task.result isKindOfClass:[CSSPDeleteObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPDeleteObjectOutput class]),[task.result description]);
 	        return nil;
 	    }] waitUntilFinished];
+
+####2.3.6 数据传输接口####
+数据传输接口`CSSPTransferManager`基于上面的基础接口，实现数据上传进度、下载进度以及任务暂停、恢复与取消。
+
+#####2.3.6.1 初始化#####
+类似于基础接口的初始化,不再赘述。
+
+####2.3.6.2 数据上传#####
+对于数据上传，如果数据小于5MB，将采用PutObject方式上传数据，若数据大于5MB，则采用分块上传的方式。    
+
+在数据上传前，通过传入CSSPNetworkingUploadProgressBlock，可以获取当前传输的进度。
+
+示例如下：    
+	
+	CSSPTransferManagerUploadRequest *uploadRequest = [CSSPTransferManagerUploadRequest new];
+    uploadRequest.object = "TransferManagerUploadTestObject";
+    uploadRequest.body = testDataURL;
+    
+    
+    __block int64_t accumulatedUploadBytes = 0;
+    __block int64_t totalUploadedBytes = 0;
+    __block int64_t totalExpectedUploadBytes = 0;
+    uploadRequest.uploadProgress = ^(int64_t bytesSent, int64_t totalBytesSent, int64_t totalBytesExpectedToSend) {
+        
+        NSLog(@"Object:%@ bytesSent: %lld, totalBytesSent: %lld, totalBytesExpectedToSend: %lld",keyName,bytesSent,totalBytesSent,totalBytesExpectedToSend);
+        accumulatedUploadBytes += bytesSent;
+        totalUploadedBytes = totalBytesSent;
+        totalExpectedUploadBytes = totalBytesExpectedToSend;
+    };
+    
+    [[[[CSSPTransferManager initialize] upload:uploadRequest] continueWithBlock:^id(BFTask *task) {
+        return nil;
+    }] waitUntilFinished];
+
+
+#####2.3.6.3 数据下载 #####
+在数据下载前，通过传入CSSPNetworkingDownloadProgressBlock，可以获取当前传输的进度。
+示例如下：    
+
+		CSSPTransferManagerDownloadRequest *downloadRequest = [CSSPTransferManagerDownloadRequest new];
+	    downloadRequest.object = "TransferManagerDownloadTestObject";
+	    
+	    NSString *downloadFileName = "LocalFileName"
+	    downloadRequest.downloadingFileURL = [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:downloadFileName]];
+	    
+	    __block int64_t accumulatedDownloadBytes = 0;
+	    __block int64_t totalDownloadedBytes = 0;
+	    __block int64_t totalExpectedDownloadBytes = 0;
+	    downloadRequest.downloadProgress = ^(int64_t bytesWritten, int64_t totalBytesWritten, int64_t totalBytesExpectedToWrite) {
+	        accumulatedDownloadBytes += bytesWritten;
+	        totalDownloadedBytes = totalBytesWritten;
+	        totalExpectedDownloadBytes = totalBytesExpectedToWrite;
+	        NSLog(@"keyName:%@ bytesWritten: %lld, totalBytesWritten: %lld, totalBytesExpectedtoWrite: %lld",NSStringFromSelector(_cmd), bytesWritten,totalBytesWritten,totalBytesExpectedToWrite);
+	    };
+	    
+	    [[[[CSSPTransferManager initialize] download:downloadRequest] continueWithBlock:^id(BFTask *task) {
+	        return nil;
+	        
+	    }] waitUntilFinished];
+
+
+#####2.3.6.4 数据传输暂停与恢复 #####
+`CSSPTransferManager`支持数据上传或下载的暂停与恢复。
+在CSSP中，新上传的Object会替换之前同名的Object，所以上传任务暂停后恢复时，采用重新上传的策略；下载Object时，采用断点续传的方法，在任务恢复后，会从之前的断点处继续下载。
+
+现在用实例来说明。  
+上传Object
+
+	CSSPTransferManagerUploadRequest *uploadRequest = [CSSPTransferManagerUploadRequest new];
+	    uploadRequest.object = objectName;
+	    uploadRequest.body = testDataURL;
+
+	BFTask *uploadTaskSmall = [[[CSSPTransferManager initialize] upload:uploadRequest] continueWithBlock:^id(BFTask *task) {
+		// 如果任务被暂停，task.error返回Canneled异常
+		XCTAssertNotNil(task.error,@"Expect got 'Cancelled' Error, but got nil");
+        XCTAssertEqualObjects(CSSPTransferManagerErrorDomain, task.error.domain);
+        XCTAssertEqual(CSSPTransferManagerErrorPaused, task.error.code);
+	        return nil;
+	    }];
+
+    //wait a few moment and pause the task
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.3]];
+    [[[uploadRequest pause] continueWithBlock:^id(BFTask *task) {
+		///通知后台该请求暂停，如果成功，返回nil
+        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error); //should not return error if successfully paused.
+        return nil;
+    }] waitUntilFinished];
+	
+	///当暂停请求成功时，此时该请求的状态为Paused
+    XCTAssertEqual(uploadRequest.state, CSSPTransferManagerRequestStatePaused);
+    
+	/// 等待以确保upload函数的回调已返回
+    [uploadTaskSmall waitUntilFinished];
+    
+    //resume the upload
+    [[[[CSSPTransferManager initialize] upload:uploadRequest] continueWithBlock:^id(BFTask *task) {
+        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+        XCTAssertTrue([task.result isKindOfClass:[CSSPTransferManagerUploadOutput class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([NSURL class]),NSStringFromClass([task.result class]));
+        return nil;
+    }] waitUntilFinished];
+    
+    /// 当上传任务完成时，此时该请求的状态为Completed
+    XCTAssertEqual(uploadRequest.state, CSSPTransferManagerRequestStateCompleted);
+
+
+下载Object
+	
+    CSSPTransferManagerDownloadRequest *downloadRequest = [CSSPTransferManagerDownloadRequest new];
+    downloadRequest.object = objectName;
+    
+    NSString *downloadFileName = [NSString stringWithFormat:@"%@-downloaded-%@",NSStringFromSelector(_cmd),objectName];
+    downloadRequest.downloadingFileURL = [NSURL fileURLWithPath:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:downloadFileName]];
+
+	/// 默认开始状态为NotStarted
+    XCTAssertEqual(downloadRequest.state, CSSPTransferManagerRequestStateNotStarted);
+    
+    BFTask *pausedTask = [[[CSSPTransferManager initialize] download:downloadRequest] continueWithBlock:^id(BFTask *task) {
+		/// Object下载暂停时，task.error返回Cancel异常，在请求暂停后触发
+        XCTAssertNotNil(task.error,@"Expect got 'Cancelled' Error, but got nil");
+        XCTAssertNil(task.result, @"task result should be nil since it has already been cancelled");
+        XCTAssertEqualObjects(CSSPTransferManagerErrorDomain, task.error.domain);
+        XCTAssertEqual(CSSPTransferManagerErrorPaused, task.error.code);
+        return nil;
+    }];
+    
+	// 下载任务开始后，状态为Running
+    XCTAssertEqual(downloadRequest.state, CSSPTransferManagerRequestStateRunning);
+    
+    //wait a few seconds and then pause it.
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:2]];
+    [[[downloadRequest pause] continueWithBlock:^id(BFTask *task) {
+		// 暂停Object请求成功时，task.error返回nil
+        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error); 
+        return nil;
+    }] waitUntilFinished];
+    
+	// 任务暂停后，请求状态为Paused
+    XCTAssertEqual(downloadRequest.state, CSSPTransferManagerRequestStatePaused);
+	// 等待以确保download函数的回调已返回
+	[pausedTask waitUntilFinished]; 
+    
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
+	
+	// 恢复下载
+	[[[[CSSPTransferManager initialize] download:downloadRequest] continueWithBlock:^id(BFTask *task) {
+	        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
+	        XCTAssertTrue([task.result isKindOfClass:[CSSPTransferManagerDownloadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPTransferManagerDownloadOutput class]),NSStringFromClass([task.result class]));
+	        CSSPTransferManagerDownloadOutput *output = task.result;
+	        NSURL *receivedBodyURL = output.body;
+	        XCTAssertTrue([receivedBodyURL isKindOfClass:[NSURL class]], @"The response object is not a class of [%@], got: %@", NSStringFromClass([NSURL class]),NSStringFromClass([receivedBodyURL class]));
+	        
+	        return nil;
+	    }] waitUntilFinished];
+	
+	// 下载完成后，状态为Completed
+	XCTAssertEqual(downloadRequest.state, CSSPTransferManagerRequestStateCompleted);

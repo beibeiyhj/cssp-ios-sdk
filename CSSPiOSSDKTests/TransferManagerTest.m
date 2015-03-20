@@ -257,7 +257,7 @@ static NSString *baseName = nil;
     XCTAssertNil(error, @"The request failed. error: [%@]", error);
     unsigned long long fileSize = [attributes fileSize];
     
-    CSSPTransferManagerUploadRequest *uploadRequest = [CSSPTransferManagerUploadRequest new];\
+    CSSPTransferManagerUploadRequest *uploadRequest = [CSSPTransferManagerUploadRequest new];
     uploadRequest.object = keyName;
     uploadRequest.body = testDataURL;
     
@@ -655,8 +655,7 @@ static NSString *baseName = nil;
     
     XCTAssertEqual(downloadRequest.state, CSSPTransferManagerRequestStatePaused);
     
-    CSSPLogDebug(@"(S3 Transfer Manager) Download Task has been paused.");
-    NSLog(@"(S3 Transfer Manager) Download Task has been paused.");
+    CSSPLogDebug(@"(Transfer Manager) Download Task has been paused.");
     [pausedTaskOne waitUntilFinished]; //make sure callback has been called.
     
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
@@ -686,7 +685,7 @@ static NSString *baseName = nil;
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:5]];
     //resume the task
     NSLog(@"(Transfer Manager) Download Task has been resumed.");
-    CSSPLogDebug(@"(S3 Transfer Manager) Download Task has been resumed.");
+    CSSPLogDebug(@"(Transfer Manager) Download Task has been resumed.");
     [[[[CSSPTransferManager initialize] download:downloadRequest] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPTransferManagerDownloadOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPTransferManagerDownloadOutput class]),NSStringFromClass([task.result class]));
@@ -699,7 +698,7 @@ static NSString *baseName = nil;
     
     XCTAssertEqual(downloadRequest.state, CSSPTransferManagerRequestStateCompleted);
     
-    NSLog(@"(S3 Transfer Manager) Download Task has been finished.");
+    NSLog(@"(Transfer Manager) Download Task has been finished.");
 //    XCTAssertEqual(fileSize, accumulatedDownloadBytes, @"accumulatedDownloadBytes is not equal to total file size");
 //    XCTAssertEqual(fileSize, totalDownloadedBytes,@"total downloaded fileSize is not equal to uploaded fileSize");
 //    XCTAssertEqual(fileSize, totalExpectedDownloadBytes);
