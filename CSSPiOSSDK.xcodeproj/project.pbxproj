@@ -60,10 +60,10 @@
 		154478321AB2E22C003B58BF /* CSSPModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05011A84B66400DE3513 /* CSSPModel.h */; };
 		154478331AB2E22C003B58BF /* CSSPXMLWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32991A8602020014C99A /* CSSPXMLWriter.h */; };
 		154478351AB2E2F9003B58BF /* Info.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C161A768BB40040E0FE /* Info.plist */; };
-		1545E0CF1AB80506007F3BA1 /* CSSPTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */; };
 		1545E0D41AB816E3007F3BA1 /* TMCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D11AB816D1007F3BA1 /* TMCache.h */; };
 		1545E0D51AB816E3007F3BA1 /* TMDiskCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */; };
 		1545E0D61AB816E3007F3BA1 /* TMMemoryCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */; };
+		1545E0D71AB91A8B007F3BA1 /* CSSPTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */; };
 		1548A9661AB6C543006FA167 /* iOSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1548A9651AB6C543006FA167 /* iOSTest.m */; };
 		154A32941A85AFBD0014C99A /* CSSPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32931A85AFBD0014C99A /* CSSPSerialization.m */; };
 		154A32971A85BC290014C99A /* CSSPURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32961A85BC290014C99A /* CSSPURLRequestSerialization.m */; };
@@ -76,6 +76,7 @@
 		154D050A1A84BA4C00DE3513 /* CSSPSignature.m in Sources */ = {isa = PBXBuildFile; fileRef = 154D05091A84BA4C00DE3513 /* CSSPSignature.m */; };
 		15501C0B1A768BB40040E0FE /* CSSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSP.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
+		1561E4331AB95BF800C490C5 /* TransferManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1561E4321AB95BF800C490C5 /* TransferManagerTest.m */; };
 		159B4B6A1A83BC410064DCB0 /* CSSPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */; };
 		159B4B6E1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */; };
 		15DE7E661A8C8A8400947888 /* CSSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */; };
@@ -246,6 +247,8 @@
 		15501C0A1A768BB40040E0FE /* CSSP.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CSSP.m; sourceTree = "<group>"; };
 		15501C101A768BB40040E0FE /* CSSPiOSSDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CSSPiOSSDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		15501C161A768BB40040E0FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1561E4321AB95BF800C490C5 /* TransferManagerTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferManagerTest.m; sourceTree = "<group>"; };
+		1561E4341AB95C5B00C490C5 /* CSSPiOSSDKAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPiOSSDKAPI.h; sourceTree = "<group>"; };
 		157643D71AA94C2B00E307F6 /* CSSPiOSSDKTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CSSPiOSSDKTests-Prefix.pch"; sourceTree = "<group>"; };
 		157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cssp-2015-02-09.json"; sourceTree = "<group>"; };
 		157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPTest.m; sourceTree = "<group>"; };
@@ -441,6 +444,7 @@
 				154A32981A8601DE0014C99A /* XMLWriter */,
 				1545E0CD1AB80506007F3BA1 /* CSSPTransferManager.h */,
 				1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */,
+				1561E4341AB95C5B00C490C5 /* CSSPiOSSDKAPI.h */,
 			);
 			path = CSSPiOSSDK;
 			sourceTree = "<group>";
@@ -451,6 +455,7 @@
 				1548A9651AB6C543006FA167 /* iOSTest.m */,
 				15501C151A768BB40040E0FE /* Supporting Files */,
 				157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */,
+				1561E4321AB95BF800C490C5 /* TransferManagerTest.m */,
 			);
 			path = CSSPiOSSDKTests;
 			sourceTree = "<group>";
@@ -622,9 +627,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1545E0D71AB91A8B007F3BA1 /* CSSPTransferManager.m in Sources */,
 				154A329E1A8606090014C99A /* CSSPURLResponseSerialization.m in Sources */,
 				154D05071A84B8AA00DE3513 /* CSSPCredentialsProvider.m in Sources */,
-				1545E0CF1AB80506007F3BA1 /* CSSPTransferManager.m in Sources */,
 				154D05031A84B66400DE3513 /* CSSPModel.m in Sources */,
 				154D05001A84B37400DE3513 /* CSSPLogging.m in Sources */,
 				1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */,
@@ -646,6 +651,7 @@
 			files = (
 				15DE7E661A8C8A8400947888 /* CSSPTest.m in Sources */,
 				1548A9661AB6C543006FA167 /* iOSTest.m in Sources */,
+				1561E4331AB95BF800C490C5 /* TransferManagerTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,12 +750,14 @@
 					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
 					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
 					"\"${PODS_ROOT}/Headers/Public/XMLDictionary\"",
+					"\"${PODS_ROOT}/Headers/Public/TMCache\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-Bolts\"",
 					"-l\"Pods-Mantle\"",
+					"-l\"Pods-TMCache\"",
 					"-l\"Pods-XMLDictionary\"",
 					"-framework",
 					"\"Foundation\"",
@@ -775,12 +783,14 @@
 					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
 					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
 					"\"${PODS_ROOT}/Headers/Public/XMLDictionary\"",
+					"\"${PODS_ROOT}/Headers/Public/TMCache\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"Pods-Bolts\"",
 					"-l\"Pods-Mantle\"",
+					"-l\"Pods-TMCache\"",
 					"-l\"Pods-XMLDictionary\"",
 					"-framework",
 					"\"Foundation\"",
@@ -817,10 +827,7 @@
 				);
 				INFOPLIST_FILE = CSSPiOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",
@@ -848,10 +855,7 @@
 				);
 				INFOPLIST_FILE = CSSPiOSSDKTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
-				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-framework",

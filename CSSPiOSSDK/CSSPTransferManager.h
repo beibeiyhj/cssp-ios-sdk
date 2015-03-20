@@ -39,10 +39,10 @@ typedef void (^CSSPTransferManagerResumeAllBlock) (CSSPRequest *request);
 
 + (CSSPTransferManager *)initialize;
 
-- (instancetype)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
+- (void)initWithConfiguration:(CSSPServiceConfiguration *)configuration;
 
 /**
- *  Schedules a new transfer to upload data to Amazon S3.
+ *  Schedules a new transfer to upload data to CSSP
  *
  *  @param uploadRequest The upload request.
  *
@@ -51,7 +51,7 @@ typedef void (^CSSPTransferManagerResumeAllBlock) (CSSPRequest *request);
 - (BFTask *)upload:(CSSPTransferManagerUploadRequest *)uploadRequest;
 
 /**
- *  Schedules a new transfer to download data from Amazon S3 and save it to the specified file.
+ *  Schedules a new transfer to download data from CSSP and save it to the specified file.
  *
  *  @param downloadRequest The download request.
  *

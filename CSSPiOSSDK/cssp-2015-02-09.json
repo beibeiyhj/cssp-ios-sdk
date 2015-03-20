@@ -172,6 +172,16 @@
             "output":{"shape":"PutObjectOutput"},
             "documentation":"Adds an object to a Container."
         },
+        "ReplicateObject":{
+            "name":"ReplicateObject",
+            "http":{
+                "method":"PUT",
+                "requestUri":"/{Object+}"
+            },
+            "input":{"shape":"ReplicateObjectRequest"},
+            "output":{"shape":"ReplicateObjectOutput"},
+            "documentation":"Replicate an object from another Container to current Container."
+        },
         "UploadPart":{
             "name":"UploadPart",
             "http":{
@@ -240,6 +250,7 @@
         "ContentLength":{"type":"integer"},
         "ContentMD5":{"type":"string"},
         "ContentType":{"type":"string"},
+        "CopySource":{"type":"string"},
         "CreateMultipartUploadOutput":{
             "type":"structure",
             "members":{
@@ -428,7 +439,7 @@
                 }
             }
         },
-
+        
         "HeadContainerRequest":{
             "type":"structure",
             "members":{
@@ -854,6 +865,35 @@
             "payload":"Body"
         },
         "Range":{"type":"string"},
+        "ReplicateObjectOutput":{
+            "type":"structure",
+            "members":{
+                "ETag":{
+                    "shape":"ETag",
+                    "location":"header",
+                    "locationName":"ETag",
+                    "documentation":"Entity tag for the uploaded object."
+                }
+            }
+        },
+        "ReplicateObjectRequest":{
+            "type":"structure",
+            "required":[
+                        "Object"
+                        ],
+            "members":{
+                "Object":{
+                    "shape":"ObjectKey",
+                    "location":"uri",
+                    "locationName":"Object"
+                },
+                "CopySource":{
+                    "shape":"CopySource",
+                    "location":"header",
+                    "locationName":"X-Copy-From"
+                }
+            }
+        },
         "Subdir":{
             "type":"structure",
             "members":{

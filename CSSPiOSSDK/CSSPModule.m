@@ -460,71 +460,16 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"container" : @"Container",
-             @"cacheControl" : @"CacheControl",
-             @"contentDisposition" : @"ContentDisposition",
-             @"contentEncoding" : @"ContentEncoding",
              @"contentType" : @"ContentType",
-             @"expires" : @"Expires",
-             @"grantFullControl" : @"GrantFullControl",
-             @"grantRead" : @"GrantRead",
-             @"grantReadACP" : @"GrantReadACP",
-             @"grantWriteACP" : @"GrantWriteACP",
              @"object" : @"Object",
              @"metadata" : @"Metadata",
              @"replicateSource" : @"CopySource",
              };
 }
 
-+ (NSValueTransformer *)expiresJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-@end
-
-@implementation CSSPReplicateObjectResult
-
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
-             @"ETag" : @"ETag",
-             @"lastModified" : @"LastModified",
-             };
-}
-
-+ (NSValueTransformer *)lastModifiedJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
 @end
 
 @implementation CSSPReplicateObjectOutput
-
-+ (NSDictionary *)JSONKeyPathsByPropertyKey {
-    return @{
-             @"expiration" : @"Expiration",
-             @"replicateObjectResult" : @"CopyObjectResult",
-             };
-}
-
-+ (NSValueTransformer *)expirationJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
-}
-
-+ (NSValueTransformer *)replicateObjectResultJSONTransformer {
-    return [NSValueTransformer mtl_JSONDictionaryTransformerWithModelClass:[CSSPReplicateObjectResult class]];
-}
 
 @end
 

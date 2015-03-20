@@ -52,7 +52,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 @class CSSPPutObjectRequest;
 @class CSSPReplicateObjectOutput;
 @class CSSPReplicateObjectRequest;
-@class CSSPReplicateObjectResult;
 @class CSSPUploadPartOutput;
 @class CSSPUploadPartRequest;
 
@@ -196,6 +195,7 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 @interface CSSPGetObjectRequest : CSSPRequest
 
 @property (nonatomic, strong) NSString *object;
+@property (nonatomic, strong) NSString *range;
 
 @end
 
@@ -434,54 +434,21 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 
 @end
 
-@interface CSSPReplicateObjectResult : CSSPModel
 
-@property (nonatomic, strong) NSString *ETag;
-@property (nonatomic, strong) NSDate *lastModified;
+@interface CSSPReplicateObjectOutput : CSSPPutObjectOutput
 
-@end
-
-@interface CSSPReplicateObjectOutput : CSSPModel
-
-
-/**
- * If the object expiration is configured, the response includes this header.
- */
-@property (nonatomic, strong) NSDate *expiration;
-@property (nonatomic, strong) CSSPReplicateObjectResult *replicateObjectResult;
 
 @end
 
 @interface CSSPReplicateObjectRequest : CSSPRequest
-
-@property (nonatomic, strong) NSString *container;
-
-/**
- * Specifies caching behavior along the request/reply chain.
- */
-@property (nonatomic, strong) NSString *cacheControl;
-
-/**
- * Specifies presentational information for the object.
- */
-@property (nonatomic, strong) NSString *contentDisposition;
-
-/**
- * Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
- */
-@property (nonatomic, strong) NSString *contentEncoding;
-
-
 /**
  * A standard MIME type describing the format of the object data.
  */
 @property (nonatomic, strong) NSString *contentType;
 
 /**
- * The date and time at which the object is no longer cacheable.
+ *  拷贝的目标object名称
  */
-@property (nonatomic, strong) NSDate *expires;
-
 @property (nonatomic, strong) NSString *object;
 
 /**
@@ -489,6 +456,9 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
  */
 @property (nonatomic, strong) NSDictionary *metadata;
 
+/**
+ *  待拷贝的源数据，格式： ”／Container／Object“
+ */
 @property (nonatomic, strong) NSString *replicateSource;
 
 @end

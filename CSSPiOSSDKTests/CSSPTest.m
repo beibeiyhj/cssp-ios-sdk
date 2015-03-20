@@ -7,9 +7,7 @@
 //
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
-
-
-#import "CSSP.h"
+#import "CSSPiOSSDKAPI.h"
 
 @interface CSSPTest :XCTestCase
 @end
@@ -31,7 +29,7 @@
 + (CSSPServiceConfiguration *)setupCredentialsProvider {
     CSSPStaticCredentialsProvider *credentialsProvider = [CSSPStaticCredentialsProvider credentialsWithAccessKey:@"841bd27b5ecc48c18d828f6007bfc400" secretKey:@"6b7362b058a24000af041903b314795a"];
 
-    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/photos"];
+    CSSPEndpoint *endpoint = [CSSPEndpoint endpointWithURL:@"http://yyxia.hfdn.openstorage.cn/111"];
     
     CSSPServiceConfiguration *configuration = [CSSPServiceConfiguration configurationWithCredentialsProvider:credentialsProvider withEndpoint:endpoint];
     return configuration;
@@ -41,7 +39,7 @@
 - (void)testHeadContainer {
     [[[[CSSP initialize] headContainer] continueWithBlock:^id(BFTask *task) {
         
-        XCTAssertNotNil(task.error, @"The request failed. error: [%@]", task.error);
+        XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
 
         if (task.error) {
             NSLog(@"The request failed. error: [%@]", task.error);
@@ -91,7 +89,8 @@
 
 - (void)testPutHeadGetAndDeleteObject {
     NSString *testObjectStr = @"a test object string.";
-    NSString *keyName = @"ios-test-put-get-and-delete-obj";
+//    NSString *keyName = @"ios-test-put-get-and-delete-obj";
+    NSString *keyName = @"IOStest/ios-test-put-get-and-delete-obj";
     NSData *testObjectData = [testObjectStr dataUsingEncoding:NSUTF8StringEncoding];
  
     CSSPPutObjectRequest *putObjectRequest = [CSSPPutObjectRequest new];
@@ -139,7 +138,7 @@
         
         CSSPDeleteObjectRequest *deleteObjectRequest = [CSSPDeleteObjectRequest new];
         deleteObjectRequest.object = keyName;
-        
+  
         return [[CSSP initialize] deleteObject:deleteObjectRequest];
     }] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertTrue([task.result isKindOfClass:[CSSPDeleteObjectOutput class]],@"The response object is not a class of [%@], got: %@", NSStringFromClass([CSSPDeleteObjectOutput class]),[task.result description]);
@@ -251,5 +250,24 @@
     }] waitUntilFinished];
 }
 
+-(void) testReplicateObject {
+ 
+    CSSPReplicateObjectRequest *replicateObjectRequest = [CSSPReplicateObjectRequest new];
+    replicateObjectRequest.object = @"replicateObject-test.jpg";
+    replicateObjectRequest.replicateSource = @"/photos/face.jpg";
+    
+    [[[CSSP initialize] replicateObject:replicateObjectRequest] continueWithBlock:^id(BFTask *task) {
+        XCTAssertNil(task.error, @"The request failed, error: %@", task.error);
+        XCTAssertTrue([task.result isKindOfClass:[CSSPReplicateObjectOutput class]], @"the response object is not a class of [%@], got: %@", NSStringFromClass([CSSPReplicateObjectOutput class]), [task.result description]);
+        
+        CSSPReplicateObjectOutput *replicationObjectOutput = task.result;
+        
+        NSLog(@"ETag %@", replicationObjectOutput.ETag);
+        
+        return nil;
+        
+    }];
+    
+}
 
 @end

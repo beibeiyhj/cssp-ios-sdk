@@ -192,14 +192,14 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
                    outputClass:[CSSPDeleteObjectOutput class]];
 }
 
-//- (BFTask *)getContainerAcl:(CSSPGetContainerAclRequest *)request {
-//    return [self invokeRequest:request
-//                    HTTPMethod:CSSPHTTPMethodGET
-//                     URLString:@"?acl"
-//                  targetPrefix:@""
-//                 operationName:@"GetContainerAcl"
-//                   outputClass:[CSSPGetContainerAclOutput class]];
-//}
+- (BFTask *)getContainerAcl:(CSSPGetContainerAclRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:CSSPHTTPMethodHEAD
+                     URLString:@""
+                  targetPrefix:@""
+                 operationName:@"GetContainerAcl"
+                   outputClass:[CSSPGetContainerAclOutput class]];
+}
 
 - (BFTask *)getObject:(CSSPGetObjectRequest *)request {
     return [self invokeRequest:request
@@ -249,14 +249,14 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 }
 
 
-//- (BFTask *)putContainerAcl:(CSSPPutContainerAclRequest *)request {
-//    return [self invokeRequest:request
-//                    HTTPMethod:CSSPHTTPMethodPUT
-//                     URLString:@"?acl"
-//                  targetPrefix:@""
-//                 operationName:@"PutContainerAcl"
-//                   outputClass:nil];
-//}
+- (BFTask *)putContainerAcl:(CSSPPutContainerAclRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:CSSPHTTPMethodPOST
+                     URLString:@""
+                  targetPrefix:@""
+                 operationName:@"PutContainerAcl"
+                   outputClass:nil];
+}
 
 - (BFTask *)putObject:(CSSPPutObjectRequest *)request {
     return [self invokeRequest:request
@@ -267,14 +267,14 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
                    outputClass:[CSSPPutObjectOutput class]];
 }
 
-//- (BFTask *)replicateObject:(CSSPReplicateObjectRequest *)request {
-//    return [self invokeRequest:request
-//                    HTTPMethod:CSSPHTTPMethodPUT
-//                     URLString:@"/{Object+}"
-//                  targetPrefix:@""
-//                 operationName:@"ReplicateObject"
-//                   outputClass:[CSSPReplicateObjectOutput class]];
-//}
+- (BFTask *)replicateObject:(CSSPReplicateObjectRequest *)request {
+    return [self invokeRequest:request
+                    HTTPMethod:CSSPHTTPMethodPUT
+                     URLString:@"/{Object+}"
+                  targetPrefix:@""
+                 operationName:@"ReplicateObject"
+                   outputClass:[CSSPReplicateObjectOutput class]];
+}
 
 
 - (BFTask *)uploadPart:(CSSPUploadPartRequest *)request {
