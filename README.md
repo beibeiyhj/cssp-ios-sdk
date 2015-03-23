@@ -27,11 +27,7 @@
 1. 从我们的官网上下载SDK，并解压.
 2. 在Xcode中打开你的项目, 右键点击 **Frameworks**，选择**Add files to "\<project name\>"...**.
 3. 在Finder中查找CSSPiOSSDK.framework，并单击选择，点击**Add**.
-4. 按照以上步骤，添加以下第三方framework,这些第三方framework在目录third-party中.
-	* `Bolts.framework`
-    * `Mantle.framework`
-    * `XMLDictionary.framework`	
-5. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
+4. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
 
 <h2><span style="color:red">2.使用iOS SDK </span></h2>  
 ###2.1 初始化
