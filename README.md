@@ -27,11 +27,15 @@
 1. 从我们的官网上下载SDK，并解压.
 2. 在Xcode中打开你的项目, 右键点击 **Frameworks**，选择**Add files to "\<project name\>"...**.
 3. 在Finder中查找CSSPiOSSDK.framework，并单击选择，点击**Add**.
-4. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
+4. 按照以上步骤，添加以下第三方framework,这些第三方framework在目录third-party中.
+	* `Bolts.framework`
+    * `Mantle.framework`
+    * `XMLDictionary.framework`	
+5. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
 
 <h2><span style="color:red">2.使用iOS SDK </span></h2>  
 ###2.1 初始化
-####2.1.1 在项目中`CSSPiOSSDKAPI.h`  
+####2.1.1 在项目中`import cssp.h`  
     **Frameworks**
     
         #import <CSSPiOSSDK/CSSPiOSSDKAPI.h>
@@ -226,8 +230,23 @@
 *	`Returns`:`BFTask`  
 	*	`error`,异常时，error不为空
 
+####2.3.5 Object拷贝####
+从其他Contaner拷贝object到当前Container
+接口定义:
 
-####2.3.5 分块上传与终止
+	- (BFTask *) replicateObject:(CSSPReplicateObjectRequest *)request;
+
+*	`Parameters`：`CSSPReplicateObjectRequest`
+	*	`object`： object名
+	*	`replicateSource`:其他Container下的Object路径，格式：/OtherContainer/Objecy
+	*	`metadata`：Object元数据，为拷贝后的新的object设置metadata
+
+*	`Returns`:`BFTask`  
+	*	`error`,异常时，error不为空
+	*	`result`,成功时，返回`CSSPGetObjectOutput`实例
+		*   `ETag`:该object的MD5
+
+####2.3.6 分块上传与终止
 1. 创建分块上传，获取uploadID    
 接口定义：
 
