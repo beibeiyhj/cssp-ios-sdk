@@ -456,20 +456,26 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 @end
 
-@implementation CSSPReplicateObjectRequest
+@implementation CSSPReplicateObjectOutput
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"contentType" : @"ContentType",
-             @"object" : @"Object",
-             @"metadata" : @"Metadata",
-             @"replicateSource" : @"CopySource",
+             @"ETag" : @"ETag"
              };
 }
 
 @end
 
-@implementation CSSPReplicateObjectOutput
+@implementation CSSPReplicateObjectRequest
+
++ (NSDictionary *)JSONKeyPathsByPropertyKey {
+    return @{
+             @"object" : @"Object",
+             @"contentLength" : @"ContentLength",
+             @"replicateSource" : @"CopySource"
+             };
+}
+
 
 @end
 

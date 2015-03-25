@@ -251,12 +251,14 @@
 }
 
 -(void) testReplicateObject {
- 
-    CSSPReplicateObjectRequest *replicateObjectRequest = [CSSPReplicateObjectRequest new];
-    replicateObjectRequest.object = @"replicateObject-test.jpg";
-    replicateObjectRequest.replicateSource = @"/photos/face.jpg";
+    NSString *keyName = @"testReplicateObject.jpg";
     
-    [[[CSSP initialize] replicateObject:replicateObjectRequest] continueWithBlock:^id(BFTask *task) {
+    CSSPReplicateObjectRequest *replicateObjectRequest = [CSSPReplicateObjectRequest new];
+    replicateObjectRequest.object = keyName;
+    replicateObjectRequest.replicateSource = @"/photos/face.jpg";
+    replicateObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:0];
+    
+    [[[[CSSP initialize] replicateObject:replicateObjectRequest] continueWithSuccessBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed, error: %@", task.error);
         XCTAssertTrue([task.result isKindOfClass:[CSSPReplicateObjectOutput class]], @"the response object is not a class of [%@], got: %@", NSStringFromClass([CSSPReplicateObjectOutput class]), [task.result description]);
         
@@ -266,7 +268,7 @@
         
         return nil;
         
-    }];
+    }]waitUntilFinished];
     
 }
 

@@ -435,30 +435,25 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 @end
 
 
-@interface CSSPReplicateObjectOutput : CSSPPutObjectOutput
-
+@interface CSSPReplicateObjectOutput : CSSPModel
+/**
+ * Entity tag for the uploaded object.
+ */
+@property (nonatomic, strong) NSString *ETag;
 
 @end
 
 @interface CSSPReplicateObjectRequest : CSSPRequest
-/**
- * A standard MIME type describing the format of the object data.
- */
-@property (nonatomic, strong) NSString *contentType;
 
 /**
- *  拷贝的目标object名称
+ * Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically.
  */
+@property (nonatomic, strong) NSNumber *contentLength;
+
+
 @property (nonatomic, strong) NSString *object;
 
-/**
- * A map of metadata to store with the object.
- */
-@property (nonatomic, strong) NSDictionary *metadata;
 
-/**
- *  待拷贝的源数据，格式： ”／Container／Object“
- */
 @property (nonatomic, strong) NSString *replicateSource;
 
 @end

@@ -882,6 +882,12 @@
                         "Object"
                         ],
             "members":{
+                "ContentLength":{
+                    "shape":"ContentLength",
+                    "location":"header",
+                    "locationName":"Content-Length",
+                    "documentation":"Size of the body in bytes. This parameter is useful when the size of the body cannot be determined automatically."
+                },
                 "Object":{
                     "shape":"ObjectKey",
                     "location":"uri",
@@ -957,6 +963,7 @@
             "type":"structure",
             "required":[
                         "Object"
+                        
                         ],
             "members":{
                 "Body":{
