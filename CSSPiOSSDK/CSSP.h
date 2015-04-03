@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 #import "CSSPNetworking.h"
 #import "CSSPCategory.h"
 #import "CSSPCredentialsProvider.h"

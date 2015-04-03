@@ -7,7 +7,7 @@
 //
 
 #import "CSSPTransferManager.h"
-#import "TMCache.h"
+#import <TMCache/TMCache.h>
 
 NSUInteger const CSSPTransferManagerMinimumPartSize = 5 * 1024 * 1024; // 5MB
 NSString *const CSSPTransferManagerCacheName = @"com.iflytekcssp.CSSPTransferManager.CacheName";
@@ -129,11 +129,11 @@ NSTimeInterval const CSSPTransferManagerAgeLimitDefault = 0.0; // Keeps the data
                        forKey:cacheKey];
         return nil;
     }] continueWithSuccessBlock:^id(BFTask *task) {
-        if (fileSize > CSSPTransferManagerMinimumPartSize) {
-            return [self multipartUpload:uploadRequest fileSize:fileSize cacheKey:cacheKey];
-        } else {
+//        if (fileSize > CSSPTransferManagerMinimumPartSize) {
+//            return [self multipartUpload:uploadRequest fileSize:fileSize cacheKey:cacheKey];
+//        } else {
             return [self putObject:uploadRequest fileSize:fileSize cacheKey:cacheKey];
-        }
+//        }
     }] continueWithBlock:^id(BFTask *task) {
         if (task.error) {
             if ([task.error.domain isEqualToString:NSURLErrorDomain]

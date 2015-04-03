@@ -550,8 +550,14 @@
         "ListObjectsOutput":{
             "type":"structure",
             "members":{
-                "object":{"shape":"ObjectList"},
-                "subdir":{"shape":"SubdirList"}
+                "ObjectList":{
+                    "shape":"ObjectList",
+                    "locationName":"object"
+                },
+                "SubdirList":{
+                    "shape":"SubdirList",
+                    "locationName":"subdir"
+                }
             }
         },
         "ListObjectsRequest":{
@@ -704,11 +710,26 @@
         "Object":{
             "type":"structure",
             "members":{
-                "name":{"shape":"ObjectKey"},
-                "last_modified":{"shape":"LastModified"},
-                "hash":{"shape":"ETag"},
-                "bytes":{"shape":"Size"},
-                "content_type":{"shape":"ContentType"}
+                "Name":{
+                    "shape":"ObjectKey",
+                    "locationName":"name"
+                },
+                "LastModified":{
+                    "shape":"LastModified",
+                    "locationName":"last_modified"
+                },
+                "ETag":{
+                    "shape":"ETag",
+                    "locationName":"hash"
+                },
+                "Size":{
+                    "shape":"Size",
+                    "locationName":"bytes"
+                },
+                "ContentType":{
+                    "shape":"ContentType",
+                    "locationName":"content_type"
+                }
             }
         },
         "ObjectCount":{"type":"integer"},

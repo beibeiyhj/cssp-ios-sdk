@@ -58,10 +58,10 @@
 
 - (void)testListObjects {
     CSSPListObjectsRequest *listObjectReq = [CSSPListObjectsRequest new];
-    //listObjectReq.limit = [NSNumber numberWithInt:1];
+    listObjectReq.limit = [NSNumber numberWithInt:5];
     //listObjectReq.marker = @"eee";
-    listObjectReq.prefix = @"animals/";
-    listObjectReq.delimiter = @"/";
+    //listObjectReq.prefix = @"animals/";
+    //listObjectReq.delimiter = @"/";
     
     [[[[CSSP initialize] listObjects:listObjectReq] continueWithBlock:^id(BFTask *task) {
         XCTAssertNil(task.error, @"The request failed. error: [%@]", task.error);
@@ -251,11 +251,11 @@
 }
 
 -(void) testReplicateObject {
-    NSString *keyName = @"testReplicateObject.jpg";
+    NSString *keyName = @"测试47474747.jpg";
     
     CSSPReplicateObjectRequest *replicateObjectRequest = [CSSPReplicateObjectRequest new];
     replicateObjectRequest.object = keyName;
-    replicateObjectRequest.replicateSource = @"/photos/face.jpg";
+    replicateObjectRequest.replicateSource = @"/111/IOStest/copy1";
     replicateObjectRequest.contentLength = [NSNumber numberWithUnsignedInteger:0];
     
     [[[[CSSP initialize] replicateObject:replicateObjectRequest] continueWithSuccessBlock:^id(BFTask *task) {

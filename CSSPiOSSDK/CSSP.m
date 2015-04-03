@@ -268,6 +268,7 @@ static NSString *CSSPAPIVersion = @"cssp-2015-02-09";
 }
 
 - (BFTask *)replicateObject:(CSSPReplicateObjectRequest *)request {
+    request.replicateSource = [request.replicateSource stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     return [self invokeRequest:request
                     HTTPMethod:CSSPHTTPMethodPUT
                      URLString:@"/{Object+}"

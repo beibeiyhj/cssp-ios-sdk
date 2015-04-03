@@ -13,7 +13,7 @@
 #import "CSSPCredentialsProvider.h"
 #import "CSSPCategory.h"
 #import "CSSPLogging.h"
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 
 @implementation CSSPSignatureSignerUtility
 

@@ -7,10 +7,10 @@
 //
 
 #import "CSSPSerialization.h"
+#import <XMLDictionary/XMLDictionary.h>
 #import "CSSPLogging.h"
 #import "CSSPCategory.h"
 #import "CSSPXMLWriter.h"
-#import "XMLDictionary.h"
 
 NSString *const CSSPJSONBuilderErrorDomain = @"com.iflycspp.CSSPJSONBuilderErrorDomain";
 NSString *const CSSPJSONParserErrorDomain = @"com.iflycssp.CSSPJSONParserErrorDomain";

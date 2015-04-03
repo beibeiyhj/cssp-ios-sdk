@@ -6,7 +6,7 @@
 //  Copyright (c) 2015年 cssp. All rights reserved.
 //
 
-#import "Mantle.h"
+#import <Mantle/Mantle.h>
 
 @interface CSSPModel : MTLModel <MTLJSONSerializing>
 

@@ -131,26 +131,13 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"acceptRanges" : @"AcceptRanges",
              @"body" : @"Body",
-             @"cacheControl" : @"CacheControl",
-             @"contentDisposition" : @"ContentDisposition",
-             @"contentEncoding" : @"ContentEncoding",
              @"contentLength" : @"ContentLength",
              @"contentType" : @"ContentType",
              @"ETag" : @"ETag",
-             @"expires" : @"Expires",
              @"lastModified" : @"LastModified",
              @"metadata" : @"Metadata",
              };
-}
-
-+ (NSValueTransformer *)expiresJSONTransformer {
-    return [MTLValueTransformer reversibleTransformerWithForwardBlock:^id(NSString *str) {
-        return [NSDate cssp_dateFromString:str];
-    } reverseBlock:^id(NSDate *date) {
-        return [date cssp_stringValue:CSSPDateISO8601DateFormat1];
-    }];
 }
 
 + (NSValueTransformer *)lastModifiedJSONTransformer {
@@ -279,11 +266,11 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"etag" : @"hash",
-             @"name" : @"name",
-             @"lastModified" : @"last_modified",
-             @"size" : @"bytes",
-             @"contentType" : @"content_type",
+             @"etag" : @"ETag",
+             @"name" : @"Name",
+             @"lastModified" : @"LastModified",
+             @"size" : @"Size",
+             @"contentType" : @"ContentType",
              };
 }
 
@@ -310,8 +297,8 @@ NSString *const CSSPErrorDomain = @"com.iflycssp.CSSPErrorDomain";
 
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"contents" : @"object",
-             @"subdirs" : @"subdir"
+             @"contents" : @"ObjectList",
+             @"subdirs" : @"SubdirList"
              };
 }
 

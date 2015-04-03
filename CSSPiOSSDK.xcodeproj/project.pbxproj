@@ -9,42 +9,6 @@
 /* Begin PBXBuildFile section */
 		1526514A1A8DE1980089761C /* cssp-2015-02-09.json in Resources */ = {isa = PBXBuildFile; fileRef = 157C30DA1A8AFD90006E75E5 /* cssp-2015-02-09.json */; };
 		1536203C1A835A4300C23D7E /* CSSPNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 1536203B1A835A4300C23D7E /* CSSPNetworking.m */; };
-		153F79961AB6817E000B9396 /* BFAppLink_Internal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79841AB6817E000B9396 /* BFAppLink_Internal.h */; };
-		153F79971AB6817E000B9396 /* BFAppLink.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79851AB6817E000B9396 /* BFAppLink.h */; };
-		153F79981AB6817E000B9396 /* BFAppLinkNavigation.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79861AB6817E000B9396 /* BFAppLinkNavigation.h */; };
-		153F79991AB6817E000B9396 /* BFAppLinkResolving.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79871AB6817E000B9396 /* BFAppLinkResolving.h */; };
-		153F799A1AB6817E000B9396 /* BFAppLinkReturnToRefererController.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79881AB6817E000B9396 /* BFAppLinkReturnToRefererController.h */; };
-		153F799B1AB6817E000B9396 /* BFAppLinkReturnToRefererView_Internal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79891AB6817E000B9396 /* BFAppLinkReturnToRefererView_Internal.h */; };
-		153F799C1AB6817E000B9396 /* BFAppLinkReturnToRefererView.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F798A1AB6817E000B9396 /* BFAppLinkReturnToRefererView.h */; };
-		153F799D1AB6817E000B9396 /* BFAppLinkTarget.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F798B1AB6817E000B9396 /* BFAppLinkTarget.h */; };
-		153F799E1AB6817E000B9396 /* BFExecutor.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F798C1AB6817E000B9396 /* BFExecutor.h */; };
-		153F799F1AB6817E000B9396 /* BFMeasurementEvent_Internal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F798D1AB6817E000B9396 /* BFMeasurementEvent_Internal.h */; };
-		153F79A01AB6817E000B9396 /* BFMeasurementEvent.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F798E1AB6817E000B9396 /* BFMeasurementEvent.h */; };
-		153F79A11AB6817E000B9396 /* BFTask.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F798F1AB6817E000B9396 /* BFTask.h */; };
-		153F79A21AB6817E000B9396 /* BFTaskCompletionSource.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79901AB6817E000B9396 /* BFTaskCompletionSource.h */; };
-		153F79A31AB6817E000B9396 /* BFURL_Internal.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79911AB6817E000B9396 /* BFURL_Internal.h */; };
-		153F79A41AB6817E000B9396 /* BFURL.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79921AB6817E000B9396 /* BFURL.h */; };
-		153F79A51AB6817E000B9396 /* BFWebViewAppLinkResolver.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79931AB6817E000B9396 /* BFWebViewAppLinkResolver.h */; };
-		153F79A61AB6817E000B9396 /* Bolts.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79941AB6817E000B9396 /* Bolts.h */; };
-		153F79A71AB6817E000B9396 /* BoltsVersion.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79951AB6817E000B9396 /* BoltsVersion.h */; };
-		153F79BC1AB68288000B9396 /* EXTKeyPathCoding.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79AB1AB68288000B9396 /* EXTKeyPathCoding.h */; };
-		153F79BD1AB68288000B9396 /* EXTRuntimeExtensions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79AC1AB68288000B9396 /* EXTRuntimeExtensions.h */; };
-		153F79BE1AB68288000B9396 /* EXTScope.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79AD1AB68288000B9396 /* EXTScope.h */; };
-		153F79BF1AB68288000B9396 /* Mantle.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79AE1AB68288000B9396 /* Mantle.h */; };
-		153F79C01AB68288000B9396 /* metamacros.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79AF1AB68288000B9396 /* metamacros.h */; };
-		153F79C11AB68288000B9396 /* MTLJSONAdapter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B01AB68288000B9396 /* MTLJSONAdapter.h */; };
-		153F79C21AB68288000B9396 /* MTLManagedObjectAdapter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B11AB68288000B9396 /* MTLManagedObjectAdapter.h */; };
-		153F79C31AB68288000B9396 /* MTLModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B21AB68288000B9396 /* MTLModel.h */; };
-		153F79C41AB68288000B9396 /* MTLModel+NSCoding.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B31AB68288000B9396 /* MTLModel+NSCoding.h */; };
-		153F79C51AB68288000B9396 /* MTLReflection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B41AB68288000B9396 /* MTLReflection.h */; };
-		153F79C61AB68288000B9396 /* MTLValueTransformer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B51AB68288000B9396 /* MTLValueTransformer.h */; };
-		153F79C71AB68288000B9396 /* NSArray+MTLManipulationAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B61AB68288000B9396 /* NSArray+MTLManipulationAdditions.h */; };
-		153F79C81AB68288000B9396 /* NSDictionary+MTLManipulationAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B71AB68288000B9396 /* NSDictionary+MTLManipulationAdditions.h */; };
-		153F79C91AB68288000B9396 /* NSError+MTLModelException.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B81AB68288000B9396 /* NSError+MTLModelException.h */; };
-		153F79CA1AB68288000B9396 /* NSObject+MTLComparisonAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79B91AB68288000B9396 /* NSObject+MTLComparisonAdditions.h */; };
-		153F79CB1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79BA1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h */; };
-		153F79CC1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79BB1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */; };
-		153F79CE1AB682FC000B9396 /* XMLDictionary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 153F79CD1AB682FC000B9396 /* XMLDictionary.h */; };
 		154478261AB2E22C003B58BF /* CSSP.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C081A768BB40040E0FE /* CSSP.h */; };
 		154478271AB2E22C003B58BF /* CSSPModule.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15E4348A1A82165800218C8A /* CSSPModule.h */; };
 		154478281AB2E22C003B58BF /* CSSPCredentialsProvider.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05051A84B8AA00DE3513 /* CSSPCredentialsProvider.h */; };
@@ -60,9 +24,6 @@
 		154478321AB2E22C003B58BF /* CSSPModel.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154D05011A84B66400DE3513 /* CSSPModel.h */; };
 		154478331AB2E22C003B58BF /* CSSPXMLWriter.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 154A32991A8602020014C99A /* CSSPXMLWriter.h */; };
 		154478351AB2E2F9003B58BF /* Info.plist in CopyFiles */ = {isa = PBXBuildFile; fileRef = 15501C161A768BB40040E0FE /* Info.plist */; };
-		1545E0D41AB816E3007F3BA1 /* TMCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D11AB816D1007F3BA1 /* TMCache.h */; };
-		1545E0D51AB816E3007F3BA1 /* TMDiskCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */; };
-		1545E0D61AB816E3007F3BA1 /* TMMemoryCache.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */; };
 		1545E0D71AB91A8B007F3BA1 /* CSSPTransferManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */; };
 		1548A9661AB6C543006FA167 /* iOSTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1548A9651AB6C543006FA167 /* iOSTest.m */; };
 		154A32941A85AFBD0014C99A /* CSSPSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 154A32931A85AFBD0014C99A /* CSSPSerialization.m */; };
@@ -77,12 +38,21 @@
 		15501C0B1A768BB40040E0FE /* CSSP.m in Sources */ = {isa = PBXBuildFile; fileRef = 15501C0A1A768BB40040E0FE /* CSSP.m */; };
 		15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 15501C051A768BB40040E0FE /* libCSSPiOSSDK.a */; };
 		1561E4331AB95BF800C490C5 /* TransferManagerTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 1561E4321AB95BF800C490C5 /* TransferManagerTest.m */; };
+		1589D4FA1AC52E8E00052DC8 /* CSSPiOSSDKAPI.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1561E4341AB95C5B00C490C5 /* CSSPiOSSDKAPI.h */; };
 		159B4B6A1A83BC410064DCB0 /* CSSPURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */; };
 		159B4B6E1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = 159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */; };
+		15B98C041AC64D3500135FFB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C001AC64D3500135FFB /* Bolts.framework */; };
+		15B98C051AC64D3500135FFB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C011AC64D3500135FFB /* Mantle.framework */; };
+		15B98C061AC64D3500135FFB /* TMCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C021AC64D3500135FFB /* TMCache.framework */; };
+		15B98C071AC64D3500135FFB /* XMLDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C031AC64D3500135FFB /* XMLDictionary.framework */; };
+		15B98C081AC64D7F00135FFB /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C001AC64D3500135FFB /* Bolts.framework */; };
+		15B98C091AC64D7F00135FFB /* Mantle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C011AC64D3500135FFB /* Mantle.framework */; };
+		15B98C0A1AC64D7F00135FFB /* TMCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C021AC64D3500135FFB /* TMCache.framework */; };
+		15B98C0B1AC64D7F00135FFB /* XMLDictionary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15B98C031AC64D3500135FFB /* XMLDictionary.framework */; };
+		15B98C0C1AC6500500135FFB /* CSSPTransferManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 1545E0CD1AB80506007F3BA1 /* CSSPTransferManager.h */; };
 		15DE7E661A8C8A8400947888 /* CSSPTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 157C30DD1A8AFF1C006E75E5 /* CSSPTest.m */; };
 		15E4348C1A82165800218C8A /* CSSPModule.m in Sources */ = {isa = PBXBuildFile; fileRef = 15E4348B1A82165800218C8A /* CSSPModule.m */; };
 		15EAD0881A8C51C300D2152B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15EAD0871A8C51C300D2152B /* Foundation.framework */; };
-		7832B8946256270695B14FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 831C2BCEF358DB7E7B12C810 /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,45 +72,8 @@
 			dstPath = Headers;
 			dstSubfolderSpec = 16;
 			files = (
-				1545E0D41AB816E3007F3BA1 /* TMCache.h in CopyFiles */,
-				1545E0D51AB816E3007F3BA1 /* TMDiskCache.h in CopyFiles */,
-				1545E0D61AB816E3007F3BA1 /* TMMemoryCache.h in CopyFiles */,
-				153F79CE1AB682FC000B9396 /* XMLDictionary.h in CopyFiles */,
-				153F79BC1AB68288000B9396 /* EXTKeyPathCoding.h in CopyFiles */,
-				153F79BD1AB68288000B9396 /* EXTRuntimeExtensions.h in CopyFiles */,
-				153F79BE1AB68288000B9396 /* EXTScope.h in CopyFiles */,
-				153F79BF1AB68288000B9396 /* Mantle.h in CopyFiles */,
-				153F79C01AB68288000B9396 /* metamacros.h in CopyFiles */,
-				153F79C11AB68288000B9396 /* MTLJSONAdapter.h in CopyFiles */,
-				153F79C21AB68288000B9396 /* MTLManagedObjectAdapter.h in CopyFiles */,
-				153F79C31AB68288000B9396 /* MTLModel.h in CopyFiles */,
-				153F79C41AB68288000B9396 /* MTLModel+NSCoding.h in CopyFiles */,
-				153F79C51AB68288000B9396 /* MTLReflection.h in CopyFiles */,
-				153F79C61AB68288000B9396 /* MTLValueTransformer.h in CopyFiles */,
-				153F79C71AB68288000B9396 /* NSArray+MTLManipulationAdditions.h in CopyFiles */,
-				153F79C81AB68288000B9396 /* NSDictionary+MTLManipulationAdditions.h in CopyFiles */,
-				153F79C91AB68288000B9396 /* NSError+MTLModelException.h in CopyFiles */,
-				153F79CA1AB68288000B9396 /* NSObject+MTLComparisonAdditions.h in CopyFiles */,
-				153F79CB1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h in CopyFiles */,
-				153F79CC1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h in CopyFiles */,
-				153F79961AB6817E000B9396 /* BFAppLink_Internal.h in CopyFiles */,
-				153F79971AB6817E000B9396 /* BFAppLink.h in CopyFiles */,
-				153F79981AB6817E000B9396 /* BFAppLinkNavigation.h in CopyFiles */,
-				153F79991AB6817E000B9396 /* BFAppLinkResolving.h in CopyFiles */,
-				153F799A1AB6817E000B9396 /* BFAppLinkReturnToRefererController.h in CopyFiles */,
-				153F799B1AB6817E000B9396 /* BFAppLinkReturnToRefererView_Internal.h in CopyFiles */,
-				153F799C1AB6817E000B9396 /* BFAppLinkReturnToRefererView.h in CopyFiles */,
-				153F799D1AB6817E000B9396 /* BFAppLinkTarget.h in CopyFiles */,
-				153F799E1AB6817E000B9396 /* BFExecutor.h in CopyFiles */,
-				153F799F1AB6817E000B9396 /* BFMeasurementEvent_Internal.h in CopyFiles */,
-				153F79A01AB6817E000B9396 /* BFMeasurementEvent.h in CopyFiles */,
-				153F79A11AB6817E000B9396 /* BFTask.h in CopyFiles */,
-				153F79A21AB6817E000B9396 /* BFTaskCompletionSource.h in CopyFiles */,
-				153F79A31AB6817E000B9396 /* BFURL_Internal.h in CopyFiles */,
-				153F79A41AB6817E000B9396 /* BFURL.h in CopyFiles */,
-				153F79A51AB6817E000B9396 /* BFWebViewAppLinkResolver.h in CopyFiles */,
-				153F79A61AB6817E000B9396 /* Bolts.h in CopyFiles */,
-				153F79A71AB6817E000B9396 /* BoltsVersion.h in CopyFiles */,
+				15B98C0C1AC6500500135FFB /* CSSPTransferManager.h in CopyFiles */,
+				1589D4FA1AC52E8E00052DC8 /* CSSPiOSSDKAPI.h in CopyFiles */,
 				154478261AB2E22C003B58BF /* CSSP.h in CopyFiles */,
 				154478271AB2E22C003B58BF /* CSSPModule.h in CopyFiles */,
 				154478281AB2E22C003B58BF /* CSSPCredentialsProvider.h in CopyFiles */,
@@ -182,47 +115,8 @@
 /* Begin PBXFileReference section */
 		1536203A1A835A4300C23D7E /* CSSPNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPNetworking.h; sourceTree = "<group>"; };
 		1536203B1A835A4300C23D7E /* CSSPNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPNetworking.m; sourceTree = "<group>"; };
-		153F79841AB6817E000B9396 /* BFAppLink_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLink_Internal.h; path = Pods/Bolts/Bolts/iOS/BFAppLink_Internal.h; sourceTree = "<group>"; };
-		153F79851AB6817E000B9396 /* BFAppLink.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLink.h; path = Pods/Bolts/Bolts/iOS/BFAppLink.h; sourceTree = "<group>"; };
-		153F79861AB6817E000B9396 /* BFAppLinkNavigation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLinkNavigation.h; path = Pods/Bolts/Bolts/iOS/BFAppLinkNavigation.h; sourceTree = "<group>"; };
-		153F79871AB6817E000B9396 /* BFAppLinkResolving.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLinkResolving.h; path = Pods/Bolts/Bolts/iOS/BFAppLinkResolving.h; sourceTree = "<group>"; };
-		153F79881AB6817E000B9396 /* BFAppLinkReturnToRefererController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLinkReturnToRefererController.h; path = Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererController.h; sourceTree = "<group>"; };
-		153F79891AB6817E000B9396 /* BFAppLinkReturnToRefererView_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLinkReturnToRefererView_Internal.h; path = Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererView_Internal.h; sourceTree = "<group>"; };
-		153F798A1AB6817E000B9396 /* BFAppLinkReturnToRefererView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLinkReturnToRefererView.h; path = Pods/Bolts/Bolts/iOS/BFAppLinkReturnToRefererView.h; sourceTree = "<group>"; };
-		153F798B1AB6817E000B9396 /* BFAppLinkTarget.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFAppLinkTarget.h; path = Pods/Bolts/Bolts/iOS/BFAppLinkTarget.h; sourceTree = "<group>"; };
-		153F798C1AB6817E000B9396 /* BFExecutor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFExecutor.h; path = Pods/Bolts/Bolts/Common/BFExecutor.h; sourceTree = "<group>"; };
-		153F798D1AB6817E000B9396 /* BFMeasurementEvent_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFMeasurementEvent_Internal.h; path = Pods/Bolts/Bolts/iOS/BFMeasurementEvent_Internal.h; sourceTree = "<group>"; };
-		153F798E1AB6817E000B9396 /* BFMeasurementEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFMeasurementEvent.h; path = Pods/Bolts/Bolts/iOS/BFMeasurementEvent.h; sourceTree = "<group>"; };
-		153F798F1AB6817E000B9396 /* BFTask.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFTask.h; path = Pods/Bolts/Bolts/Common/BFTask.h; sourceTree = "<group>"; };
-		153F79901AB6817E000B9396 /* BFTaskCompletionSource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFTaskCompletionSource.h; path = Pods/Bolts/Bolts/Common/BFTaskCompletionSource.h; sourceTree = "<group>"; };
-		153F79911AB6817E000B9396 /* BFURL_Internal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFURL_Internal.h; path = Pods/Bolts/Bolts/iOS/BFURL_Internal.h; sourceTree = "<group>"; };
-		153F79921AB6817E000B9396 /* BFURL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFURL.h; path = Pods/Bolts/Bolts/iOS/BFURL.h; sourceTree = "<group>"; };
-		153F79931AB6817E000B9396 /* BFWebViewAppLinkResolver.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BFWebViewAppLinkResolver.h; path = Pods/Bolts/Bolts/iOS/BFWebViewAppLinkResolver.h; sourceTree = "<group>"; };
-		153F79941AB6817E000B9396 /* Bolts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Bolts.h; path = Pods/Bolts/Bolts/Common/Bolts.h; sourceTree = "<group>"; };
-		153F79951AB6817E000B9396 /* BoltsVersion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BoltsVersion.h; path = Pods/Bolts/Bolts/Common/BoltsVersion.h; sourceTree = "<group>"; };
-		153F79AB1AB68288000B9396 /* EXTKeyPathCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EXTKeyPathCoding.h; path = Pods/Mantle/Mantle/extobjc/EXTKeyPathCoding.h; sourceTree = "<group>"; };
-		153F79AC1AB68288000B9396 /* EXTRuntimeExtensions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EXTRuntimeExtensions.h; path = Pods/Mantle/Mantle/extobjc/EXTRuntimeExtensions.h; sourceTree = "<group>"; };
-		153F79AD1AB68288000B9396 /* EXTScope.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = EXTScope.h; path = Pods/Mantle/Mantle/extobjc/EXTScope.h; sourceTree = "<group>"; };
-		153F79AE1AB68288000B9396 /* Mantle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Mantle.h; path = Pods/Mantle/Mantle/Mantle.h; sourceTree = "<group>"; };
-		153F79AF1AB68288000B9396 /* metamacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = metamacros.h; path = Pods/Mantle/Mantle/extobjc/metamacros.h; sourceTree = "<group>"; };
-		153F79B01AB68288000B9396 /* MTLJSONAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTLJSONAdapter.h; path = Pods/Mantle/Mantle/MTLJSONAdapter.h; sourceTree = "<group>"; };
-		153F79B11AB68288000B9396 /* MTLManagedObjectAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTLManagedObjectAdapter.h; path = Pods/Mantle/Mantle/MTLManagedObjectAdapter.h; sourceTree = "<group>"; };
-		153F79B21AB68288000B9396 /* MTLModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTLModel.h; path = Pods/Mantle/Mantle/MTLModel.h; sourceTree = "<group>"; };
-		153F79B31AB68288000B9396 /* MTLModel+NSCoding.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MTLModel+NSCoding.h"; path = "Pods/Mantle/Mantle/MTLModel+NSCoding.h"; sourceTree = "<group>"; };
-		153F79B41AB68288000B9396 /* MTLReflection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTLReflection.h; path = Pods/Mantle/Mantle/MTLReflection.h; sourceTree = "<group>"; };
-		153F79B51AB68288000B9396 /* MTLValueTransformer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTLValueTransformer.h; path = Pods/Mantle/Mantle/MTLValueTransformer.h; sourceTree = "<group>"; };
-		153F79B61AB68288000B9396 /* NSArray+MTLManipulationAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSArray+MTLManipulationAdditions.h"; path = "Pods/Mantle/Mantle/NSArray+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
-		153F79B71AB68288000B9396 /* NSDictionary+MTLManipulationAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+MTLManipulationAdditions.h"; path = "Pods/Mantle/Mantle/NSDictionary+MTLManipulationAdditions.h"; sourceTree = "<group>"; };
-		153F79B81AB68288000B9396 /* NSError+MTLModelException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSError+MTLModelException.h"; path = "Pods/Mantle/Mantle/NSError+MTLModelException.h"; sourceTree = "<group>"; };
-		153F79B91AB68288000B9396 /* NSObject+MTLComparisonAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSObject+MTLComparisonAdditions.h"; path = "Pods/Mantle/Mantle/NSObject+MTLComparisonAdditions.h"; sourceTree = "<group>"; };
-		153F79BA1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+MTLInversionAdditions.h"; path = "Pods/Mantle/Mantle/NSValueTransformer+MTLInversionAdditions.h"; sourceTree = "<group>"; };
-		153F79BB1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NSValueTransformer+MTLPredefinedTransformerAdditions.h"; path = "Pods/Mantle/Mantle/NSValueTransformer+MTLPredefinedTransformerAdditions.h"; sourceTree = "<group>"; };
-		153F79CD1AB682FC000B9396 /* XMLDictionary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = XMLDictionary.h; path = Pods/XMLDictionary/XMLDictionary/XMLDictionary.h; sourceTree = "<group>"; };
 		1545E0CD1AB80506007F3BA1 /* CSSPTransferManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPTransferManager.h; sourceTree = "<group>"; };
 		1545E0CE1AB80506007F3BA1 /* CSSPTransferManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPTransferManager.m; sourceTree = "<group>"; };
-		1545E0D11AB816D1007F3BA1 /* TMCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMCache.h; path = Pods/TMCache/TMCache/TMCache.h; sourceTree = "<group>"; };
-		1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMDiskCache.h; path = Pods/TMCache/TMCache/TMDiskCache.h; sourceTree = "<group>"; };
-		1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TMMemoryCache.h; path = Pods/TMCache/TMCache/TMMemoryCache.h; sourceTree = "<group>"; };
 		1548A9651AB6C543006FA167 /* iOSTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iOSTest.m; sourceTree = "<group>"; };
 		154A32921A85AFBD0014C99A /* CSSPSerialization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSerialization.h; sourceTree = "<group>"; };
 		154A32931A85AFBD0014C99A /* CSSPSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSerialization.m; sourceTree = "<group>"; };
@@ -256,12 +150,13 @@
 		159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPURLSessionManager.m; sourceTree = "<group>"; };
 		159B4B6C1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPSynchronizedMutableDictionary.h; sourceTree = "<group>"; };
 		159B4B6D1A83BD740064DCB0 /* CSSPSynchronizedMutableDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPSynchronizedMutableDictionary.m; sourceTree = "<group>"; };
+		15B98C001AC64D3500135FFB /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Bolts.framework; path = "third-party/Bolts.framework"; sourceTree = "<group>"; };
+		15B98C011AC64D3500135FFB /* Mantle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mantle.framework; path = "third-party/Mantle.framework"; sourceTree = "<group>"; };
+		15B98C021AC64D3500135FFB /* TMCache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TMCache.framework; path = "third-party/TMCache.framework"; sourceTree = "<group>"; };
+		15B98C031AC64D3500135FFB /* XMLDictionary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XMLDictionary.framework; path = "third-party/XMLDictionary.framework"; sourceTree = "<group>"; };
 		15E4348A1A82165800218C8A /* CSSPModule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSSPModule.h; sourceTree = "<group>"; };
 		15E4348B1A82165800218C8A /* CSSPModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSPModule.m; sourceTree = "<group>"; };
 		15EAD0871A8C51C300D2152B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		831C2BCEF358DB7E7B12C810 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		F0942B16486258057AC02A7C /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,8 +164,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B98C041AC64D3500135FFB /* Bolts.framework in Frameworks */,
+				15B98C051AC64D3500135FFB /* Mantle.framework in Frameworks */,
+				15B98C061AC64D3500135FFB /* TMCache.framework in Frameworks */,
+				15B98C071AC64D3500135FFB /* XMLDictionary.framework in Frameworks */,
 				15EAD0881A8C51C300D2152B /* Foundation.framework in Frameworks */,
-				7832B8946256270695B14FF7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -278,6 +176,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B98C081AC64D7F00135FFB /* Bolts.framework in Frameworks */,
+				15B98C091AC64D7F00135FFB /* Mantle.framework in Frameworks */,
+				15B98C0A1AC64D7F00135FFB /* TMCache.framework in Frameworks */,
+				15B98C0B1AC64D7F00135FFB /* XMLDictionary.framework in Frameworks */,
 				15501C111A768BB40040E0FE /* libCSSPiOSSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,15 +187,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		046144DA85B75BA8CEEF359F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				F0942B16486258057AC02A7C /* Pods.debug.xcconfig */,
-				FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		153620391A835A1200C23D7E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -303,73 +196,6 @@
 				159B4B691A83BC410064DCB0 /* CSSPURLSessionManager.m */,
 			);
 			name = Networking;
-			sourceTree = "<group>";
-		};
-		153F79A81AB68188000B9396 /* Bolts */ = {
-			isa = PBXGroup;
-			children = (
-				153F79841AB6817E000B9396 /* BFAppLink_Internal.h */,
-				153F79851AB6817E000B9396 /* BFAppLink.h */,
-				153F79861AB6817E000B9396 /* BFAppLinkNavigation.h */,
-				153F79871AB6817E000B9396 /* BFAppLinkResolving.h */,
-				153F79881AB6817E000B9396 /* BFAppLinkReturnToRefererController.h */,
-				153F79891AB6817E000B9396 /* BFAppLinkReturnToRefererView_Internal.h */,
-				153F798A1AB6817E000B9396 /* BFAppLinkReturnToRefererView.h */,
-				153F798B1AB6817E000B9396 /* BFAppLinkTarget.h */,
-				153F798C1AB6817E000B9396 /* BFExecutor.h */,
-				153F798D1AB6817E000B9396 /* BFMeasurementEvent_Internal.h */,
-				153F798E1AB6817E000B9396 /* BFMeasurementEvent.h */,
-				153F798F1AB6817E000B9396 /* BFTask.h */,
-				153F79901AB6817E000B9396 /* BFTaskCompletionSource.h */,
-				153F79911AB6817E000B9396 /* BFURL_Internal.h */,
-				153F79921AB6817E000B9396 /* BFURL.h */,
-				153F79931AB6817E000B9396 /* BFWebViewAppLinkResolver.h */,
-				153F79941AB6817E000B9396 /* Bolts.h */,
-				153F79951AB6817E000B9396 /* BoltsVersion.h */,
-			);
-			name = Bolts;
-			sourceTree = "<group>";
-		};
-		153F79A91AB681B6000B9396 /* Mantle */ = {
-			isa = PBXGroup;
-			children = (
-				153F79AB1AB68288000B9396 /* EXTKeyPathCoding.h */,
-				153F79AC1AB68288000B9396 /* EXTRuntimeExtensions.h */,
-				153F79AD1AB68288000B9396 /* EXTScope.h */,
-				153F79AE1AB68288000B9396 /* Mantle.h */,
-				153F79AF1AB68288000B9396 /* metamacros.h */,
-				153F79B01AB68288000B9396 /* MTLJSONAdapter.h */,
-				153F79B11AB68288000B9396 /* MTLManagedObjectAdapter.h */,
-				153F79B21AB68288000B9396 /* MTLModel.h */,
-				153F79B31AB68288000B9396 /* MTLModel+NSCoding.h */,
-				153F79B41AB68288000B9396 /* MTLReflection.h */,
-				153F79B51AB68288000B9396 /* MTLValueTransformer.h */,
-				153F79B61AB68288000B9396 /* NSArray+MTLManipulationAdditions.h */,
-				153F79B71AB68288000B9396 /* NSDictionary+MTLManipulationAdditions.h */,
-				153F79B81AB68288000B9396 /* NSError+MTLModelException.h */,
-				153F79B91AB68288000B9396 /* NSObject+MTLComparisonAdditions.h */,
-				153F79BA1AB68288000B9396 /* NSValueTransformer+MTLInversionAdditions.h */,
-				153F79BB1AB68288000B9396 /* NSValueTransformer+MTLPredefinedTransformerAdditions.h */,
-			);
-			name = Mantle;
-			sourceTree = "<group>";
-		};
-		153F79AA1AB68248000B9396 /* XMLDictionary */ = {
-			isa = PBXGroup;
-			children = (
-				153F79CD1AB682FC000B9396 /* XMLDictionary.h */,
-			);
-			name = XMLDictionary;
-			sourceTree = "<group>";
-		};
-		1545E0D01AB816B4007F3BA1 /* TMCache */ = {
-			isa = PBXGroup;
-			children = (
-				1545E0D11AB816D1007F3BA1 /* TMCache.h */,
-				1545E0D21AB816D1007F3BA1 /* TMDiskCache.h */,
-				1545E0D31AB816D1007F3BA1 /* TMMemoryCache.h */,
-			);
-			name = TMCache;
 			sourceTree = "<group>";
 		};
 		154A32901A85AF900014C99A /* Serialization */ = {
@@ -408,14 +234,9 @@
 		15501BFC1A768BB40040E0FE = {
 			isa = PBXGroup;
 			children = (
-				1545E0D01AB816B4007F3BA1 /* TMCache */,
-				153F79AA1AB68248000B9396 /* XMLDictionary */,
-				153F79A91AB681B6000B9396 /* Mantle */,
-				153F79A81AB68188000B9396 /* Bolts */,
 				15501C071A768BB40040E0FE /* CSSPiOSSDK */,
 				15501C141A768BB40040E0FE /* CSSPiOSSDKTests */,
 				15501C061A768BB40040E0FE /* Products */,
-				046144DA85B75BA8CEEF359F /* Pods */,
 				903D659F178841379487EFA0 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -495,8 +316,11 @@
 		903D659F178841379487EFA0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				15B98C001AC64D3500135FFB /* Bolts.framework */,
+				15B98C011AC64D3500135FFB /* Mantle.framework */,
+				15B98C021AC64D3500135FFB /* TMCache.framework */,
+				15B98C031AC64D3500135FFB /* XMLDictionary.framework */,
 				15EAD0871A8C51C300D2152B /* Foundation.framework */,
-				831C2BCEF358DB7E7B12C810 /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -508,11 +332,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 15501C191A768BB40040E0FE /* Build configuration list for PBXNativeTarget "CSSPiOSSDK" */;
 			buildPhases = (
-				17859DE6CDBF135BC2BBD152 /* Check Pods Manifest.lock */,
 				15501C011A768BB40040E0FE /* Sources */,
 				15501C021A768BB40040E0FE /* Frameworks */,
 				15501C031A768BB40040E0FE /* CopyFiles */,
-				2EC7603FE35FE87B44B3FD0D /* Copy Pods Resources */,
 				154478251AB2E1F1003B58BF /* CopyFiles */,
 				154478341AB2E284003B58BF /* CopyFiles */,
 			);
@@ -588,39 +410,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		17859DE6CDBF135BC2BBD152 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		2EC7603FE35FE87B44B3FD0D /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		15501C011A768BB40040E0FE /* Sources */ = {
@@ -742,23 +531,17 @@
 		};
 		15501C1A1A768BB40040E0FE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F0942B16486258057AC02A7C /* Pods.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = NO;
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
-					"\"${PODS_ROOT}/Headers/Public/XMLDictionary\"",
-					"\"${PODS_ROOT}/Headers/Public/TMCache\"",
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/third-party",
 				);
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-l\"Pods-Bolts\"",
-					"-l\"Pods-Mantle\"",
-					"-l\"Pods-TMCache\"",
-					"-l\"Pods-XMLDictionary\"",
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
@@ -775,23 +558,17 @@
 		};
 		15501C1B1A768BB40040E0FE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FBBCE8A33DB993AAF652F6BF /* Pods.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = NO;
-				HEADER_SEARCH_PATHS = (
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/Bolts\"",
-					"\"${PODS_ROOT}/Headers/Public/Mantle\"",
-					"\"${PODS_ROOT}/Headers/Public/XMLDictionary\"",
-					"\"${PODS_ROOT}/Headers/Public/TMCache\"",
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/third-party",
 				);
+				HEADER_SEARCH_PATHS = "";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-l\"Pods-Bolts\"",
-					"-l\"Pods-Mantle\"",
-					"-l\"Pods-TMCache\"",
-					"-l\"Pods-XMLDictionary\"",
 					"-framework",
 					"\"Foundation\"",
 					"-framework",
@@ -813,6 +590,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/third-party",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CSSPiOSSDKTests/CSSPiOSSDKTests-Prefix.pch";
@@ -845,6 +623,7 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(PROJECT_DIR)/third-party",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CSSPiOSSDKTests/CSSPiOSSDKTests-Prefix.pch";

@@ -7,7 +7,7 @@
 //
 
 #import "CSSPNetworking.h"
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 #import "CSSPURLSessionManager.h"
 #import "CSSPCategory.h"
 

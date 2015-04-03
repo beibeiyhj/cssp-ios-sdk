@@ -150,8 +150,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
 
 @interface CSSPGetObjectOutput : CSSPModel
 
-@property (nonatomic, strong) NSString *acceptRanges;
-
 /**
  * Object data.
  */
@@ -173,10 +171,6 @@ typedef NS_ENUM(NSInteger, CSSPProtocol) {
  */
 @property (nonatomic, strong) NSString *ETag;
 
-/**
- * The date and time at which the object is no longer cacheable.
- */
-@property (nonatomic, strong) NSDate *expires;
 
 /**
  * Last modified date of the object

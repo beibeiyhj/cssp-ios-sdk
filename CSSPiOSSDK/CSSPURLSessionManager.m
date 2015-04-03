@@ -7,7 +7,7 @@
 //
 #import "CSSPURLSessionManager.h"
 #import "CSSPSynchronizedMutableDictionary.h"
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 
 #pragma mark - CSSPURLSessionManagerDelegate
 

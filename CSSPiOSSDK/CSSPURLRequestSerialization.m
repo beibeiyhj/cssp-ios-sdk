@@ -9,7 +9,7 @@
 #import "CSSPURLRequestSerialization.h"
 #import "CSSPLogging.h"
 #import "CSSPCategory.h"
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 
 NSString *const CSSPValidationErrorDomain = @"com.iflycssp.CSSPValidationErrorDomain";
 

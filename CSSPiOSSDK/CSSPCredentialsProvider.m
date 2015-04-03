@@ -8,7 +8,7 @@
 
 #import "CSSPCredentialsProvider.h"
 #import "CSSPLogging.h"
-#import "Bolts.h"
+#import <Bolts/Bolts.h>
 
 @interface CSSPStaticCredentialsProvider()
 
