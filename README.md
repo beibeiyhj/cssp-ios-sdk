@@ -11,7 +11,7 @@
 	*	`Account`是`CSSP`提供给用户的独立虚拟空间，用户可以在此空间中创建多个属于自己的`Container`。`Account`作为隔离用户的独立命名空间，其名称在开启云存储服务时即需指定,服务开启后不可修改。
 *	`Container`
 	*	`Container`是开放存储平台中object存储的容器；`Container`名称在单个`Account`中具有全局唯一性，且不能修改。存储在`Account`中的每个`Object`必须都包含在某个`Container`中。 `Container`同时作为权限控制和计费度量等功能的管理单位。需要注意的是用户可根据需要在合肥，北京，广州总计创建4个`Container`，每个`Container`存放的`Object`的数量和大小没有限制。
-*	`Object`
+*	`Object`a
 	*	`Object`是`CSSP`中用户操作的基本数据单元。`Object`包含`key`、`metadata`(元数据)和`data`三部分
 		*	`key`是`Object`的名字
 		*	`metadata`是用户对该`Object`的描述，由一系列`name-value`对组成
@@ -27,7 +27,8 @@
 1. 从我们的官网上下载SDK，并解压.
 2. 在Xcode中打开你的项目, 右键点击 **Frameworks**，选择**Add files to "\<project name\>"...**.
 3. 在Finder中查找CSSPiOSSDK.framework，并单击选择，点击**Add**.
-4. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
+4. 安装上面的步骤添加Third－Party下的Bolts、Mantle、TMCache、XMLDictionary，并在Other_LDFLAGS增加－ObjC参数
+5. 将目录service-definitions中的cssp-2015-02-09.json添加到你的项目中.
 
 <h2><span style="color:red">2.使用iOS SDK </span></h2>  
 ###2.1 初始化
